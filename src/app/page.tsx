@@ -11,7 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { HandThumbUpIcon, HandThumbDownIcon, CpuChipIcon } from '@heroicons/react/24/outline';
+import { HandThumbUpIcon, HandThumbDownIcon, CpuChipIcon, XMarkIcon, ArrowRightIcon, CubeIcon, ExclamationTriangleIcon, FaceFrownIcon } from '@heroicons/react/24/outline';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -131,16 +131,116 @@ const CLASS_8A = {
   name: "Grade 8 • Algebra",
   // keep it simple — we "select all" by default
   students: [
-    { id: "stu-01", name: "Ava Martinez", avgScore: 92, masteryBand: 4, masteryLabel: "Advanced", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-02", name: "Ben Kim", avgScore: 88, masteryBand: 3, masteryLabel: "Proficient", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-03", name: "Chris Thompson", avgScore: 76, masteryBand: 3, masteryLabel: "Proficient", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-04", name: "Diana Patel", avgScore: 84, masteryBand: 3, masteryLabel: "Proficient", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-05", name: "Ethan Rodriguez", avgScore: 91, masteryBand: 4, masteryLabel: "Advanced", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-06", name: "Fiona Lee", avgScore: 79, masteryBand: 3, masteryLabel: "Proficient", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-07", name: "Gabriel Santos", avgScore: 87, masteryBand: 3, masteryLabel: "Proficient", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-08", name: "Hannah Wilson", avgScore: 82, masteryBand: 3, masteryLabel: "Proficient", avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-09", name: "Isaac Johnson", avgScore: 95, masteryBand: 4, masteryLabel: "Advanced", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face" },
-    { id: "stu-10", name: "Jade Chen", avgScore: 73, masteryBand: 2, masteryLabel: "Developing", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face" }
+    { 
+      id: "stu-01", 
+      name: "Ava Martinez", 
+      avgScore: 92, 
+      masteryBand: 4, 
+      masteryLabel: "Advanced", 
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "visual",
+      preferredModality: "slides",
+      learningStyleDescription: "Learns best through charts, diagrams, and visual presentations"
+    },
+    { 
+      id: "stu-02", 
+      name: "Ben Kim", 
+      avgScore: 88, 
+      masteryBand: 3, 
+      masteryLabel: "Proficient", 
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "auditory",
+      preferredModality: "audio",
+      learningStyleDescription: "Learns best through listening and verbal instruction"
+    },
+    { 
+      id: "stu-03", 
+      name: "Chris Thompson", 
+      avgScore: 76, 
+      masteryBand: 3, 
+      masteryLabel: "Proficient", 
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "kinesthetic",
+      preferredModality: "video",
+      learningStyleDescription: "Learns best through hands-on activities and movement"
+    },
+    { 
+      id: "stu-04", 
+      name: "Diana Patel", 
+      avgScore: 84, 
+      masteryBand: 3, 
+      masteryLabel: "Proficient", 
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "reading",
+      preferredModality: "text",
+      learningStyleDescription: "Learns best through reading and written materials"
+    },
+    { 
+      id: "stu-05", 
+      name: "Ethan Rodriguez", 
+      avgScore: 91, 
+      masteryBand: 4, 
+      masteryLabel: "Advanced", 
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "visual",
+      preferredModality: "slides",
+      learningStyleDescription: "Learns best through charts, diagrams, and visual presentations"
+    },
+    { 
+      id: "stu-06", 
+      name: "Fiona Lee", 
+      avgScore: 79, 
+      masteryBand: 3, 
+      masteryLabel: "Proficient", 
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "auditory",
+      preferredModality: "audio",
+      learningStyleDescription: "Learns best through listening and verbal instruction"
+    },
+    { 
+      id: "stu-07", 
+      name: "Gabriel Santos", 
+      avgScore: 87, 
+      masteryBand: 3, 
+      masteryLabel: "Proficient", 
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "reading",
+      preferredModality: "text",
+      learningStyleDescription: "Learns best through reading and written materials"
+    },
+    { 
+      id: "stu-08", 
+      name: "Hannah Wilson", 
+      avgScore: 82, 
+      masteryBand: 3, 
+      masteryLabel: "Proficient", 
+      avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "kinesthetic",
+      preferredModality: "video",
+      learningStyleDescription: "Learns best through hands-on activities and movement"
+    },
+    { 
+      id: "stu-09", 
+      name: "Isaac Johnson", 
+      avgScore: 95, 
+      masteryBand: 4, 
+      masteryLabel: "Advanced", 
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "reading",
+      preferredModality: "text",
+      learningStyleDescription: "Learns best through reading and written materials"
+    },
+    { 
+      id: "stu-10", 
+      name: "Jade Chen", 
+      avgScore: 73, 
+      masteryBand: 2, 
+      masteryLabel: "Developing", 
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+      learningStyle: "visual",
+      preferredModality: "slides",
+      learningStyleDescription: "Learns best through charts, diagrams, and visual presentations"
+    }
   ],
 };
 
@@ -153,8 +253,56 @@ const PREBAKED: Lesson[] = [
     updatedAt: "2025-09-22",
     efficacy: 0.82,
     subject: "math",
-    status: "published",
+    isLive: true,
+    liveAt: "2025-09-20",
     completedCount: 18,
+    assignedStudents: ["stu-01", "stu-02", "stu-03", "stu-04", "stu-05", "stu-06", "stu-07", "stu-08", "stu-09", "stu-10"],
+    studentProgress: {
+      "stu-01": { studentId: "stu-01", status: "completed", startedAt: "2025-09-20", completedAt: "2025-09-21", score: 95, timeSpent: 45 },
+      "stu-02": { studentId: "stu-02", status: "completed", startedAt: "2025-09-20", completedAt: "2025-09-22", score: 88, timeSpent: 52 },
+      "stu-03": { studentId: "stu-03", status: "in_progress", startedAt: "2025-09-21", timeSpent: 23 },
+      "stu-04": { studentId: "stu-04", status: "completed", startedAt: "2025-09-20", completedAt: "2025-09-21", score: 92, timeSpent: 38 },
+      "stu-05": { studentId: "stu-05", status: "completed", startedAt: "2025-09-20", completedAt: "2025-09-21", score: 97, timeSpent: 41 },
+      "stu-06": { studentId: "stu-06", status: "in_progress", startedAt: "2025-09-22", timeSpent: 15 },
+      "stu-07": { studentId: "stu-07", status: "completed", startedAt: "2025-09-21", completedAt: "2025-09-22", score: 85, timeSpent: 48 },
+      "stu-08": { studentId: "stu-08", status: "not_started" },
+      "stu-09": { studentId: "stu-09", status: "completed", startedAt: "2025-09-20", completedAt: "2025-09-21", score: 94, timeSpent: 35 },
+      "stu-10": { studentId: "stu-10", status: "in_progress", startedAt: "2025-09-22", timeSpent: 8 }
+    },
+    chatHistory: [
+      {
+        id: "user-1695123456789",
+        type: "user",
+        content: "Create lesson materials for all students focusing on 8.EE.B.6 and 8.F.B.4 with multiple modalities",
+        timestamp: new Date("2025-09-19T14:30:00Z")
+      },
+      {
+        id: "ai-1695123456790",
+        type: "ai",
+        content: "I've created a comprehensive lesson on slope-intercept form that addresses both standards with engaging, multi-modal content.",
+        timestamp: new Date("2025-09-19T14:31:00Z"),
+        reasoning: "The user requested materials covering 8.EE.B.6 (linear equations) and 8.F.B.4 (functions). I've designed content that:\n\n• **Addresses Both Standards**: Slope-intercept form connects algebraic manipulation (8.EE.B.6) with function concepts (8.F.B.4)\n• **Multi-Modal Approach**: Created text, slides, video, and audio versions to accommodate different learning preferences\n• **Real-World Connections**: Used skateboard ramps and ride-sharing examples to make abstract concepts concrete\n• **Scaffolded Learning**: Progressed from basic slope concept to full y = mx + b mastery\n• **Assessment Integration**: Included formative and summative assessment opportunities",
+        summary: "Created a complete slope-intercept form lesson with:\n\n• **Engaging Introduction**: Real-world skateboard ramp scenario\n• **Visual Representations**: Interactive graphs and coordinate plane activities\n• **Formula Breakdown**: Step-by-step y = mx + b component analysis\n• **Practice Problems**: Graduated difficulty with real-world applications\n• **Multi-Modal Content**: Text, slides, video, and audio versions\n• **Aligned Assessments**: Questions targeting both 8.EE.B.6 and 8.F.B.4\n\nThe lesson is ready for all students and includes differentiated content for various learning styles.",
+        reasoningCollapsed: true,
+        feedback: "positive"
+      },
+      {
+        id: "user-1695123456791",
+        type: "user",
+        content: "Make the introduction more engaging with a stronger hook and connect it better to students' everyday experiences",
+        timestamp: new Date("2025-09-19T15:45:00Z")
+      },
+      {
+        id: "ai-1695123456792",
+        type: "ai",
+        content: "I've successfully updated the introduction to be more engaging and relatable! The changes include stronger hooks and better real-world connections.",
+        timestamp: new Date("2025-09-19T15:46:00Z"),
+        reasoning: "The user wanted a more engaging introduction with stronger hooks and better connections to student experiences. I focused on:\n\n• **Stronger Hook**: Opened with a familiar ride-sharing scenario that immediately connects to students' experiences\n• **Real-World Relevance**: Linked slope-intercept form to everyday situations like Uber pricing and phone plans\n• **Interactive Language**: Used more engaging, conversational tone to draw students in\n• **Practical Context**: Showed why this math matters in their daily lives\n• **Immediate Connection**: Made the abstract concept concrete from the first sentence",
+        summary: "I've successfully updated the introduction section to be more engaging and relatable! The changes include:\n\n• **Stronger Hook**: Opens with a familiar ride-sharing scenario that immediately connects to students' experiences\n• **Real-World Connection**: Links slope-intercept form to everyday situations like Uber pricing and phone plans\n• **Interactive Language**: Uses more engaging, conversational tone to draw students in\n• **Practical Context**: Shows why this math matters in their daily lives\n\nThe introduction section has been updated and is now live in your lesson. The content captures attention from the first sentence and helps students see the relevance of linear functions in their world.",
+        reasoningCollapsed: true,
+        feedback: null
+      }
+    ]
   },
   {
     id: "lsn-002",
@@ -163,8 +311,42 @@ const PREBAKED: Lesson[] = [
     updatedAt: "2025-09-19",
     efficacy: 0.76,
     subject: "math",
-    status: "published",
-    completedCount: 22,
+    isLive: false,
+    completedCount: 0,
+    chatHistory: [
+      {
+        id: "user-1695023456789",
+        type: "user",
+        content: "Create a lesson on functions that helps students understand the relationship between input and output values, focusing on 8.F.A.1",
+        timestamp: new Date("2025-09-18T10:15:00Z")
+      },
+      {
+        id: "ai-1695023456790",
+        type: "ai",
+        content: "I've created a comprehensive functions lesson that builds understanding through real-world examples and interactive activities.",
+        timestamp: new Date("2025-09-18T10:16:00Z"),
+        reasoning: "For 8.F.A.1 (understanding functions as input-output relationships), I designed content that:\n\n• **Concrete Examples**: Used vending machines, temperature conversion, and recipe scaling to illustrate function concepts\n• **Visual Representations**: Created function machines, tables, and graphs to show input-output relationships\n• **Progressive Complexity**: Started with simple one-step functions, built to multi-step operations\n• **Real-World Applications**: Connected abstract function notation to familiar situations\n• **Multiple Representations**: Showed functions as tables, graphs, equations, and verbal descriptions",
+        summary: "Created a complete functions lesson featuring:\n\n• **Function Machine Concept**: Visual representation of input-output relationships\n• **Real-World Examples**: Vending machines, temperature conversion, recipe scaling\n• **Multiple Representations**: Tables, graphs, equations, and verbal descriptions\n• **Interactive Activities**: Students practice identifying and creating functions\n• **Assessment Components**: Formative checks and summative evaluation\n\nThe lesson builds from concrete examples to abstract understanding, perfectly aligned with 8.F.A.1 standards.",
+        reasoningCollapsed: true,
+        feedback: null
+      },
+      {
+        id: "user-1695023456791",
+        type: "user",
+        content: "Add more practice problems that focus on identifying whether a relationship is a function or not",
+        timestamp: new Date("2025-09-18T11:30:00Z")
+      },
+      {
+        id: "ai-1695023456792",
+        type: "ai",
+        content: "I've enhanced the practice section with additional problems specifically focused on function identification and the vertical line test.",
+        timestamp: new Date("2025-09-18T11:31:00Z"),
+        reasoning: "The user requested more practice problems for function identification. I added:\n\n• **Vertical Line Test Examples**: Visual problems using graphs to determine if relationships are functions\n• **Table Analysis**: Problems where students examine input-output tables\n• **Real-World Scenarios**: Situations where students must determine if relationships are functional\n• **Mixed Problem Types**: Combination of graphs, tables, and word problems\n• **Common Misconceptions**: Problems that address typical student errors",
+        summary: "Enhanced the practice problems section with:\n\n• **Function Identification Problems**: 8 new problems focusing on determining if relationships are functions\n• **Vertical Line Test Practice**: Visual exercises using coordinate plane graphs\n• **Table Analysis**: Problems examining input-output relationships in tabular form\n• **Real-World Applications**: Scenarios like student ID numbers, temperature readings, and sports statistics\n• **Progressive Difficulty**: From simple one-to-one relationships to more complex examples\n\nThe updated practice section now provides comprehensive coverage of function identification skills.",
+        reasoningCollapsed: true,
+        feedback: null
+      }
+    ]
   },
   {
     id: "lsn-003",
@@ -173,8 +355,42 @@ const PREBAKED: Lesson[] = [
     updatedAt: "2025-09-12",
     efficacy: 0.71,
     subject: "math",
-    status: "published",
-    completedCount: 15,
+    isLive: false,
+    completedCount: 0,
+    chatHistory: [
+      {
+        id: "user-1694923456789",
+        type: "user",
+        content: "I need a lesson on integer exponents that covers the laws and patterns, aligned to 8.EE.A.1. My students struggle with negative exponents.",
+        timestamp: new Date("2025-09-11T13:20:00Z")
+      },
+      {
+        id: "ai-1694923456790",
+        type: "ai",
+        content: "I've created a comprehensive exponents lesson that specifically addresses negative exponents through pattern recognition and visual models.",
+        timestamp: new Date("2025-09-11T13:21:00Z"),
+        reasoning: "The user mentioned students struggle with negative exponents, so I designed content that:\n\n• **Pattern-Based Learning**: Shows the pattern from positive to negative exponents\n• **Visual Models**: Uses fraction bars and decimal representations to make negative exponents concrete\n• **Step-by-Step Progression**: Builds from familiar positive exponents to challenging negative ones\n• **Multiple Representations**: Shows exponents as repeated multiplication, fractions, and decimals\n• **Common Error Prevention**: Addresses typical misconceptions about negative exponents",
+        summary: "Created an integer exponents lesson with special focus on negative exponents:\n\n• **Pattern Recognition**: Visual progression from positive to negative exponents\n• **Conceptual Understanding**: Fraction and decimal representations of negative exponents\n• **Exponent Laws**: Product, quotient, and power rules with clear examples\n• **Real-World Applications**: Scientific notation and measurement contexts\n• **Scaffolded Practice**: Graduated problems building confidence with negative exponents\n\nThe lesson specifically addresses student difficulties with negative exponents through multiple approaches.",
+        reasoningCollapsed: true,
+        feedback: null
+      },
+      {
+        id: "user-1694923456791",
+        type: "user",
+        content: "Can you add some real-world examples that show why we need negative exponents? Maybe something with scientific notation?",
+        timestamp: new Date("2025-09-11T14:45:00Z")
+      },
+      {
+        id: "ai-1694923456792",
+        type: "ai",
+        content: "I've added compelling real-world examples featuring scientific notation, microscopic measurements, and technology applications.",
+        timestamp: new Date("2025-09-11T14:46:00Z"),
+        reasoning: "The user wanted real-world examples showing the necessity of negative exponents. I added:\n\n• **Scientific Notation Applications**: Virus sizes, atomic measurements, computer memory\n• **Technology Examples**: Processor speeds, data storage, digital measurements\n• **Microscopic World**: Cell sizes, bacteria, molecular dimensions\n• **Practical Contexts**: Why scientists and engineers need negative exponents\n• **Career Connections**: How negative exponents appear in STEM fields",
+        summary: "Enhanced the lesson with compelling real-world applications:\n\n• **Scientific Notation Examples**: Virus sizes (10⁻⁷ meters), atomic radii (10⁻¹⁰ meters)\n• **Technology Applications**: Computer processing speeds, memory storage capacities\n• **Microscopic Measurements**: Cell biology, chemistry, and physics contexts\n• **Career Connections**: How engineers, scientists, and researchers use negative exponents\n• **Practical Problem Solving**: Converting between standard and scientific notation\n\nThese examples help students understand why negative exponents are essential tools in science and technology.",
+        reasoningCollapsed: true,
+        feedback: "positive"
+      }
+    ]
   },
 ];
 
@@ -187,6 +403,44 @@ const MODALITIES: { key: ModalityKey; name: string }[] = [
 
 type ModalityKey = "text" | "slides" | "video" | "audio";
 
+// Learning Style Utilities
+const LEARNING_STYLES = {
+  visual: { 
+    name: "Visual", 
+    icon: "👁️", 
+    color: "bg-blue-100 text-blue-800",
+    description: "Charts, diagrams, visual presentations"
+  },
+  auditory: { 
+    name: "Auditory", 
+    icon: "🎧", 
+    color: "bg-green-100 text-green-800",
+    description: "Listening, verbal instruction, discussions"
+  },
+  reading: { 
+    name: "Reading/Writing", 
+    icon: "📚", 
+    color: "bg-purple-100 text-purple-800",
+    description: "Text, written materials, note-taking"
+  },
+  kinesthetic: { 
+    name: "Kinesthetic", 
+    icon: "🤲", 
+    color: "bg-orange-100 text-orange-800",
+    description: "Hands-on, movement, interactive activities"
+  }
+};
+
+const getModalityForLearningStyle = (learningStyle: string): ModalityKey => {
+  const mapping: Record<string, ModalityKey> = {
+    visual: "slides",
+    auditory: "audio", 
+    reading: "text",
+    kinesthetic: "video"
+  };
+  return mapping[learningStyle] || "text";
+};
+
 interface Standard {
   id: string;
   label: string;
@@ -195,6 +449,13 @@ interface Standard {
 interface Student {
   id: string;
   name: string;
+  avgScore: number;
+  masteryBand: number;
+  masteryLabel: string;
+  avatar: string;
+  learningStyle: "visual" | "auditory" | "reading" | "kinesthetic";
+  preferredModality: ModalityKey;
+  learningStyleDescription: string;
 }
 
 interface ClassRoom {
@@ -210,8 +471,21 @@ interface Lesson {
   standards: string[];
   updatedAt: string;
   efficacy: number;
-  status?: 'draft' | 'published';
+  isLive?: boolean;
+  liveAt?: string;
   completedCount?: number;
+  assignedStudents?: string[];
+  studentProgress?: Record<string, StudentProgress>;
+  chatHistory?: Array<{id: string, type: 'user' | 'ai', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>;
+}
+
+interface StudentProgress {
+  studentId: string;
+  status: 'not_started' | 'in_progress' | 'completed';
+  startedAt?: string;
+  completedAt?: string;
+  score?: number;
+  timeSpent?: number; // in minutes
 }
 
 interface GeneratedPayload {
@@ -230,16 +504,160 @@ interface GenerationState {
   currentModality: ModalityKey | null;
 }
 
+// -------------------- Lesson Modal --------------------
+function LessonModal({ 
+  lesson, 
+  isOpen, 
+  onClose, 
+  onSave 
+}: { 
+  lesson: Lesson; 
+  isOpen: boolean; 
+  onClose: () => void; 
+  onSave: (lesson: Lesson) => void; 
+}) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  // Handle opening animation
+  useEffect(() => {
+    if (isOpen) {
+      setIsAnimating(true);
+    }
+  }, [isOpen]);
+  
+  // Handle closing animation
+  const handleClose = () => {
+    setIsAnimating(false);
+    setTimeout(() => {
+      onClose();
+    }, 200); // Match animation duration
+  };
+  
+  if (!isOpen) return null;
+
+  // Prevent background scrolling when modal is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  return (
+    <>
+      <style>{`
+        .modal-scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .modal-scroll::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+        .modal-scroll:hover {
+          scrollbar-width: thin;
+        }
+        .modal-scroll:hover::-webkit-scrollbar {
+          width: 8px;
+        }
+        .modal-scroll:hover::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 4px;
+        }
+        .modal-scroll:hover::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 4px;
+        }
+        .modal-scroll:hover::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+      `}</style>
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
+        {/* Backdrop with blur */}
+        <div 
+          className="absolute inset-0 bg-white/40 backdrop-blur-md" 
+          onClick={handleClose}
+        />
+        
+        {/* Modal Content */}
+      <div className={`relative w-[90%] h-[90%] bg-slate-50 rounded-2xl border-2 border-slate-200 flex overflow-hidden transition-all duration-200 ease-out ${
+        isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+      }`}>
+        {/* Minimize Button */}
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-slate-100 transition-colors"
+          title="Minimize lesson"
+        >
+          <div className="h-5 w-5 flex items-center justify-center text-slate-600 font-bold text-lg">
+            −
+          </div>
+        </button>
+
+        {/* Lesson Content Area - Scrollable with hidden scrollbar */}
+        <div className="flex-1 overflow-y-auto modal-scroll">
+          <LessonBuilder
+            lesson={lesson}
+            onClose={onClose}
+            onSave={onSave}
+            isPending={false}
+            onConfirm={undefined}
+            onNavigate={() => {}}
+            isModal={true}
+          />
+        </div>
+      </div>
+      </div>
+    </>
+  );
+}
+
 // -------------------- App --------------------
 export default function App() {
   const [lessons, setLessons] = useState(PREBAKED);
   const [openLessonId, setOpenLessonId] = useState<string | null>(null);
   const [currentView, setCurrentView] = useState<'dashboard' | 'builder' | 'review' | 'students' | 'standards'>('dashboard');
+  const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
   const [pendingLesson, setPendingLesson] = useState<Lesson | null>(null);
 
   function handleOpenLesson(id: string) {
     setOpenLessonId(id);
-    setCurrentView('builder');
+    setIsLessonModalOpen(true);
+  }
+
+  function handleCloseLessonModal() {
+    setOpenLessonId(null);
+    setIsLessonModalOpen(false);
+  }
+
+  function handleToggleLessonLive(lessonId: string) {
+    setLessons(prevLessons => 
+      prevLessons.map(lesson => {
+        if (lesson.id === lessonId) {
+          const allStudents = CLASS_8A.students.map(s => s.id);
+          return {
+            ...lesson,
+            isLive: !lesson.isLive,
+            liveAt: !lesson.isLive ? new Date().toISOString().split('T')[0] : undefined,
+            assignedStudents: !lesson.isLive ? allStudents : [],
+            studentProgress: !lesson.isLive ? allStudents.reduce((acc, studentId) => {
+              acc[studentId] = {
+                studentId,
+                status: 'not_started'
+              };
+              return acc;
+            }, {} as Record<string, StudentProgress>) : {}
+          };
+        }
+        return lesson;
+      })
+    );
   }
 
   function handleCloseBuilder() {
@@ -281,7 +699,7 @@ export default function App() {
     }
   }
 
-  if (currentView === 'builder' && openLessonId) {
+  if (currentView === 'builder' && openLessonId && !isLessonModalOpen) {
     const lesson = pendingLesson || lessons.find((l) => l.id === openLessonId)!;
   return (
       <TooltipProvider>
@@ -399,35 +817,36 @@ export default function App() {
                       </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {lessons.map((lesson) => (
-                  <LessonCard key={lesson.id} lesson={lesson} onOpen={() => handleOpenLesson(lesson.id)} />
+                  <LessonCard key={lesson.id} lesson={lesson} onOpen={() => handleOpenLesson(lesson.id)} onToggleLive={handleToggleLessonLive} />
                 ))}
               </div>
             </div>
 
+
             {/* AI Suggestions */}
             <div className="max-w-7xl mx-auto">
                       <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-slate-800">More Guided Lessons</h2>
+                        <h2 className="text-2xl font-bold text-slate-800">Generated Lessons</h2>
                       </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <SuggestionCard 
                   title="Graphing Linear Inequalities"
-                  reason="Next logical step after slope-intercept form"
+                  reason="Next logical step"
                   standard="8.EE.B.6"
                   urgency="high"
                   timeEstimate="2 days"
                 />
                 <SuggestionCard 
                   title="Systems of Linear Equations"
-                  reason="Builds on linear function understanding"
+                  reason="Builds on functions"
                   standard="8.EE.C.8"
                   urgency="medium"
                   timeEstimate="3 days"
                 />
                 <SuggestionCard 
                   title="Proportional Relationships Review"
-                  reason="3 students struggled on last assessment"
+                  reason="Reteaching needed"
                   standard="8.EE.B.5"
                   urgency="high"
                   timeEstimate="1 day"
@@ -528,6 +947,18 @@ export default function App() {
                 )}
               </main>
             </div>
+            
+            {/* Lesson Modal */}
+            {isLessonModalOpen && openLessonId && (
+              <LessonModal
+                lesson={lessons.find((l) => l.id === openLessonId)!}
+                isOpen={isLessonModalOpen}
+                onClose={handleCloseLessonModal}
+                onSave={(patched) => {
+                  setLessons((prev) => prev.map((l) => (l.id === patched.id ? patched : l)));
+                }}
+              />
+            )}
           </TooltipProvider>
         );
       }
@@ -759,7 +1190,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
 
       <div className="max-w-7xl mx-auto relative">
         {/* Fused Textarea and Toolbar */}
-        <div className="border-2 border-slate-300 rounded-2xl bg-white shadow-none">
+        <div className="border-2 border-slate-200 rounded-2xl bg-white shadow-none">
           {/* Main Prompt */}
           <Textarea
             ref={textareaRef}
@@ -784,7 +1215,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
                 <div key={mention.id}>
                   <div
                   className={`grid grid-cols-[32px_1fr_auto] items-center gap-2 px-3 py-2 cursor-pointer hover:bg-slate-100 ${
-                    index === selectedMentionIndex ? 'bg-slate-200 border-l-2 border-slate-400' : ''
+                    index === selectedMentionIndex ? 'bg-slate-200 border-l-2 border-slate-300' : ''
                   }`}
                     onClick={() => handleMentionSelect(mention)}
                   >
@@ -991,9 +1422,9 @@ function LeftSidebar({ currentView, onNavigate }: {
   onNavigate: (view: 'dashboard' | 'students' | 'standards') => void; 
 }) {
   return (
-    <div className="fixed left-0 top-0 h-screen w-16 bg-slate-100 border-r border-slate-300 flex flex-col z-50">
+    <div className="fixed left-0 top-0 h-screen w-16 bg-slate-100 border-r border-slate-200 flex flex-col z-50">
       {/* Logo */}
-      <div className="flex items-center justify-center p-4 border-b border-slate-300">
+      <div className="flex items-center justify-center p-4 border-b border-slate-200">
         <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center">
           <AcademicCapIconSolid className="h-4 w-4 text-white" />
         </div>
@@ -1036,7 +1467,7 @@ function LeftSidebar({ currentView, onNavigate }: {
       </nav>
 
       {/* Profile Menu */}
-      <div className="p-2 border-t border-slate-300">
+      <div className="p-2 border-t border-slate-200">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="w-full flex items-center justify-center hover:bg-slate-200 rounded-lg p-3 transition-colors">
@@ -1131,6 +1562,20 @@ function SuggestionCard({
 }) {
   const urgencyVariant = urgency === 'high' ? 'destructive' : urgency === 'medium' ? 'default' : 'secondary';
 
+  // Get appropriate icon for the reason
+  const getReasonIcon = (reason: string) => {
+    if (reason.includes('Next logical step') || reason.includes('Next')) {
+      return <ArrowRightIcon className="h-4 w-4 text-gray-400" />;
+    } else if (reason.includes('Builds on') || reason.includes('understanding')) {
+      return <CubeIcon className="h-4 w-4 text-gray-400" />;
+    } else if (reason.includes('struggling') || reason.includes('struggled')) {
+      return <FaceFrownIcon className="h-4 w-4 text-gray-400" />;
+    } else if (reason.includes('Reteaching') || reason.includes('reteaching')) {
+      return <ArrowPathIcon className="h-4 w-4 text-gray-400" />;
+    }
+    return <CpuChipIcon className="h-4 w-4 text-gray-400" />; // Default AI icon
+  };
+
   // Generate a summary with standards incorporated
   const getSummary = (title: string, standard: string) => {
     if (title.includes('Linear Inequalities')) {
@@ -1159,33 +1604,77 @@ function SuggestionCard({
     return 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=600&h=400&fit=crop&auto=format';
   };
 
+  const handleToggleLive = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Toggle live status for suggestion: ${title}`);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Delete suggestion: ${title}`);
+  };
+
+  const handleDuplicate = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Duplicate suggestion: ${title}`);
+  };
+
   return (
-    <Card className="cursor-pointer overflow-hidden border-2 border-slate-300 !bg-slate-50 shadow-none rounded-2xl">
-      <CardContent className="p-0 relative">
-        <div className="p-6 pb-4 bg-slate-50">
-          <div className="mb-3">
-            <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
-          </div>
-          
-          <div className="mb-4">
-            <p className="text-sm text-slate-600 leading-relaxed">{getSummary(title, standard)}</p>
-          </div>
-          
-          <div className="text-sm text-slate-500 mb-4">
-            <div className="flex items-start gap-2">
-              <LightBulbIcon className="h-4 w-4" />
-              <span>{reason}</span>
-            </div>
-          </div>
+    <Card className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col">
+      <CardContent className="p-6 flex-1 flex flex-col">
+        {/* Eyebrow - AI Suggestion */}
+        <div className="flex items-center gap-1.5 mb-2">
+          {getReasonIcon(reason)}
+          <span className="text-xs text-slate-500">{reason}</span>
         </div>
         
-        {/* Placeholder Image - Edge to Edge at Bottom */}
-        <div className="h-60 bg-gradient-to-r from-blue-100 to-purple-100">
-          <img 
-            src={getPlaceholderImage(title)}
-            alt="Lesson illustration"
-            className="w-full h-full object-cover"
-          />
+        {/* Row 1 - Lesson Name */}
+        <div className="mb-3">
+          <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
+        </div>
+        
+        {/* Row 2 - Lesson Description */}
+        <div className="flex-1">
+          <p className="text-sm text-slate-600 leading-relaxed">{getSummary(title, standard)}</p>
+        </div>
+
+        {/* Row 3 - Actions */}
+        <div className="flex items-center justify-between mt-4">
+          {/* Live Toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleToggleLive}
+              className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-gray-300"
+            >
+              <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-1" />
+            </button>
+            <span className="text-xs font-medium text-slate-500">Draft</span>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            {/* Duplicate Button */}
+            <button
+              onClick={handleDuplicate}
+              className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
+              title="Duplicate lesson"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </button>
+            
+            {/* Delete Button */}
+            <button
+              onClick={handleDelete}
+              className="p-1.5 text-slate-400 hover:text-red-500 rounded transition-colors"
+              title="Delete lesson"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -1240,34 +1729,71 @@ function ExtraCreditCard({
     return 'secondary';
   };
 
+  const handleToggleLive = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Toggle live status for extra credit: ${title}`);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Delete extra credit: ${title}`);
+  };
+
+  const handleDuplicate = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Duplicate extra credit: ${title}`);
+  };
+
   return (
-    <Card className="cursor-pointer overflow-hidden border-2 border-slate-300 !bg-slate-50 shadow-none rounded-2xl">
-      <CardContent className="p-0 relative">
-        <div className="p-6 pb-4 bg-slate-50">
-          <div className="mb-3">
-            <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
-          </div>
-          
-          <div className="mb-3">
-            <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
-          </div>
-          
-          
-          <div className="text-sm text-slate-500">
-            <div className="flex items-center gap-2">
-              <AcademicCapIcon className="h-4 w-4" />
-              <span>Available for all students</span>
-            </div>
-          </div>
+    <Card className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col">
+      <CardContent className="p-6 flex-1 flex flex-col">
+        {/* Row 1 - Lesson Name */}
+        <div className="mb-3">
+          <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
         </div>
         
-        {/* Placeholder Image - Edge to Edge at Bottom */}
-        <div className="h-60 bg-gradient-to-r from-purple-100 to-pink-100">
-          <img 
-            src={getPlaceholderImage(title)}
-            alt="Lesson illustration"
-            className="w-full h-full object-cover"
-          />
+        {/* Row 2 - Lesson Description */}
+        <div className="flex-1">
+          <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
+        </div>
+
+        {/* Row 3 - Actions */}
+        <div className="flex items-center justify-between mt-4">
+          {/* Live Toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleToggleLive}
+              className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-gray-300"
+            >
+              <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-1" />
+            </button>
+            <span className="text-xs font-medium text-slate-500">Draft</span>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            {/* Duplicate Button */}
+            <button
+              onClick={handleDuplicate}
+              className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
+              title="Duplicate lesson"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </button>
+            
+            {/* Delete Button */}
+            <button
+              onClick={handleDelete}
+              className="p-1.5 text-slate-400 hover:text-red-500 rounded transition-colors"
+              title="Delete lesson"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -1275,8 +1801,8 @@ function ExtraCreditCard({
 }
 
 // -------------------- Lesson Card --------------------
-function LessonCard({ lesson, onOpen }: { lesson: Lesson; onOpen: () => void }) {
-  const { title, standards = [], updatedAt, status, completedCount = 0 } = lesson;
+function LessonCard({ lesson, onOpen, onToggleLive }: { lesson: Lesson; onOpen: () => void; onToggleLive: (lessonId: string) => void }) {
+  const { title, standards = [], updatedAt, isLive = false, completedCount = 0, assignedStudents = [], studentProgress = {} } = lesson;
   
   // Mock data for students currently accessing lessons
   const getCurrentlyAccessingStudents = (lessonTitle: string) => {
@@ -1327,56 +1853,85 @@ function LessonCard({ lesson, onOpen }: { lesson: Lesson; onOpen: () => void }) 
     return 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=600&h=400&fit=crop&auto=format';
   };
 
+  const handleToggleLive = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    onToggleLive(lesson.id);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Delete lesson: ${lesson.id}`);
+  };
+
+  const handleDuplicate = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    console.log(`Duplicate lesson: ${lesson.id}`);
+  };
+
   return (
-    <Card className="cursor-pointer overflow-hidden border-2 border-slate-300 !bg-slate-100 shadow-none" onClick={onOpen}>
-      <CardContent className="p-0 relative">
-        <div className="p-6 pb-4 bg-slate-50">
-          <div className="mb-3">
-            <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
-          </div>
-          
-          <div className="mb-3">
-            <p className="text-sm text-slate-600 leading-relaxed">{getSummary(title, standards)}</p>
-          </div>
-          
-          {/* Avatar Stack for Currently Accessing Students */}
-          {currentlyAccessing.length > 0 && (
-            <div className="flex items-center gap-1">
-              <div className="flex -space-x-3">
-                {currentlyAccessing.map((student, index) => (
-                  <div
-                    key={student.id}
-                    className="w-8 h-8 rounded-full border-2 border-slate-50 overflow-hidden"
-                    style={{ zIndex: currentlyAccessing.length - index }}
-                  >
-                    {student.avatar ? (
-                      <img 
-                        src={student.avatar} 
-                        alt={student.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-slate-300 flex items-center justify-center">
-                        <span className="text-sm font-semibold text-slate-600">
-                          {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <span className="text-xs text-slate-400 ml-1">viewing</span>
-            </div>
-          )}
+    <Card className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col" onClick={onOpen}>
+      <CardContent className="p-6 flex-1 flex flex-col">
+        {/* Row 1 - Lesson Name */}
+        <div className="mb-3">
+          <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
         </div>
         
-        {/* Placeholder Image - Edge to Edge at Bottom */}
-        <div className="h-60 bg-gradient-to-r from-green-100 to-blue-100">
-          <img 
-            src={getPlaceholderImage(title)}
-            alt="Lesson illustration"
-            className="w-full h-full object-cover"
-          />
+        {/* Row 2 - Lesson Description */}
+        <div className="flex-1">
+          <p className="text-sm text-slate-600 leading-relaxed">{getSummary(title, standards)}</p>
+        </div>
+
+        {/* Row 3 - Actions */}
+        <div className="flex items-center justify-between mt-4">
+          {/* Live Toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleToggleLive}
+              className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 ${
+                isLive ? 'bg-slate-600' : 'bg-slate-300'
+              }`}
+            >
+              <span
+                className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                  isLive ? 'translate-x-5' : 'translate-x-1'
+                }`}
+              />
+            </button>
+            <span className={`text-xs font-medium ${isLive ? 'text-slate-600' : 'text-slate-500'}`}>
+              {isLive 
+                ? (currentlyAccessing.length > 0 
+                    ? `${currentlyAccessing.length} viewing now`
+                    : `${Object.keys(studentProgress).filter(id => studentProgress[id]?.status === 'completed').length}/${assignedStudents.length} completed`
+                  )
+                : 'Draft'
+              }
+            </span>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            {/* Duplicate Button */}
+            <button
+              onClick={handleDuplicate}
+              className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
+              title="Duplicate lesson"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </button>
+            
+            {/* Delete Button */}
+            <button
+              onClick={handleDelete}
+              className="p-1.5 text-slate-400 hover:text-red-500 rounded transition-colors"
+              title="Delete lesson"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -1897,7 +2452,7 @@ function UnifiedPromptComponent({
         </div>
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="border-2 border-slate-300 rounded-2xl bg-white shadow-none">
+          <div className="border-2 border-slate-200 rounded-2xl bg-white shadow-none">
             <Textarea
               ref={textareaRef}
               value={prompt}
@@ -1921,7 +2476,7 @@ function UnifiedPromptComponent({
                   <div key={mention.id}>
                     <div
                     className={`grid grid-cols-[32px_1fr_auto] items-center gap-2 px-3 py-2 cursor-pointer hover:bg-slate-100 ${
-                      index === selectedMentionIndex ? 'bg-slate-200 border-l-2 border-slate-400' : ''
+                      index === selectedMentionIndex ? 'bg-slate-200 border-l-2 border-slate-300' : ''
                     }`}
                       onClick={() => handleMentionSelect(mention)}
                     >
@@ -2079,9 +2634,9 @@ function UnifiedPromptComponent({
 
   // Refinement mode (for lesson builder)
   return (
-    <div className={`h-full bg-slate-100 border-l border-slate-300 flex flex-col ${className}`}>
+    <div className={`h-full bg-slate-100 border-l border-slate-200 flex flex-col ${className}`}>
       {/* Header */}
-      <div className="p-4 border-b border-slate-300">
+      <div className="p-4 border-b border-slate-200">
         <h3 className="font-semibold text-slate-800">AI Assistant</h3>
       </div>
 
@@ -2265,18 +2820,18 @@ function UnifiedPromptComponent({
       </div>
 
       {/* Input Area */}
-      <div className="p-4 border-t border-slate-300">
+      <div className="p-4 border-t border-slate-200">
         {/* Active Section Chip */}
         {activeSection && (
           <div className="mb-3">
-            <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full flex items-center gap-2 w-fit">
+            <span className="px-2 py-1 bg-slate-200 text-slate-800 text-xs font-medium rounded border border-slate-200 flex items-center gap-2 w-fit">
               Section: {activeSection}
               {onClearSection && (
                 <button 
                   onClick={onClearSection}
                   className="text-slate-500 hover:text-slate-700"
                 >
-                  ×
+                  <XMarkIcon className="h-3 w-3" />
                 </button>
               )}
             </span>
@@ -2284,7 +2839,7 @@ function UnifiedPromptComponent({
         )}
 
         {/* Homepage-style Layout */}
-        <div className="border-2 border-slate-300 rounded-2xl bg-white shadow-none">
+        <div className="border-2 border-slate-200 rounded-2xl bg-white shadow-none">
           {/* Textarea */}
           <Textarea
             ref={textareaRef}
@@ -2308,7 +2863,7 @@ function UnifiedPromptComponent({
                 <div key={mention.id}>
                   <div
                   className={`grid grid-cols-[32px_1fr_auto] items-center gap-2 px-3 py-2 cursor-pointer hover:bg-slate-100 ${
-                    index === selectedMentionIndex ? 'bg-slate-200 border-l-2 border-slate-400' : ''
+                    index === selectedMentionIndex ? 'bg-slate-200 border-l-2 border-slate-300' : ''
                   }`}
                     onClick={() => handleMentionSelect(mention)}
                   >
@@ -2554,7 +3109,7 @@ function FloatingAIAssistant({
       </div>
 
       {/* Fixed Input Area at Bottom */}
-      <div className="p-4 border-t border-slate-300">
+      <div className="p-4 border-t border-slate-200">
         {/* Quick Suggestions - Now at top */}
         <div className="mb-3">
           <div className="flex flex-wrap gap-1">
@@ -2583,13 +3138,13 @@ function FloatingAIAssistant({
           </span>
           {/* Active Section Chip */}
           {activeSection && (
-            <span className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full flex items-center gap-1">
+            <span className="px-2 py-1 bg-slate-200 text-slate-800 text-xs font-medium rounded border border-slate-200 flex items-center gap-1">
               Section: {activeSection}
               <button 
                 onClick={onClearSection}
                 className="ml-1 text-slate-500 hover:text-slate-700"
               >
-                ×
+                <XMarkIcon className="h-3 w-3" />
               </button>
             </span>
           )}
@@ -2723,13 +3278,13 @@ function RightRailChat({
         {/* Active Section Chip */}
         {activeSection && (
           <div className="flex items-center gap-2 mb-2">
-            <span className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded-full flex items-center gap-1">
+            <span className="px-2 py-1 bg-slate-200 text-slate-800 text-xs font-medium rounded border border-slate-200 flex items-center gap-1">
               Section: {activeSection}
               <button 
                 onClick={onClearSection}
                 className="ml-1 text-slate-500 hover:text-slate-700"
               >
-                ×
+                <XMarkIcon className="h-3 w-3" />
               </button>
             </span>
           </div>
@@ -2820,6 +3375,7 @@ function LessonBuilder({
   isPending = false,
   onConfirm,
   onNavigate,
+  isModal = false,
 }: {
   lesson: Lesson;
   onClose: () => void;
@@ -2827,6 +3383,7 @@ function LessonBuilder({
   isPending?: boolean;
   onConfirm?: () => void;
   onNavigate: (view: 'dashboard' | 'students' | 'standards') => void;
+  isModal?: boolean;
 }) {
   const [subject, setSubject] = useState(lesson.subject ?? "math");
   const [standard, setStandard] = useState<string>(lesson.standards?.[0] ?? "8.F.B.4");
@@ -2842,6 +3399,10 @@ function LessonBuilder({
   });
   const [title, setTitle] = useState(lesson.title ?? "Understanding Slope in y = mx + b");
   const [activeTab, setActiveTab] = useState<ModalityKey>("text");
+  const [currentLesson, setCurrentLesson] = useState<Lesson>({
+    ...lesson,
+    isLive: lesson.isLive ?? false
+  });
   const [generationState, setGenerationState] = useState<GenerationState>({
     isGenerating: false,
     currentStep: 0,
@@ -2852,7 +3413,7 @@ function LessonBuilder({
   
   // AI Chat Rail state
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [chatHistory, setChatHistory] = useState<Array<{id: string, type: 'user' | 'ai', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>>([]);
+  const [chatHistory, setChatHistory] = useState<Array<{id: string, type: 'user' | 'ai', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>>(lesson.chatHistory || []);
   const [undoStack, setUndoStack] = useState<Array<{sectionId: string, previousContent: string}>>([]);
   const [toast, setToast] = useState<{message: string, type: 'success' | 'info'} | null>(null);
   const [introContent, setIntroContent] = useState({
@@ -3255,6 +3816,35 @@ The changes are now live in your lesson. You can continue refining other section
     return "Current section content...";
   }
 
+  const handleToggleLive = () => {
+    const allStudents = CLASS_8A.students.map(s => s.id);
+    const updatedLesson: Lesson = {
+      ...currentLesson,
+      isLive: !currentLesson.isLive,
+      liveAt: !currentLesson.isLive ? new Date().toISOString().split('T')[0] : undefined,
+      assignedStudents: !currentLesson.isLive ? allStudents : [],
+      studentProgress: !currentLesson.isLive ? allStudents.reduce((acc, studentId) => {
+        acc[studentId] = {
+          studentId,
+          status: 'not_started'
+        };
+        return acc;
+      }, {} as Record<string, StudentProgress>) : {}
+    };
+    
+    setCurrentLesson(updatedLesson);
+    onSave(updatedLesson);
+    
+    // Show success message
+    setToast({
+      message: updatedLesson.isLive 
+        ? `Lesson is now live for all students!` 
+        : `Lesson is no longer visible to students.`,
+      type: 'success'
+    });
+    setTimeout(() => setToast(null), 3000);
+  };
+
   const STD_OPTIONS = subject === "math" ? G8_MATH_STANDARDS : [];
   const filteredStandards = STD_OPTIONS.filter(std => 
     std.id.toLowerCase().includes(standardsFilter.toLowerCase()) ||
@@ -3266,27 +3856,93 @@ The changes are now live in your lesson. You can continue refining other section
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-slate-50 text-foreground flex">
-        <LeftSidebar currentView="builder" onNavigate={(view) => {
-          if (view === 'dashboard') {
-            onClose();
-          } else {
-            onNavigate(view);
-          }
-        }} />
+      <div className={`${isModal ? 'h-full bg-slate-50 text-foreground flex' : 'min-h-screen bg-slate-50 text-foreground flex'}`}>
+        {!isModal && (
+          <LeftSidebar currentView="builder" onNavigate={(view) => {
+            if (view === 'dashboard') {
+              onClose();
+            } else {
+              onNavigate(view);
+            }
+          }} />
+        )}
         
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col">
-          {/* Breadcrumb */}
-          <div className="px-6 pt-4">
-            <Breadcrumb items={[
-              { label: "Home", onClick: () => onClose() },
-              { label: "Lesson Builder" }
-            ]} />
+          {/* Breadcrumb - only show when not in modal */}
+          {!isModal && (
+            <div className="px-20 pt-4 pr-[580px]">
+              <div className="max-w-4xl mx-auto">
+                <Breadcrumb items={[
+                  { label: "Home", onClick: () => onClose() },
+                  { label: "Lesson Builder" }
+                ]} />
+              </div>
+            </div>
+          )}
+
+          {/* Lesson Header */}
+          <div className={`${isModal ? 'px-6 py-4' : 'px-20 py-4 pr-[580px]'}`}>
+            <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-3">
+                  <h1 className="text-xl font-semibold text-slate-800">{title}</h1>
+                </div>
+                <div className="flex items-center gap-4 flex-shrink-0">
+                  {/* Student Facepile - 3 viewers */}
+                  {currentLesson.isLive && currentLesson.assignedStudents && currentLesson.assignedStudents.length > 0 && (
+                    <div className="flex -space-x-2">
+                      {currentLesson.assignedStudents.slice(0, 3).map((studentId, index) => {
+                        const student = CLASS_8A.students.find(s => s.id === studentId);
+                        if (!student) return null;
+                        return (
+                          <div
+                            key={studentId}
+                            className="w-6 h-6 rounded-full border-2 border-white bg-slate-200 overflow-hidden flex-shrink-0"
+                            title={student.name}
+                          >
+                            {student.avatar ? (
+                              <img 
+                                src={student.avatar} 
+                                alt={student.name}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-slate-300 flex items-center justify-center text-xs font-medium text-slate-600">
+                                {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                  
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleToggleLive}
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 ${
+                        currentLesson.isLive ? 'bg-slate-600' : 'bg-slate-300'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                          currentLesson.isLive ? 'translate-x-5' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                    <span className={`text-xs font-medium ${currentLesson.isLive ? 'text-slate-600' : 'text-slate-500'}`}>
+                      {currentLesson.isLive ? '3 viewing' : 'Draft'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           
           {/* Content Area */}
-          <div className="flex-1 px-6 py-6 pr-[520px]">
+          <div className={`flex-1 ${isModal ? 'px-6 py-6 overflow-y-auto' : 'px-20 py-6 pr-[580px]'}`}>
+            <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
           {/* Tabbed Interface */}
           <div className="mb-8">
           {/* Tab Navigation - Static and Left Aligned */}
@@ -3346,11 +4002,12 @@ The changes are now live in your lesson. You can continue refining other section
             />
             </div>
           </div>
+            </div>
           </div>
         </div>
         
-        {/* Unified AI Assistant - Fixed Right Panel */}
-        <div className="fixed top-0 right-0 h-screen w-[500px] z-40">
+        {/* Unified AI Assistant - Right Panel */}
+        <div className={`${isModal ? 'w-[320px] border-l border-slate-200 bg-slate-100 flex-shrink-0' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
         <UnifiedPromptComponent
           mode="refinement"
           initialPrompt={lesson.prompt || ''}
@@ -3504,6 +4161,7 @@ Ready to implement? Select "✨ Improve with AI" on the relevant section to appl
             onClose={() => setToast(null)} 
           />
         )}
+
       </div>
     </TooltipProvider>
   );
@@ -3520,35 +4178,39 @@ function StudentsPage() {
           <h1 className="text-4xl font-bold mb-4 text-slate-800">Students</h1>
         </div>
 
+        {/* Student Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {students.map((student) => (
-            <div key={student.id} className="cursor-pointer overflow-hidden border-2 border-slate-300 !bg-slate-50 shadow-none rounded-2xl">
-              <div className="p-6 pb-4 bg-slate-50">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                    {student.avatar ? (
-                      <img 
-                        src={student.avatar} 
-                        alt={student.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-slate-200 flex items-center justify-center">
-                        <span className="text-slate-600 font-semibold text-sm">
-                          {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                  <div>
-                    <div className="text-lg font-semibold text-slate-800">{student.name}</div>
-                    <div className="text-sm text-slate-500">Band {student.masteryBand} of 4</div>
+          {students.map((student) => {
+            const learningStyleInfo = LEARNING_STYLES[student.learningStyle as keyof typeof LEARNING_STYLES];
+            
+            return (
+              <div key={student.id} className="overflow-hidden border-2 border-slate-200 !bg-slate-50 shadow-none rounded-2xl">
+                <div className="p-6 pb-4 bg-slate-50">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                      {student.avatar ? (
+                        <img 
+                          src={student.avatar} 
+                          alt={student.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-slate-200 flex items-center justify-center">
+                          <span className="text-slate-600 font-semibold text-sm">
+                            {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="text-lg font-semibold text-slate-800">{student.name}</div>
+                      <div className="text-sm text-slate-500">Band {student.masteryBand} • {learningStyleInfo.name} Learner</div>
+                    </div>
                   </div>
                 </div>
-                
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -3680,7 +4342,7 @@ function StandardsPage() {
                   <button
                     key={standard.id}
                     onClick={() => handleStandardSelect(standard)}
-                    className="text-left p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition"
+                    className="text-left p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition"
                   >
                     <div className="font-medium text-blue-600">{standard.id}</div>
                     <div className="text-sm text-neutral-900 mt-1">{standard.label}</div>
@@ -3853,15 +4515,15 @@ function StandardsPage() {
         <div className="mt-8 bg-slate-100 rounded-2xl border border-slate-200 shadow-sm p-6">
           <h2 className="text-xl font-semibold mb-4">Teacher Resources</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button className="p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition text-left">
+            <button className="p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition text-left">
               <div className="font-medium mb-1 flex items-center gap-2"><PresentationChartBarIcon className="h-4 w-4" />Standards Alignment Report</div>
               <div className="text-sm text-neutral-600">See how your lessons align to each standard</div>
             </button>
-            <button className="p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition text-left">
+            <button className="p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition text-left">
               <div className="font-medium mb-1">📈 Scope & Sequence</div>
               <div className="text-sm text-neutral-600">View recommended pacing and progression</div>
             </button>
-            <button className="p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition text-left">
+            <button className="p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition text-left">
               <div className="font-medium mb-1 flex items-center gap-2"><DocumentTextIcon className="h-4 w-4" />Standard Progressions</div>
               <div className="text-sm text-neutral-600">See how standards build across grades</div>
             </button>
@@ -4103,23 +4765,23 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
   introContent?: {paragraph1: string, paragraph2: string};
 }) {
   return (
-    <div className="h-full p-8">
+    <div className="h-full">
       <div className="space-y-8">
         
         {/* Document Header */}
-        <div className="border-b border-slate-300 pb-4">
+        <div className="border-b border-slate-200 pb-4">
           <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
           <p className="text-slate-600">Linear Functions in Algebra</p>
           <div className="text-sm text-slate-500 mt-2">
-            Generated for Grade 8 Mathematics • Band 3 Students
+            Generated for Grade 8 Mathematics
           </div>
         </div>
 
         {/* Introduction */}
-        <section className={`space-y-4 relative group border-2 border-dashed rounded-lg p-4 transition-all duration-200 ${
+        <section className={`space-y-4 relative group rounded-lg transition-all duration-200 ${
           activeSection === 'introduction' 
-            ? 'border-green-400 bg-green-50/50' 
-            : 'border-slate-300 hover:border-blue-300'
+            ? 'border-2 border-dashed border-slate-300 bg-slate-50/50 p-4' 
+            : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-xl font-semibold text-slate-800">Introduction</h2>
@@ -4129,8 +4791,8 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
                   onClick={() => onEditWithAI('introduction', 'Introduction')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'introduction'
-                      ? 'bg-green-200 text-green-800 border border-green-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200 hover:border-blue-300'
+                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'introduction' ? 'Targeted' : 'Refine with AI'}
@@ -4150,10 +4812,10 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
         </section>
 
         {/* AI Generated Graph */}
-        <section className={`space-y-4 relative group border-2 border-dashed rounded-lg p-4 transition-all duration-200 ${
+        <section className={`space-y-4 relative group rounded-lg transition-all duration-200 ${
           activeSection === 'visual-representation' 
-            ? 'border-green-400 bg-green-50/50' 
-            : 'border-slate-300 hover:border-blue-300'
+            ? 'border-2 border-dashed border-slate-300 bg-slate-50/50 p-4' 
+            : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-xl font-semibold text-slate-800">Visual Representation</h2>
@@ -4163,8 +4825,8 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
                   onClick={() => onEditWithAI('visual-representation', 'Visual Representation')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'visual-representation'
-                      ? 'bg-green-200 text-green-800 border border-green-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200 hover:border-blue-300'
+                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'visual-representation' ? 'Targeted' : 'Refine with AI'}
@@ -4172,7 +4834,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
               )}
             </div>
           </div>
-          <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-8 text-center">
+          <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-8 text-center">
             <div className="bg-white rounded-xl p-6 mb-4">
               <svg className="w-full h-64 mx-auto" viewBox="0 0 400 300">
                 {/* Grid */}
@@ -4205,10 +4867,10 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
         </section>
 
         {/* Formula Breakdown */}
-        <section className={`space-y-4 relative group border-2 border-dashed rounded-lg p-4 transition-all duration-200 ${
+        <section className={`space-y-4 relative group rounded-lg transition-all duration-200 ${
           activeSection === 'formula-components' 
-            ? 'border-green-400 bg-green-50/50' 
-            : 'border-slate-300 hover:border-blue-300'
+            ? 'border-2 border-dashed border-slate-300 bg-slate-50/50 p-4' 
+            : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-xl font-semibold text-slate-800">Formula Components</h2>
@@ -4218,8 +4880,8 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
                   onClick={() => onEditWithAI('formula-components', 'Formula Components')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'formula-components'
-                      ? 'bg-green-200 text-green-800 border border-green-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200 hover:border-blue-300'
+                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'formula-components' ? 'Targeted' : 'Refine with AI'}
@@ -4227,7 +4889,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
               )}
             </div>
           </div>
-          <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-6">
+          <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
             <div className="text-center mb-6">
               <span className="font-mono text-3xl text-slate-800">y = mx + b</span>
             </div>
@@ -4251,10 +4913,10 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
         </section>
 
         {/* Real-World Application */}
-        <section className={`space-y-4 relative group border-2 border-dashed rounded-lg p-4 transition-all duration-200 ${
+        <section className={`space-y-4 relative group rounded-lg transition-all duration-200 ${
           activeSection === 'real-world-application' 
-            ? 'border-green-400 bg-green-50/50' 
-            : 'border-slate-300 hover:border-blue-300'
+            ? 'border-2 border-dashed border-slate-300 bg-slate-50/50 p-4' 
+            : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-xl font-semibold text-slate-800">Real-World Application</h2>
@@ -4264,8 +4926,8 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
                   onClick={() => onEditWithAI('real-world-application', 'Real-World Application')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'real-world-application'
-                      ? 'bg-green-200 text-green-800 border border-green-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-blue-100 text-blue-700 hover:bg-blue-200 border border-blue-200 hover:border-blue-300'
+                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'real-world-application' ? 'Targeted' : 'Refine with AI'}
@@ -4273,7 +4935,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
               )}
             </div>
           </div>
-          <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-6">
+          <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
             <h3 className="font-semibold text-slate-800 mb-3">
               Example: Cell Phone Plan
             </h3>
@@ -4290,16 +4952,36 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
         </section>
 
         {/* Personalized Quiz */}
-        <section className="space-y-4">
-          <h2 className="text-xl font-semibold text-slate-800">Personalized Assessment</h2>
-          <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-6">
+        <section className={`space-y-4 relative group rounded-lg transition-all duration-200 ${
+          activeSection === 'assessment' 
+            ? 'border-2 border-dashed border-slate-300 bg-slate-50/50 p-4' 
+            : ''
+        }`}>
+          <div className="flex items-start justify-between gap-4">
+            <h2 className="text-xl font-semibold text-slate-800">Personalized Assessment</h2>
+            <div className="flex items-start gap-2">
+              {onEditWithAI && (
+                <button
+                  onClick={() => onEditWithAI('assessment', 'Personalized Assessment')}
+                  className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
+                    activeSection === 'assessment'
+                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  {activeSection === 'assessment' ? 'Targeted' : 'Refine with AI'}
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
             <p className="text-sm text-slate-600 mb-6">
-              Generated based on your learning profile: Band 3 proficiency level
+              Generated based on your learning profile
             </p>
             
             <div className="space-y-6">
               {/* Question 1 */}
-              <div className="bg-white border border-slate-300 rounded-xl p-4">
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
                 <p className="font-medium text-slate-800 mb-3">1. What is the slope in the equation y = -3x + 7?</p>
                 <div className="space-y-2">
                   <label className="flex items-center space-x-2 cursor-pointer">
@@ -4318,26 +5000,26 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
               </div>
 
               {/* Question 2 */}
-              <div className="bg-white border border-slate-300 rounded-xl p-4">
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
                 <p className="font-medium text-slate-800 mb-3">2. A gym membership costs $40 to join plus $15 per month. Write the equation for total cost (y) after x months:</p>
                 <input 
                   type="text" 
                   placeholder="y = "
-                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
+                  className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
                 />
               </div>
 
               {/* Question 3 */}
-              <div className="bg-white border border-slate-300 rounded-xl p-4">
+              <div className="bg-white border border-slate-200 rounded-xl p-4">
                 <p className="font-medium text-slate-800 mb-3">3. In the equation y = 4x + 12, what does the number 12 represent in a real-world context?</p>
                 <textarea 
                   placeholder="Explain your reasoning..."
-                  className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 h-20 resize-none"
+                  className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 h-20 resize-none"
                 />
               </div>
             </div>
 
-            <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-300">
+            <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-200">
               <button className="text-slate-600 hover:text-slate-800 text-sm">
                 Need help? View hints
               </button>
@@ -4356,11 +5038,11 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: {
 // -------------------- Slides Content --------------------
 function SlidesContent() {
   return (
-    <div className="h-full p-8">
+    <div className="h-full">
       <div className="space-y-6">
         
     {/* Slides Header */}
-    <div className="border-b border-slate-300 pb-4">
+    <div className="border-b border-slate-200 pb-4">
       <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
       <p className="text-slate-600">Interactive Slide Presentation • 12 slides</p>
       <div className="flex gap-2 mt-2">
@@ -4371,13 +5053,13 @@ function SlidesContent() {
     </div>
 
         {/* Slide Navigator */}
-        <div className="flex items-center justify-between bg-slate-100 border-2 border-slate-300 rounded-2xl p-4">
+        <div className="flex items-center justify-between bg-slate-100 border-2 border-slate-200 rounded-2xl p-4">
           <button className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600">
             Previous
           </button>
           <div className="flex items-center gap-2">
             <span className="text-slate-600">Slide</span>
-            <select className="bg-white border border-slate-300 rounded px-2 py-1 text-slate-800">
+            <select className="bg-white border border-slate-200 rounded px-2 py-1 text-slate-800">
               <option>1 - Title Slide</option>
               <option>2 - Learning Objectives</option>
               <option>3 - What is Slope?</option>
@@ -4399,7 +5081,7 @@ function SlidesContent() {
         </div>
 
         {/* Current Slide Display */}
-        <div className="bg-white border-2 border-slate-300 rounded-2xl p-8 aspect-video">
+        <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 aspect-video">
           <div className="h-full flex flex-col justify-center">
             <h2 className="text-4xl font-bold text-slate-800 mb-6 text-center">
               Understanding Slope-Intercept Form
@@ -4415,7 +5097,7 @@ function SlidesContent() {
         </div>
 
         {/* Slide Notes */}
-        <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-6">
+        <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
           <h3 className="font-semibold text-slate-800 mb-3">Speaker Notes</h3>
           <p className="text-slate-600 text-sm leading-relaxed">
             Welcome students to today's lesson on slope-intercept form. This is a foundational concept that will help them 
@@ -4432,17 +5114,17 @@ function SlidesContent() {
 // -------------------- Video Content --------------------
 function VideoContent() {
   return (
-    <div className="h-full p-8">
+    <div className="h-full">
       <div className="space-y-6">
         
         {/* Video Header */}
-        <div className="border-b border-slate-300 pb-4">
+        <div className="border-b border-slate-200 pb-4">
           <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
           <p className="text-slate-600">Educational Video • HD Quality</p>
         </div>
 
         {/* Video Player */}
-        <div className="bg-slate-900 border-2 border-slate-300 rounded-2xl overflow-hidden">
+        <div className="bg-slate-900 border-2 border-slate-200 rounded-2xl overflow-hidden">
           <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
             <div className="text-center text-white">
               <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
@@ -4489,10 +5171,10 @@ function VideoContent() {
         </div>
 
         {/* Video Chapters */}
-        <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-6">
+        <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
           <h3 className="font-semibold text-slate-800 mb-4">Video Chapters</h3>
           <div className="space-y-2">
-                        <div className="p-2 bg-white rounded-lg border border-slate-300">
+                        <div className="p-2 bg-white rounded-lg border border-slate-200">
                           <span className="text-slate-800 font-medium">1. Introduction to Linear Functions</span>
                         </div>
                         <div className="p-2 hover:bg-white rounded-lg cursor-pointer">
@@ -4518,17 +5200,17 @@ function VideoContent() {
 // -------------------- Audio Content --------------------
 function AudioContent() {
   return (
-    <div className="h-full p-8">
+    <div className="h-full">
       <div className="space-y-6">
         
         {/* Audio Header */}
-        <div className="border-b border-slate-300 pb-4">
+        <div className="border-b border-slate-200 pb-4">
           <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
           <p className="text-slate-600">Audio Lesson • Podcast Style</p>
         </div>
 
         {/* Audio Player */}
-        <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-8">
+        <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-8">
           <div className="text-center mb-6">
             <div className="w-32 h-32 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -4571,7 +5253,7 @@ function AudioContent() {
         </div>
 
         {/* Audio Transcript */}
-        <div className="bg-slate-100 border-2 border-slate-300 rounded-2xl p-6">
+        <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
           <h3 className="font-semibold text-slate-800 mb-4">Live Transcript</h3>
           <div className="bg-white rounded-lg p-4 max-h-64 overflow-y-auto">
             <div className="space-y-3 text-sm">
@@ -4601,22 +5283,22 @@ function AudioContent() {
 
         {/* Audio Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-100 border border-slate-300 rounded-xl p-4 text-center">
+          <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
             <h4 className="font-semibold text-slate-800 mb-2">Playback Speed</h4>
-            <select className="bg-white border border-slate-300 rounded px-3 py-1">
+            <select className="bg-white border border-slate-200 rounded px-3 py-1">
               <option>0.75x</option>
               <option selected>1x</option>
               <option>1.25x</option>
               <option>1.5x</option>
             </select>
           </div>
-          <div className="bg-slate-100 border border-slate-300 rounded-xl p-4 text-center">
+          <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
             <h4 className="font-semibold text-slate-800 mb-2">Captions</h4>
             <button className="bg-slate-700 text-white px-4 py-1 rounded">
               On
             </button>
           </div>
-          <div className="bg-slate-100 border border-slate-300 rounded-xl p-4 text-center">
+          <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
             <h4 className="font-semibold text-slate-800 mb-2">Download</h4>
             <button className="bg-slate-700 text-white px-4 py-1 rounded">
               MP3
