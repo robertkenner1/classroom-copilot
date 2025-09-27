@@ -1748,7 +1748,7 @@ function UnifiedPromptComponent({
       id: student.id,
       name: student.name,
       type: 'student' as const,
-      masteryLevel: student.masteryLevel,
+      masteryLevel: student.masteryLabel,
       masteryBand: student.masteryBand,
       initials: student.name.split(' ').map(n => n[0]).join(''),
       avatar: student.avatar
