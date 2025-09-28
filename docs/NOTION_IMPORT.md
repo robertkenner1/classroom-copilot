@@ -173,6 +173,23 @@ This design process demonstrates that the best educational technology solutions 
 
 ---
 
+## 🚀 Live Working Prototype
+
+**Experience the AI-powered teacher's assistant in action:**
+
+### → [Try the Live Prototype](https://classroom-copilot.vercel.app/)
+
+**Features Demonstrated:**
+- **Standards-driven lesson generation** - Create lessons aligned to Grade 8 Math standards
+- **Multi-modal content creation** - Text, slides, video, audio, and interactive assessments
+- **Teacher workflow integration** - Guided lessons, generated content, and self-taught materials
+- **Conversational + traditional interfaces** - AI chat assistance alongside familiar form controls
+- **Student-centered personalization** - Content adapted for different learning styles and mastery levels
+
+*The prototype showcases the core teacher workflow: "Take the standard and create me a lesson on [topic]" enhanced with intelligent personalization and multi-modal content generation.*
+
+---
+
 ## 📋 Complete Design Challenge Documentation
 
 **For the full strategic framework, technical architecture, and detailed analysis that addresses all design brief requirements:**
