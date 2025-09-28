@@ -632,6 +632,11 @@ export default function App() {
   }
 
   function handleCloseLessonModal() {
+    // If there's a pending lesson, save it to the lessons list
+    if (pendingLesson) {
+      setLessons((prev) => [pendingLesson, ...prev]);
+      setPendingLesson(null);
+    }
     setOpenLessonId(null);
     setIsLessonModalOpen(false);
   }
@@ -669,7 +674,7 @@ export default function App() {
   function handleLessonGenerated(lesson: Lesson) {
     setPendingLesson(lesson);
     setOpenLessonId(lesson.id);
-    setCurrentView('builder'); // Go directly to builder instead of review
+    setIsLessonModalOpen(true); // Open in modal instead of navigating to builder page
   }
 
   function handleNavigation(view: 'dashboard' | 'students' | 'standards') {
@@ -951,11 +956,15 @@ export default function App() {
             {/* Lesson Modal */}
             {isLessonModalOpen && openLessonId && (
               <LessonModal
-                lesson={lessons.find((l) => l.id === openLessonId)!}
+                lesson={pendingLesson || lessons.find((l) => l.id === openLessonId)!}
                 isOpen={isLessonModalOpen}
                 onClose={handleCloseLessonModal}
                 onSave={(patched) => {
-                  setLessons((prev) => prev.map((l) => (l.id === patched.id ? patched : l)));
+                  if (pendingLesson) {
+                    setPendingLesson(patched);
+                  } else {
+                    setLessons((prev) => prev.map((l) => (l.id === patched.id ? patched : l)));
+                  }
                 }}
               />
             )}
@@ -3416,6 +3425,7 @@ function LessonBuilder({
   const [chatHistory, setChatHistory] = useState<Array<{id: string, type: 'user' | 'ai', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>>(lesson.chatHistory || []);
   const [undoStack, setUndoStack] = useState<Array<{sectionId: string, previousContent: string}>>([]);
   const [toast, setToast] = useState<{message: string, type: 'success' | 'info'} | null>(null);
+  const [contentVisible, setContentVisible] = useState(!isPending); // Hide content for new lessons until AI summary is shown
   const [introContent, setIntroContent] = useState({
     paragraph1: `Linear functions are mathematical relationships that create straight lines when graphed. The slope-intercept form, 
 written as y = mx + b, is one of the most useful ways to express these relationships because it immediately shows 
@@ -3424,15 +3434,71 @@ us two key pieces of information: how steep the line is (slope) and where it cro
 slope-intercept form gives you a powerful tool for modeling and solving practical problems.`
   });
 
-  // Auto-generate content on load
+  // Auto-generate content on load and simulate initial generation for new lessons
   useEffect(() => {
     // Always generate content on load (for lesson preview)
     if (!generated.text) {
       handleGenerate();
     }
     
-    // Demo starts with clean slate - no pre-loaded chat history
-  }, [chatHistory.length]);
+    // For new lessons (isPending), simulate the initial generation chat turn
+    if (isPending && chatHistory.length === 0) {
+      simulateInitialGeneration();
+    }
+  }, [chatHistory.length, isPending]);
+
+  const simulateInitialGeneration = async () => {
+    // Add the initial user prompt
+    const userPrompt = lesson.prompt || "Create lesson materials for all students focusing on 8.NS.A.1 with multiple modalities";
+    
+    const initialUserMessage = {
+      id: `msg-${Date.now()}`,
+      type: 'user' as const,
+      content: userPrompt,
+      timestamp: new Date()
+    };
+    
+    setChatHistory([initialUserMessage]);
+    
+    // Simulate AI processing with reasoning
+    setTimeout(() => {
+      const aiMessage = {
+        id: `msg-${Date.now() + 1}`,
+        type: 'ai' as const,
+        content: "I've created comprehensive lesson materials on slope-intercept form (y = mx + b) tailored for your students. The content includes an introduction with conceptual foundation and clear explanations, visual representation with interactive coordinate plane and examples, formula components with breakdown of variables and constants, and real-world application using cell phone plan modeling example.\n\nReady to refine? Select \"Refine with AI\" on any section to start iterating, or ask me specific questions about the lesson content.",
+        timestamp: new Date(),
+        reasoning: "I need to create comprehensive lesson materials for slope-intercept form that cater to different learning styles and provide multiple modalities for engagement.\n\n**Content Strategy:**\n• **Introduction**: Build conceptual foundation with clear explanations\n• **Visual Elements**: Interactive coordinate plane with multiple examples\n• **Formula Breakdown**: Detailed explanation of variables and constants\n• **Real-World Applications**: Relatable examples like cell phone plans\n• **Multiple Modalities**: Text, visual, interactive, and practical components\n\n**Differentiation Approach:**\n• Clear step-by-step explanations for foundational understanding\n• Visual representations for visual learners\n• Interactive elements for kinesthetic learners\n• Real-world connections for practical application\n\nThis comprehensive approach ensures all students can access and understand the slope-intercept form concept through their preferred learning modality.",
+        reasoningCollapsed: false, // Start with reasoning expanded
+        feedback: null,
+        isStreaming: true // Start as streaming
+      };
+      
+      setChatHistory(prev => [...prev, aiMessage]);
+      
+      // Simulate reasoning streaming and then collapse
+      setTimeout(() => {
+        setChatHistory(prev => prev.map(msg => 
+          msg.id === aiMessage.id 
+            ? { ...msg, isStreaming: false }
+            : msg
+        ));
+        
+        // Collapse reasoning after streaming is done
+        setTimeout(() => {
+          setChatHistory(prev => prev.map(msg => 
+            msg.id === aiMessage.id 
+              ? { ...msg, reasoningCollapsed: true }
+              : msg
+          ));
+          
+          // Show content after reasoning collapses
+          setTimeout(() => {
+            setContentVisible(true);
+          }, 300);
+        }, 1000); // Wait 1 second before collapsing
+      }, 2000); // Stream for 2 seconds
+    }, 3000); // 3 second delay for AI processing
+  };
 
   async function handleGenerate() {
     if (standardsMode === "manual" && !standard) return; // Gate: require standard selection in manual mode
@@ -3999,6 +4065,7 @@ The changes are now live in your lesson. You can continue refining other section
               onEditWithAI={handleEditWithAI}
               activeSection={activeSection}
               introContent={introContent}
+              contentVisible={contentVisible}
             />
             </div>
           </div>
@@ -4759,11 +4826,25 @@ function Field({
   );
 }
 
-function ImmersiveTextContent({ onEditWithAI, activeSection, introContent }: { 
+function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, contentVisible = true }: { 
   onEditWithAI?: (sectionId: string, sectionTitle: string) => void;
   activeSection?: string | null;
   introContent?: {paragraph1: string, paragraph2: string};
+  contentVisible?: boolean;
 }) {
+  
+  // Show loading screen when content is not visible
+  if (!contentVisible) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-600 mx-auto mb-4"></div>
+          <p className="text-slate-600 text-lg font-medium">Generating lesson materials...</p>
+          <p className="text-slate-500 text-sm mt-2">Creating comprehensive content for your students</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="h-full">
       <div className="space-y-8">
@@ -5321,6 +5402,7 @@ function TabContent({
   onEditWithAI,
   activeSection,
   introContent,
+  contentVisible = true,
 }: {
   modality: ModalityKey;
   title: string;
@@ -5331,17 +5413,18 @@ function TabContent({
   onEditWithAI?: (sectionId: string, sectionTitle: string) => void;
   activeSection?: string | null;
   introContent?: {paragraph1: string, paragraph2: string};
+  contentVisible?: boolean;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(content || "");
   const [showRegenerateInput, setShowRegenerateInput] = useState(false);
   const [regenerateTweak, setRegenerateTweak] = useState("");
   
-  const hasContent = content && content !== "— Not generated yet —";
+  const hasContent = content && content !== "— Not generated yet —" && contentVisible;
 
   // Show immersive content for text modality
-  if (modality === "text" && hasContent) {
-    return <ImmersiveTextContent onEditWithAI={onEditWithAI} activeSection={activeSection} introContent={introContent} />;
+  if (modality === "text" && content && content !== "— Not generated yet —") {
+    return <ImmersiveTextContent onEditWithAI={onEditWithAI} activeSection={activeSection} introContent={introContent} contentVisible={contentVisible} />;
   }
 
   // Show mock artifacts for other modalities
@@ -5355,6 +5438,19 @@ function TabContent({
   
   if (modality === "audio" && hasContent) {
     return <AudioContent />;
+  }
+  
+  // Show loading screen when content is being generated
+  if (!contentVisible && content && content !== "— Not generated yet —") {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-600 mx-auto mb-4"></div>
+          <p className="text-slate-600 text-lg font-medium">Generating lesson materials...</p>
+          <p className="text-slate-500 text-sm mt-2">Creating comprehensive content for your students</p>
+        </div>
+      </div>
+    );
   }
   
   const handleEdit = () => {
