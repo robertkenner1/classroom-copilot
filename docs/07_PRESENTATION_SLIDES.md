@@ -109,11 +109,11 @@
 ### **Atomic Design for Education**
 
 ```
-🔬 Atoms: Button, Input, Badge
-🧬 Molecules: SearchBar, MessageBubble, LessonCard
-🦠 Organisms: ChatInterface, LessonBuilder, StudentRoster
-📄 Templates: Page layouts and structures
-📱 Pages: Specific teacher workflow implementations
+Atoms: Button, Input, Badge
+Molecules: SearchBar, MessageBubble, LessonCard
+Organisms: ChatInterface, LessonBuilder, StudentRoster
+Templates: Page layouts and structures
+Pages: Specific teacher workflow implementations
 ```
 
 **Current Foundation**: Next.js + TypeScript + Tailwind + shadcn/ui
@@ -261,13 +261,13 @@
 ## **Slide 17: Discussion Topics**
 ### **Key Areas for Exploration**
 
-🎯 **Implementation Priorities** → What should we build first?
+**Implementation Priorities** → What should we build first?
 
-⚡ **Resource Requirements** → Team size and timeline considerations
+**Resource Requirements** → Team size and timeline considerations
 
-🛡️ **Risk Mitigation** → Biggest potential failure points
+**Risk Mitigation** → Biggest potential failure points
 
-🚀 **Future Vision** → Where does this product go in 2-3 years?
+**Future Vision** → Where does this product go in 2-3 years?
 
 ---
 
