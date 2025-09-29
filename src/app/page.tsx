@@ -1219,7 +1219,6 @@ export default function App() {
             )}
           </TooltipProvider>
         );
-      }
 }
 
 // -------------------- Lesson Creator Component --------------------
