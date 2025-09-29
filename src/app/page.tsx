@@ -3115,7 +3115,7 @@ function UnifiedPromptComponent({
                         {message.content}
                       </div>
                       <Avatar className="h-8 w-8 flex-shrink-0">
-                        <AvatarFallback className="bg-blue-500 text-white">
+                        <AvatarFallback className="bg-slate-600 text-white">
                           <AcademicCapIcon className="h-4 w-4" />
                         </AvatarFallback>
                       </Avatar>
@@ -3506,7 +3506,7 @@ function FloatingAIAssistant({
                 )}
                 {message.type === 'agent' && (
                   <Avatar className="h-8 w-8 flex-shrink-0">
-                    <AvatarFallback className="bg-blue-500 text-white">
+                    <AvatarFallback className="bg-slate-600 text-white">
                       <AcademicCapIcon className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
@@ -3734,7 +3734,7 @@ function RightRailChat({
                 )}
                 {message.type === 'agent' && (
                   <Avatar className="h-8 w-8 flex-shrink-0">
-                    <AvatarFallback className="bg-blue-500 text-white">
+                    <AvatarFallback className="bg-slate-600 text-white">
                       <AcademicCapIcon className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
