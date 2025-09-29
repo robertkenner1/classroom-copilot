@@ -32,7 +32,6 @@ import {
   BookOpenIcon,
   PencilSquareIcon,
   HomeIcon,
-  UserGroupIcon as UsersIcon,
   ClipboardDocumentListIcon as StandardsIcon,
   UserIcon,
   Cog6ToothIcon,
@@ -671,6 +670,7 @@ interface Lesson {
     changes: string;
     agentPrompt: string;
   };
+  suggestionId?: string; // Track which AI suggestion this lesson came from
 }
 
 interface StudentProgress {
@@ -703,12 +703,14 @@ function LessonModal({
   lesson, 
   isOpen, 
   onClose, 
-  onSave 
+  onSave,
+  onToggleLive
 }: { 
   lesson: Lesson; 
   isOpen: boolean; 
   onClose: () => void; 
   onSave: (lesson: Lesson) => void; 
+  onToggleLive: (lessonId: string) => void;
 }) {
   const [isAnimating, setIsAnimating] = useState(false);
   
@@ -774,29 +776,29 @@ function LessonModal({
         
         /* Lesson content scrollbar styling */
         .lesson-content-scroll {
-          scrollbar-width: none;
-          -ms-overflow-style: none;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(203, 213, 225, 0.6) transparent;
+          scrollbar-gutter: stable;
         }
         .lesson-content-scroll::-webkit-scrollbar {
-          width: 0px;
+          width: 8px;
           background: transparent;
+        }
+        .lesson-content-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .lesson-content-scroll::-webkit-scrollbar-thumb {
+          background: rgba(203, 213, 225, 0.6);
+          border-radius: 4px;
         }
         .lesson-content-scroll:hover {
-          scrollbar-width: thin;
-        }
-        .lesson-content-scroll:hover::-webkit-scrollbar {
-          width: 8px;
-        }
-        .lesson-content-scroll:hover::-webkit-scrollbar-track {
-          background: transparent;
-          border-radius: 4px;
+          scrollbar-color: rgba(203, 213, 225, 0.8) transparent;
         }
         .lesson-content-scroll:hover::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
-          border-radius: 4px;
+          background: rgba(203, 213, 225, 0.8);
         }
-        .lesson-content-scroll:hover::-webkit-scrollbar-thumb:hover {
-          background: #94a3b8;
+        .lesson-content-scroll::-webkit-scrollbar-thumb:hover {
+          background: rgba(148, 163, 184, 0.9);
         }
       `}</style>
       <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -807,22 +809,66 @@ function LessonModal({
         />
         
         {/* Modal Content */}
-      <div className={`relative w-[90%] h-[90%] bg-slate-50 rounded-2xl border-2 border-slate-200 flex overflow-hidden transition-all duration-200 ease-out ${
+      <div className={`relative w-[90%] h-[90%] bg-slate-50 rounded-2xl flex flex-col overflow-hidden transition-all duration-200 ease-out ${
         isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
       }`}>
-        {/* Minimize Button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-slate-100 transition-colors"
-          title="Minimize lesson"
-        >
-          <div className="h-5 w-5 flex items-center justify-center text-slate-600 font-semibold text-lg">
-            −
+        {/* Modal Header with Lesson Title and Controls */}
+        <div className="flex-shrink-0 bg-white border-b border-slate-200 px-12 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4 flex-1 min-w-0">
+              <input
+                className="text-lg font-semibold outline-none rounded px-1 -mx-1 hover:bg-neutral-50 focus:bg-neutral-50"
+                value={lesson.title}
+                onChange={(e) => onSave({...lesson, title: e.target.value})}
+                style={{ width: `${Math.max(lesson.title.length * 0.6, 10)}ch` }}
+              />
+              
+              {/* Draft/Live Toggle next to title */}
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onToggleLive(lesson.id);
+                  }}
+                  className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 ${
+                    lesson.isLive ? 'bg-slate-600' : 'bg-slate-300'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                      lesson.isLive ? 'translate-x-5' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+                <span className={`text-xs font-medium whitespace-nowrap ${lesson.isLive ? 'text-slate-600' : 'text-slate-500'}`}>
+                  {lesson.isLive 
+                    ? (lesson.assignedStudents && lesson.assignedStudents.length > 0 
+                        ? `Live • ${lesson.assignedStudents.length} viewing`
+                        : 'Live • Ready for students'
+                      )
+                    : `Draft • Last edited ${lesson.updatedAt}`
+                  }
+                </span>
+              </div>
+            </div>
+            
+            {/* Right side controls */}
+            <div className="flex items-center">
+              <button
+                onClick={handleClose}
+                className="p-2 bg-transparent hover:bg-slate-100 transition-colors rounded-full"
+                title="Minimize lesson"
+              >
+                <div className="h-4 w-4 flex items-center justify-center text-slate-600 font-semibold text-sm">
+                  −
+                </div>
+              </button>
+            </div>
           </div>
-        </button>
+        </div>
 
         {/* Lesson Content Area - Scrollable with hidden scrollbar */}
-        <div className="flex-1 overflow-y-auto modal-scroll">
+        <div className="flex-1 overflow-y-auto modal-scroll flex">
           <LessonBuilder
             lesson={lesson}
             onClose={onClose}
@@ -831,6 +877,7 @@ function LessonModal({
             onConfirm={undefined}
             onNavigate={() => {}}
             isModal={true}
+            onToggleLive={onToggleLive}
           />
         </div>
       </div>
@@ -846,14 +893,112 @@ export default function App() {
   const [currentView, setCurrentView] = useState<'dashboard' | 'builder' | 'review' | 'students' | 'standards'>('dashboard');
   const [isLessonModalOpen, setIsLessonModalOpen] = useState(false);
   const [pendingLesson, setPendingLesson] = useState<Lesson | null>(null);
+  const [currentAISuggestion, setCurrentAISuggestion] = useState<Lesson | null>(null);
+  const [lessonHasBeenModified, setLessonHasBeenModified] = useState(false);
+  
+  // AI Suggestions state - these can be dynamically generated
+  const [aiSuggestions, setAiSuggestions] = useState([
+    {
+      id: "ai-suggestion-1",
+      title: "Negative Exponents Practice",
+      reason: "Band 2 students struggling",
+      standard: "8.EE.A.1",
+      urgency: "high" as const,
+      timeEstimate: "1 day",
+      agentContext: {
+        reasoning: "Based on student performance data from 'Integer Exponents and Their Properties' lesson: 4 out of 6 Band 2 students scored below 70% on negative exponent problems. Common errors include treating negative exponents as negative numbers.",
+        planning: "Created focused practice lesson that reinforces the pattern from positive to negative exponents, uses visual fraction models extensively, and includes error analysis of common mistakes.",
+        changes: "Generated targeted practice lesson with pattern recognition warm-up, visual fraction model exercises, common error identification activities, and graduated difficulty progression.",
+        agentPrompt: "Band 2 students are struggling with negative exponents in your recent lesson. Performance data shows 4 out of 6 students scored below 70%. I'm creating a targeted practice lesson with visual scaffolding to address these gaps immediately."
+      }
+    },
+    {
+      id: "ai-suggestion-2",
+      title: "Introduction to Functions",
+      reason: "Next logical step",
+      standard: "8.F.A.1",
+      urgency: "medium" as const,
+      timeEstimate: "2 days",
+      agentContext: {
+        reasoning: "Students have mastered linear equations and are ready for the next conceptual step. Functions build naturally on their understanding of input-output relationships from slope-intercept form.",
+        planning: "Created introductory functions lesson that connects to previous learning, uses familiar contexts, and introduces function notation gradually with visual support.",
+        changes: "Generated lesson with function machine concept, real-world examples (vending machines, temperature conversion), multiple representations (tables, graphs, equations), and practice identifying functions.",
+        agentPrompt: "Your students have mastered linear equations and are ready for functions as the next logical step. Curriculum pacing indicates this is the optimal time to introduce function concepts. I'm generating an introductory functions lesson that builds on their current understanding."
+      }
+    },
+    {
+      id: "ai-suggestion-3",
+      title: "Unit Rate as Slope Review",
+      reason: "Reteaching needed",
+      standard: "8.EE.B.5",
+      urgency: "high" as const,
+      timeEstimate: "1 day",
+      agentContext: {
+        reasoning: "Assessment data shows students are confusing unit rate and slope concepts. They need targeted review to solidify the connection between these related but distinct concepts.",
+        planning: "Created review lesson that explicitly connects unit rate to slope, uses visual comparisons, and provides practice distinguishing between the concepts in different contexts.",
+        changes: "Generated lesson with side-by-side comparisons, real-world scenarios (speed, cost per item), visual representations, and targeted practice problems addressing common misconceptions.",
+        agentPrompt: "Assessment data reveals confusion between unit rate and slope concepts among your students. This misconception requires immediate intervention. I'm creating a focused review lesson with visual comparisons to clarify these related but distinct concepts."
+      }
+    }
+  ]);
+
+  // Function to generate a new AI suggestion to replace one that was moved to My Lessons
+  function generateNewAISuggestion() {
+    const newSuggestions = [
+      {
+        title: "Solving Linear Inequalities",
+        reason: "Building on equation skills",
+        standard: "8.EE.B.7",
+        urgency: "medium" as const,
+        timeEstimate: "2 days",
+        agentContext: {
+          reasoning: "Students have solid foundation in solving linear equations. Natural progression is to extend these skills to inequalities, which builds critical thinking about solution sets.",
+          planning: "Created lesson that connects equation solving to inequality solving, emphasizes graphing solution sets, and includes real-world applications with constraints.",
+          changes: "Generated lesson with equation-to-inequality bridge, number line representations, word problems with constraints, and practice with compound inequalities.",
+          agentPrompt: "Your students have mastered linear equations. The next logical step is linear inequalities to extend their algebraic reasoning. I'm creating a lesson that builds on their current skills while introducing new concepts."
+        }
+      },
+      {
+        title: "Systems of Linear Equations",
+        reason: "Advanced problem solving",
+        standard: "8.EE.C.8",
+        urgency: "low" as const,
+        timeEstimate: "3 days",
+        agentContext: {
+          reasoning: "Students are ready for more complex algebraic thinking. Systems of equations introduce multiple-variable problem solving and real-world applications.",
+          planning: "Created lesson with graphical and algebraic methods, real-world scenarios (business problems, mixture problems), and multiple solution strategies.",
+          changes: "Generated lesson with substitution method, elimination method, graphical interpretation, and practical applications in business and science contexts.",
+          agentPrompt: "Based on student progress, they're ready for systems of linear equations. This advances their problem-solving skills and introduces multi-variable thinking. I'm creating a comprehensive lesson with multiple solution methods."
+        }
+      },
+      {
+        title: "Pythagorean Theorem Applications",
+        reason: "Geometry integration",
+        standard: "8.G.B.7",
+        urgency: "medium" as const,
+        timeEstimate: "2 days",
+        agentContext: {
+          reasoning: "Students need to connect algebraic skills with geometric concepts. Pythagorean theorem provides practical applications of square roots and equation solving.",
+          planning: "Created lesson with real-world applications (construction, navigation, sports), visual proofs, and connections to coordinate geometry.",
+          changes: "Generated lesson with hands-on activities, real-world problem solving, coordinate plane applications, and 3D extensions.",
+          agentPrompt: "It's time to integrate geometry with your students' algebraic skills. The Pythagorean theorem provides excellent real-world applications. I'm creating a lesson that connects math to practical situations."
+        }
+      }
+    ];
+
+    // Return a random new suggestion
+    return newSuggestions[Math.floor(Math.random() * newSuggestions.length)];
+  }
 
   function handleOpenLesson(id: string) {
     setOpenLessonId(id);
     setIsLessonModalOpen(true);
   }
 
-  function handleCreateLessonFromSuggestion(lesson: Lesson) {
-    setLessons((prev) => [lesson, ...prev]);
+  function handleCreateLessonFromSuggestion(lesson: Lesson, suggestionId?: string) {
+    // Don't add to lessons array immediately - store as AI suggestion being viewed
+    setCurrentAISuggestion({...lesson, suggestionId});
+    setLessonHasBeenModified(false);
     setOpenLessonId(lesson.id);
     setIsLessonModalOpen(true);
   }
@@ -865,11 +1010,32 @@ export default function App() {
   }
 
   function handleCloseLessonModal() {
-    // If there's a pending lesson, save it to the lessons list
+    // If there's a pending lesson (from lesson builder), save it to the lessons list
     if (pendingLesson) {
       setLessons((prev) => [pendingLesson, ...prev]);
       setPendingLesson(null);
     }
+    
+    // If there's an AI suggestion that has been modified, move it to My Lessons
+    if (currentAISuggestion && lessonHasBeenModified) {
+      setLessons((prev) => [currentAISuggestion, ...prev]);
+      
+      // Generate new AI suggestion to replace the one that was moved
+      if (currentAISuggestion.suggestionId) {
+        const newSuggestion = generateNewAISuggestion();
+        setAiSuggestions(prev => 
+          prev.map(suggestion => 
+            suggestion.id === currentAISuggestion.suggestionId 
+              ? { ...newSuggestion, id: suggestion.id }
+              : suggestion
+          )
+        );
+      }
+    }
+    
+    // Reset state
+    setCurrentAISuggestion(null);
+    setLessonHasBeenModified(false);
     setOpenLessonId(null);
     setIsLessonModalOpen(false);
   }
@@ -901,6 +1067,8 @@ export default function App() {
   function handleCloseBuilder() {
     setOpenLessonId(null);
     setPendingLesson(null);
+    setCurrentAISuggestion(null);
+    setLessonHasBeenModified(false);
     setCurrentView('dashboard');
   }
 
@@ -914,6 +1082,8 @@ export default function App() {
     setCurrentView(view);
     setOpenLessonId(null);
     setPendingLesson(null);
+    setCurrentAISuggestion(null);
+    setLessonHasBeenModified(false);
   }
 
   const extractTitleFromPrompt = (prompt: string): string => {
@@ -938,7 +1108,7 @@ export default function App() {
   }
 
   if (currentView === 'builder' && openLessonId && !isLessonModalOpen) {
-    const lesson = pendingLesson || lessons.find((l) => l.id === openLessonId) || ENRICHMENT_LESSONS.find((l) => l.id === openLessonId)!;
+    const lesson = pendingLesson || currentAISuggestion || lessons.find((l) => l.id === openLessonId) || ENRICHMENT_LESSONS.find((l) => l.id === openLessonId)!;
   return (
       <TooltipProvider>
         <div className="min-h-screen bg-slate-50 text-foreground">
@@ -950,13 +1120,18 @@ export default function App() {
               onSave={(patched) => {
                 if (pendingLesson) {
                   setPendingLesson(patched);
+                } else if (currentAISuggestion) {
+                  // Mark AI suggestion as modified and update it
+                  setCurrentAISuggestion(patched);
+                  setLessonHasBeenModified(true);
                 } else {
                   setLessons((prev) => prev.map((l) => (l.id === patched.id ? patched : l)));
                 }
               }}
-              isPending={!!pendingLesson}
+              isPending={!!pendingLesson || !!currentAISuggestion}
               onConfirm={pendingLesson ? handleConfirmLesson : undefined}
               onNavigate={handleNavigation}
+              onToggleLive={handleToggleLessonLive}
             />
           </div>
         </div>
@@ -1083,49 +1258,19 @@ export default function App() {
                       </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <SuggestionCard 
-                  title="Negative Exponents Practice"
-                  reason="Band 2 students struggling"
-                  standard="8.EE.A.1"
-                  urgency="high"
-                  timeEstimate="1 day"
-                  agentContext={{
-                    reasoning: "Based on student performance data from 'Integer Exponents and Their Properties' lesson: 4 out of 6 Band 2 students scored below 70% on negative exponent problems. Common errors include treating negative exponents as negative numbers.",
-                    planning: "Created focused practice lesson that reinforces the pattern from positive to negative exponents, uses visual fraction models extensively, and includes error analysis of common mistakes.",
-                    changes: "Generated targeted practice lesson with pattern recognition warm-up, visual fraction model exercises, common error identification activities, and graduated difficulty progression.",
-                    agentPrompt: "Band 2 students are struggling with negative exponents in your recent lesson. Performance data shows 4 out of 6 students scored below 70%. I'm creating a targeted practice lesson with visual scaffolding to address these gaps immediately."
-                  }}
-                  onCreateLesson={handleCreateLessonFromSuggestion}
-                />
-                <SuggestionCard 
-                  title="Introduction to Functions"
-                  reason="Next logical step"
-                  standard="8.F.A.1"
-                  urgency="medium"
-                  timeEstimate="2 days"
-                  agentContext={{
-                    reasoning: "Students have mastered linear equations and are ready for the next conceptual step. Functions build naturally on their understanding of input-output relationships from slope-intercept form.",
-                    planning: "Created introductory functions lesson that connects to previous learning, uses familiar contexts, and introduces function notation gradually with visual support.",
-                    changes: "Generated lesson with function machine concept, real-world examples (vending machines, temperature conversion), multiple representations (tables, graphs, equations), and practice identifying functions.",
-                    agentPrompt: "Your students have mastered linear equations and are ready for functions as the next logical step. Curriculum pacing indicates this is the optimal time to introduce function concepts. I'm generating an introductory functions lesson that builds on their current understanding."
-                  }}
-                  onCreateLesson={handleCreateLessonFromSuggestion}
-                />
-                <SuggestionCard 
-                  title="Unit Rate as Slope Review"
-                  reason="Reteaching needed"
-                  standard="8.EE.B.5"
-                  urgency="high"
-                  timeEstimate="1 day"
-                  agentContext={{
-                    reasoning: "Assessment data shows students are confusing unit rate and slope concepts. They need targeted review to solidify the connection between these related but distinct concepts.",
-                    planning: "Created review lesson that explicitly connects unit rate to slope, uses visual comparisons, and provides practice distinguishing between the concepts in different contexts.",
-                    changes: "Generated lesson with side-by-side comparisons, real-world scenarios (speed, cost per item), visual representations, and targeted practice problems addressing common misconceptions.",
-                    agentPrompt: "Assessment data reveals confusion between unit rate and slope concepts among your students. This misconception requires immediate intervention. I'm creating a focused review lesson with visual comparisons to clarify these related but distinct concepts."
-                  }}
-                  onCreateLesson={handleCreateLessonFromSuggestion}
-                />
-                      </div>
+                {aiSuggestions.map((suggestion) => (
+                  <SuggestionCard 
+                    key={suggestion.id}
+                    title={suggestion.title}
+                    reason={suggestion.reason}
+                    standard={suggestion.standard}
+                    urgency={suggestion.urgency}
+                    timeEstimate={suggestion.timeEstimate}
+                    agentContext={suggestion.agentContext}
+                    onCreateLesson={(lesson) => handleCreateLessonFromSuggestion(lesson, suggestion.id)}
+                  />
+                ))}
+              </div>
                     </div>
 
                     {/* Extra Credit / Self-Learning Lessons */}
@@ -1205,16 +1350,21 @@ export default function App() {
             {/* Lesson Modal */}
             {isLessonModalOpen && openLessonId && (
               <LessonModal
-                lesson={pendingLesson || lessons.find((l) => l.id === openLessonId) || ENRICHMENT_LESSONS.find((l) => l.id === openLessonId)!}
+                lesson={pendingLesson || currentAISuggestion || lessons.find((l) => l.id === openLessonId) || ENRICHMENT_LESSONS.find((l) => l.id === openLessonId)!}
                 isOpen={isLessonModalOpen}
                 onClose={handleCloseLessonModal}
                 onSave={(patched) => {
                   if (pendingLesson) {
                     setPendingLesson(patched);
+                  } else if (currentAISuggestion) {
+                    // Mark AI suggestion as modified and update it
+                    setCurrentAISuggestion(patched);
+                    setLessonHasBeenModified(true);
                   } else {
                     setLessons((prev) => prev.map((l) => (l.id === patched.id ? patched : l)));
                   }
                 }}
+                onToggleLive={handleToggleLessonLive}
               />
             )}
           </TooltipProvider>
@@ -1522,7 +1672,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
           )}
 
           {/* Toolbar - directly attached */}
-          <div className="border-t border-slate-200 rounded-b-2xl">
+          <div className="rounded-b-2xl">
             <div className="p-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {/* Students Selection */}
@@ -1530,7 +1680,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
                   value={selectedStudents} 
                   onValueChange={(value) => setSelectedStudents(value)}
                 >
-                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
+                  <SelectTrigger className="h-8 text-xs border border-slate-200 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                     <div className="flex items-center gap-1.5">
                       <UserGroupIcon className="h-4 w-4 text-slate-600" />
                       <SelectValue />
@@ -1550,7 +1700,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
 
                 {/* Standards Selection */}
                 <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
+                  <SelectTrigger className="h-8 text-xs border border-slate-200 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                     <div className="flex items-center gap-1.5">
                       <AcademicCapIcon className="h-4 w-4 text-slate-600" />
                       <SelectValue placeholder="All standards" />
@@ -1690,7 +1840,7 @@ function LeftSidebar({ currentView, onNavigate }: {
                 : 'text-slate-600 hover:text-slate-700 hover:bg-slate-200'
             }`}
           >
-            <UsersIcon className="h-5 w-5" />
+            <UserGroupIcon className="h-5 w-5" />
           </button>
           <button
             onClick={() => onNavigate('standards')}
@@ -2893,12 +3043,12 @@ function UnifiedPromptComponent({
             )}
 
             {/* Toolbar */}
-            <div className="border-t border-slate-200 rounded-b-2xl">
+            <div className="rounded-b-2xl">
               <div className="p-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {/* Students Selection */}
                   <Select value={selectedStudents} onValueChange={setSelectedStudents}>
-                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
+                    <SelectTrigger className="h-8 text-xs border border-slate-200 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                       <div className="flex items-center gap-1.5">
                         <UserGroupIcon className="h-4 w-4 text-slate-600" />
                         <SelectValue />
@@ -2918,7 +3068,7 @@ function UnifiedPromptComponent({
 
                   {/* Standards Selection */}
                   <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
+                    <SelectTrigger className="h-8 text-xs border border-slate-200 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                       <div className="flex items-center gap-1.5">
                         <AcademicCapIcon className="h-4 w-4 text-slate-600" />
                         <SelectValue placeholder="All standards" />
@@ -3093,7 +3243,7 @@ function UnifiedPromptComponent({
           ) : (
             <>
               {chatHistory.map((message) => (
-                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-end items-end gap-2' : 'justify-start'}`}>
+                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-start gap-2' : 'justify-start'}`}>
                   {message.type === 'user' ? (
                     <>
                       <div className="max-w-[80%] p-3 rounded-lg text-sm bg-slate-200 text-slate-700">
@@ -3108,17 +3258,14 @@ function UnifiedPromptComponent({
                     </>
                   ) : message.type === 'agent' ? (
                     <>
-                      <div className="max-w-[80%] p-3 rounded-lg text-sm bg-blue-50 text-blue-800 border border-blue-200">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
-                        </div>
-                        {message.content}
-                      </div>
                       <Avatar className="h-8 w-8 flex-shrink-0">
                         <AvatarFallback className="bg-slate-600 text-white">
                           <AcademicCapIcon className="h-4 w-4" />
                         </AvatarFallback>
                       </Avatar>
+                      <div className="flex-1 p-3 rounded-lg text-sm bg-transparent text-slate-700">
+                        {message.content}
+                      </div>
                     </>
                   ) : (
                     <div className="w-full space-y-3">
@@ -3157,8 +3304,8 @@ function UnifiedPromptComponent({
                       {/* Action buttons for each AI response */}
                       {!message.isStreaming && (
                         <div className="flex items-center gap-1 mt-3">
-                        {/* Undo button - only show if this message applied changes */}
-                        {message.id.startsWith('apply-') && undoStack.length > 0 && (
+                        {/* Undo button - show for AI messages when undo is available */}
+                        {message.type === 'ai' && undoStack.length > 0 && (
                           <button
                             onClick={() => onUndo()}
                             className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
@@ -3288,11 +3435,11 @@ function UnifiedPromptComponent({
           )}
 
           {/* Controls Row */}
-          <div className="p-3 flex items-center justify-between border-t border-slate-200 rounded-b-2xl">
+          <div className="p-3 flex items-center justify-between rounded-b-2xl">
             <div className="flex items-center gap-2">
               {/* Students Selection */}
               <Select value={selectedStudents} onValueChange={setSelectedStudents}>
-                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
+                <SelectTrigger className="h-8 text-xs border border-slate-200 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                   <div className="flex items-center gap-1.5">
                     <UserGroupIcon className="h-4 w-4 text-slate-600" />
                     <SelectValue />
@@ -3310,7 +3457,7 @@ function UnifiedPromptComponent({
 
               {/* Standards Selection */}
               <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
+                <SelectTrigger className="h-8 text-xs border border-slate-200 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                   <div className="flex items-center gap-1.5">
                     <AcademicCapIcon className="h-4 w-4 text-slate-600" />
                     <SelectValue placeholder="All standards" />
@@ -3460,14 +3607,8 @@ function FloatingAIAssistant({
             {/* Show agent context if available and no chat history */}
             {lesson.agentContext && chatHistory.length === 0 && (
               <div className="flex justify-start">
-                <div className="max-w-[80%] p-3 rounded-lg text-sm bg-blue-50 border border-blue-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
-                      <span className="text-white text-xs font-medium">AI</span>
-                    </div>
-                    <span className="text-xs text-blue-600 font-medium">Your Teaching Agent</span>
-                  </div>
-                  <p className="text-blue-800">{lesson.agentContext.agentPrompt}</p>
+                <div className="max-w-[80%] p-3 rounded-lg text-sm bg-transparent">
+                  <p className="text-slate-700">{lesson.agentContext.agentPrompt}</p>
                   <div className="mt-3 p-2 bg-white rounded border border-blue-100">
                     <div className="text-xs text-blue-600 mb-1">Generated Analysis:</div>
                     <div className="text-xs text-blue-700 space-y-1">
@@ -3486,14 +3627,9 @@ function FloatingAIAssistant({
                   message.type === 'user' 
                     ? 'bg-slate-200 text-slate-700' 
                     : message.type === 'agent'
-                    ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                    ? 'bg-transparent text-slate-700'
                     : 'bg-gray-100 text-gray-700'
                 }`}>
-                  {message.type === 'agent' && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
-                    </div>
-                  )}
                   {message.content}
                 </div>
                 {message.type === 'user' && (
@@ -3714,14 +3850,9 @@ function RightRailChat({
                   message.type === 'user' 
                     ? 'bg-slate-200 text-slate-700' 
                     : message.type === 'agent'
-                    ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                    ? 'bg-transparent text-slate-700'
                     : 'bg-gray-100 text-gray-700'
                 }`}>
-                  {message.type === 'agent' && (
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
-                    </div>
-                  )}
                   {message.content}
                 </div>
                 {message.type === 'user' && (
@@ -3807,6 +3938,7 @@ function LessonBuilder({
   onConfirm,
   onNavigate,
   isModal = false,
+  onToggleLive,
 }: {
   lesson: Lesson;
   onClose: () => void;
@@ -3814,6 +3946,7 @@ function LessonBuilder({
   isPending?: boolean;
   onConfirm?: () => void;
   onNavigate: (view: 'dashboard' | 'students' | 'standards') => void;
+  onToggleLive?: (lessonId: string) => void;
   isModal?: boolean;
 }) {
   const [subject, setSubject] = useState(lesson.subject ?? "math");
@@ -4383,32 +4516,39 @@ The changes are now live in your lesson. You can continue refining other section
   }
 
   const handleToggleLive = () => {
-    const allStudents = CLASS_8A.students.map(s => s.id);
-    const updatedLesson: Lesson = {
-      ...currentLesson,
-      isLive: !currentLesson.isLive,
-      liveAt: !currentLesson.isLive ? new Date().toISOString().split('T')[0] : undefined,
-      assignedStudents: !currentLesson.isLive ? allStudents : [],
-      studentProgress: !currentLesson.isLive ? allStudents.reduce((acc, studentId) => {
-        acc[studentId] = {
-          studentId,
-          status: 'not_started'
-        };
-        return acc;
-      }, {} as Record<string, StudentProgress>) : {}
-    };
+    if (onToggleLive) {
+      onToggleLive(lesson.id);
+    } else {
+      // Fallback for when onToggleLive is not provided
+      const allStudents = CLASS_8A.students.map(s => s.id);
+      const updatedLesson: Lesson = {
+        ...currentLesson,
+        isLive: !currentLesson.isLive,
+        liveAt: !currentLesson.isLive ? new Date().toISOString().split('T')[0] : undefined,
+        assignedStudents: !currentLesson.isLive ? allStudents : [],
+        studentProgress: !currentLesson.isLive ? allStudents.reduce((acc, studentId) => {
+          acc[studentId] = {
+            studentId,
+            status: 'not_started'
+          };
+          return acc;
+        }, {} as Record<string, StudentProgress>) : {}
+      };
+      
+      setCurrentLesson(updatedLesson);
+      onSave(updatedLesson);
+    }
     
-    setCurrentLesson(updatedLesson);
-    onSave(updatedLesson);
-    
-    // Show success message
-    setToast({
-      message: updatedLesson.isLive 
-        ? `Lesson is now live for all students!` 
-        : `Lesson is no longer visible to students.`,
-      type: 'success'
-    });
-    setTimeout(() => setToast(null), 3000);
+    // Show success message (only for fallback case)
+    if (!onToggleLive) {
+      setToast({
+        message: !currentLesson.isLive 
+          ? `Lesson is now live for all students!` 
+          : `Lesson is no longer visible to students.`,
+        type: 'success'
+      });
+      setTimeout(() => setToast(null), 3000);
+    }
   };
 
   const STD_OPTIONS = subject === "math" ? G8_MATH_STANDARDS : [];
@@ -4447,72 +4587,74 @@ The changes are now live in your lesson. You can continue refining other section
             </div>
           )}
 
-          {/* Lesson Header */}
-          <div className={`${isModal ? 'px-6 py-4' : 'px-20 py-4 pr-[580px]'}`}>
-            <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
-              <div className="flex items-center justify-between w-full">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-xl font-semibold text-slate-700">{title}</h1>
-                </div>
-                <div className="flex items-center gap-4 flex-shrink-0">
-                  {/* Student Facepile - 3 viewers */}
-                  {currentLesson.isLive && currentLesson.assignedStudents && currentLesson.assignedStudents.length > 0 && (
-                    <div className="flex -space-x-2">
-                      {currentLesson.assignedStudents.slice(0, 3).map((studentId, index) => {
-                        const student = CLASS_8A.students.find(s => s.id === studentId);
-                        if (!student) return null;
-                        return (
-                          <div
-                            key={studentId}
-                            className="w-6 h-6 rounded-full border-2 border-white bg-slate-200 overflow-hidden flex-shrink-0"
-                            title={student.name}
-                          >
-                            {student.avatar ? (
-                              <img 
-                                src={student.avatar} 
-                                alt={student.name}
-                                className="w-full h-full object-cover"
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-600">
-                                {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                  
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={handleToggleLive}
-                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 ${
-                        currentLesson.isLive ? 'bg-slate-600' : 'bg-slate-300'
-                      }`}
-                    >
-                      <span
-                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
-                          currentLesson.isLive ? 'translate-x-5' : 'translate-x-1'
+          {/* Lesson Header - only show when not in modal */}
+          {!isModal && (
+            <div className="px-20 py-4 pr-[580px]">
+              <div className="max-w-4xl mx-auto">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3">
+                    <h1 className="text-xl font-semibold text-slate-700">{title}</h1>
+                  </div>
+                  <div className="flex items-center gap-4 flex-shrink-0">
+                    {/* Student Facepile - 3 viewers */}
+                    {currentLesson.isLive && currentLesson.assignedStudents && currentLesson.assignedStudents.length > 0 && (
+                      <div className="flex -space-x-2">
+                        {currentLesson.assignedStudents.slice(0, 3).map((studentId, index) => {
+                          const student = CLASS_8A.students.find(s => s.id === studentId);
+                          if (!student) return null;
+                          return (
+                            <div
+                              key={studentId}
+                              className="w-6 h-6 rounded-full border-2 border-white bg-slate-200 overflow-hidden flex-shrink-0"
+                              title={student.name}
+                            >
+                              {student.avatar ? (
+                                <img 
+                                  src={student.avatar} 
+                                  alt={student.name}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-600">
+                                  {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleToggleLive}
+                        className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 ${
+                          currentLesson.isLive ? 'bg-slate-600' : 'bg-slate-300'
                         }`}
-                      />
-                    </button>
-                    <span className={`text-xs font-medium ${currentLesson.isLive ? 'text-slate-600' : 'text-slate-500'}`}>
-                      {currentLesson.isLive ? '3 viewing' : 'Draft'}
-                    </span>
+                      >
+                        <span
+                          className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                            currentLesson.isLive ? 'translate-x-5' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                      <span className={`text-xs font-medium ${currentLesson.isLive ? 'text-slate-600' : 'text-slate-500'}`}>
+                        {currentLesson.isLive ? '3 viewing' : 'Draft'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
           
           {/* Content Area */}
-          <div className={`flex-1 ${isModal ? 'px-6 py-6 overflow-y-auto lesson-content-scroll' : 'px-20 py-6 pr-[580px]'}`}>
+          <div className={`flex-1 ${isModal ? 'px-12 py-12 overflow-y-auto lesson-content-scroll' : 'px-20 py-6 pr-[580px]'}`}>
             <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
           {/* Tabbed Interface */}
           <div className="mb-8">
           {/* Tab Navigation - Static and Left Aligned */}
-          <div className="mb-6">
+          <div className="mb-10">
             <nav className="flex gap-1">
               {MODALITIES.map((modality) => {
                 const isActive = activeTab === modality.key;
@@ -4575,7 +4717,7 @@ The changes are now live in your lesson. You can continue refining other section
         </div>
         
         {/* Unified AI Assistant - Right Panel */}
-        <div className={`${isModal ? 'w-[520px] border-l border-slate-200 bg-slate-100 flex-shrink-0' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
+        <div className={`${isModal ? 'w-[420px] border-l border-slate-200 bg-slate-100 flex-shrink-0' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
         <UnifiedPromptComponent
           mode="refinement"
           initialPrompt={lesson.prompt || ''}
@@ -5208,7 +5350,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
   }
   return (
     <div className="h-full">
-      <div className="space-y-8">
+      <div className="space-y-12">
         
         {/* Document Header */}
         <div className="border-b border-slate-200 pb-4">
@@ -5492,7 +5634,7 @@ function SlidesContent({ lesson }: { lesson?: Lesson }) {
 
   return (
     <div className="h-full">
-      <div className="space-y-6">
+      <div className="space-y-12">
         
     {/* Slides Header */}
     <div className="border-b border-slate-200 pb-4">
@@ -5645,7 +5787,7 @@ function VideoContent({ lesson }: { lesson?: Lesson }) {
 
   return (
     <div className="h-full">
-      <div className="space-y-6">
+      <div className="space-y-12">
         
         {/* Video Header */}
         <div className="border-b border-slate-200 pb-4">
@@ -5680,10 +5822,10 @@ function VideoContent({ lesson }: { lesson?: Lesson }) {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-white text-sm">Speed:</span>
-                <select className="bg-slate-700 text-white text-sm rounded px-2 py-1">
+                <select className="bg-slate-700 text-white text-sm rounded px-2 py-1" defaultValue="1x">
                   <option>0.5x</option>
                   <option>0.75x</option>
-                  <option selected>1x</option>
+                  <option>1x</option>
                   <option>1.25x</option>
                   <option>1.5x</option>
                   <option>2x</option>
@@ -5734,7 +5876,7 @@ function AudioContent({ lesson }: { lesson?: Lesson }) {
 
   return (
     <div className="h-full">
-      <div className="space-y-6">
+      <div className="space-y-12">
         
         {/* Audio Header */}
         <div className="border-b border-slate-200 pb-4">
@@ -5818,9 +5960,9 @@ function AudioContent({ lesson }: { lesson?: Lesson }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
             <h4 className="font-semibold text-slate-700 mb-2">Playback Speed</h4>
-            <select className="bg-white border border-slate-200 rounded px-3 py-1">
+            <select className="bg-white border border-slate-200 rounded px-3 py-1" defaultValue="1x">
               <option>0.75x</option>
-              <option selected>1x</option>
+              <option>1x</option>
               <option>1.25x</option>
               <option>1.5x</option>
             </select>
