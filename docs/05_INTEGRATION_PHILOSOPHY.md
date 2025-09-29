@@ -166,9 +166,12 @@ Each lesson maintains its own isolated chat session, intentionally preventing cr
 
 #### Autonomous Teaching Agent Integration
 
-**Proactive Educational Intelligence Within Conversational Framework**
+**Proactive Educational Intelligence Through Brand Personification**
 
 The Teaching Agent operates as an autonomous educational assistant that monitors student performance, analyzes curriculum needs, and proactively creates targeted interventions while maintaining the conversational interface paradigm.
+
+**Brand-Mediated AI Interaction:**
+Rather than presenting autonomous actions as coming from an abstract "AI agent," the system personifies these capabilities through the application's brand identity (graduation cap logo). This creates a more approachable relationship where teachers understand that the application itself is intelligently working on their behalf, reducing the psychological distance between human and AI.
 
 **Agent-Conversational Interface Integration:**
 
