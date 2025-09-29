@@ -1522,7 +1522,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
           )}
 
           {/* Toolbar - directly attached */}
-          <div>
+          <div className="border-t border-slate-200 rounded-b-2xl">
             <div className="p-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {/* Students Selection */}
@@ -1530,7 +1530,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
                   value={selectedStudents} 
                   onValueChange={(value) => setSelectedStudents(value)}
                 >
-                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[120px] justify-start gap-1">
+                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                     <div className="flex items-center gap-1.5">
                       <UserGroupIcon className="h-4 w-4 text-slate-600" />
                       <SelectValue />
@@ -1550,7 +1550,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
 
                 {/* Standards Selection */}
                 <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[140px] justify-start gap-1">
+                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                     <div className="flex items-center gap-1.5">
                       <AcademicCapIcon className="h-4 w-4 text-slate-600" />
                       <SelectValue placeholder="All standards" />
@@ -2893,12 +2893,12 @@ function UnifiedPromptComponent({
             )}
 
             {/* Toolbar */}
-            <div>
+            <div className="border-t border-slate-200 rounded-b-2xl">
               <div className="p-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {/* Students Selection */}
                   <Select value={selectedStudents} onValueChange={setSelectedStudents}>
-                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[120px] justify-start gap-1">
+                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                       <div className="flex items-center gap-1.5">
                         <UserGroupIcon className="h-4 w-4 text-slate-600" />
                         <SelectValue />
@@ -2918,7 +2918,7 @@ function UnifiedPromptComponent({
 
                   {/* Standards Selection */}
                   <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[140px] justify-start gap-1">
+                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                       <div className="flex items-center gap-1.5">
                         <AcademicCapIcon className="h-4 w-4 text-slate-600" />
                         <SelectValue placeholder="All standards" />
@@ -3288,11 +3288,11 @@ function UnifiedPromptComponent({
           )}
 
           {/* Controls Row */}
-          <div className="p-3 flex items-center justify-between">
+          <div className="p-3 flex items-center justify-between border-t border-slate-200 rounded-b-2xl">
             <div className="flex items-center gap-2">
               {/* Students Selection */}
               <Select value={selectedStudents} onValueChange={setSelectedStudents}>
-                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[120px] justify-start gap-1">
+                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                   <div className="flex items-center gap-1.5">
                     <UserGroupIcon className="h-4 w-4 text-slate-600" />
                     <SelectValue />
@@ -3310,7 +3310,7 @@ function UnifiedPromptComponent({
 
               {/* Standards Selection */}
               <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[140px] justify-start gap-1">
+                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-auto justify-start gap-1">
                   <div className="flex items-center gap-1.5">
                     <AcademicCapIcon className="h-4 w-4 text-slate-600" />
                     <SelectValue placeholder="All standards" />
@@ -4574,7 +4574,7 @@ The changes are now live in your lesson. You can continue refining other section
         </div>
         
         {/* Unified AI Assistant - Right Panel */}
-        <div className={`${isModal ? 'w-[320px] border-l border-slate-200 bg-slate-100 flex-shrink-0' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
+        <div className={`${isModal ? 'w-[520px] border-l border-slate-200 bg-slate-100 flex-shrink-0' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
         <UnifiedPromptComponent
           mode="refinement"
           initialPrompt={lesson.prompt || ''}
