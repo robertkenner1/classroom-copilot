@@ -3093,7 +3093,7 @@ function UnifiedPromptComponent({
           ) : (
             <>
               {chatHistory.map((message) => (
-                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-end gap-2' : 'justify-start'}`}>
+                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-end items-end gap-2' : 'justify-start'}`}>
                   {message.type === 'user' ? (
                     <>
                       <div className="max-w-[80%] p-3 rounded-lg text-sm bg-slate-200 text-slate-700">
@@ -3108,17 +3108,17 @@ function UnifiedPromptComponent({
                     </>
                   ) : message.type === 'agent' ? (
                     <>
-                      <Avatar className="h-8 w-8 flex-shrink-0">
-                        <AvatarFallback className="bg-blue-500 text-white">
-                          <CpuChipIcon className="h-4 w-4" />
-                        </AvatarFallback>
-                      </Avatar>
                       <div className="max-w-[80%] p-3 rounded-lg text-sm bg-blue-50 text-blue-800 border border-blue-200">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
                         </div>
                         {message.content}
                       </div>
+                      <Avatar className="h-8 w-8 flex-shrink-0">
+                        <AvatarFallback className="bg-blue-500 text-white">
+                          <AcademicCapIcon className="h-4 w-4" />
+                        </AvatarFallback>
+                      </Avatar>
                     </>
                   ) : (
                     <div className="w-full space-y-3">
@@ -3481,14 +3481,7 @@ function FloatingAIAssistant({
             )}
             
             {chatHistory.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-end gap-2' : 'justify-start'}`}>
-                {message.type === 'agent' && (
-                  <Avatar className="h-8 w-8 flex-shrink-0">
-                    <AvatarFallback className="bg-blue-500 text-white">
-                      <CpuChipIcon className="h-4 w-4" />
-                    </AvatarFallback>
-                  </Avatar>
-                )}
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-end items-end gap-2' : 'justify-start'}`}>
                 <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
                   message.type === 'user' 
                     ? 'bg-slate-200 text-slate-700' 
@@ -3508,6 +3501,13 @@ function FloatingAIAssistant({
                     <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Teacher" />
                     <AvatarFallback>
                       <UserIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
+                {message.type === 'agent' && (
+                  <Avatar className="h-8 w-8 flex-shrink-0">
+                    <AvatarFallback className="bg-blue-500 text-white">
+                      <AcademicCapIcon className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
                 )}
@@ -3709,14 +3709,7 @@ function RightRailChat({
         ) : (
           <div className="space-y-3">
             {chatHistory.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-end gap-2' : 'justify-start'}`}>
-                {message.type === 'agent' && (
-                  <Avatar className="h-8 w-8 flex-shrink-0">
-                    <AvatarFallback className="bg-blue-500 text-white">
-                      <CpuChipIcon className="h-4 w-4" />
-                    </AvatarFallback>
-                  </Avatar>
-                )}
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-end items-end gap-2' : 'justify-start'}`}>
                 <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
                   message.type === 'user' 
                     ? 'bg-slate-200 text-slate-700' 
@@ -3736,6 +3729,13 @@ function RightRailChat({
                     <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Teacher" />
                     <AvatarFallback>
                       <UserIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
+                {message.type === 'agent' && (
+                  <Avatar className="h-8 w-8 flex-shrink-0">
+                    <AvatarFallback className="bg-blue-500 text-white">
+                      <AcademicCapIcon className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
                 )}
