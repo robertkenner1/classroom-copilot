@@ -77,22 +77,28 @@ Every feature, component, and system decision is evaluated through the lens of s
 ## **Key Workflows & Components (15 minutes)**
 
 ### Core User Journey: Lesson Creation
-#### Conversational → Traditional Integration
+#### Conversational → Traditional Integration (Enhanced with Turn System)
 1. **AI-Powered Start**: "Create a lesson on slope for students struggling with algebra"
-2. **Intelligent Generation**: Multi-modal content with transparent reasoning
+2. **4-Phase AI Response**: 
+   - **Understanding Intent (🧠)**: Show AI analyzing student needs and curriculum context
+   - **Planning Changes (📋)**: Display strategic approach and content outline
+   - **Making Changes (🔧)**: Demonstrate real-time content generation with progress streaming
+   - **Applying Changes (✅)**: Show completed lesson delivery with visual indicators
 3. **Traditional Refinement**: Precise editing using familiar form patterns
-4. **Conversational Enhancement**: "Add more visual examples for kinesthetic learners"
+4. **Conversational Enhancement**: "Add more visual examples for kinesthetic learners" (triggers new turn cycle)
 5. **Seamless Finalization**: Traditional scheduling and distribution tools
 
-#### Live Demo: Interface Integration
-- [ ] **Unified Prompt Component**: Show conversational interface in action
-- [ ] **Lesson Builder**: Demonstrate traditional form-based editing
-- [ ] **Right Rail Chat**: Context-aware AI assistance during editing
-- [ ] **State Preservation**: How context flows between interface modes
+#### Live Demo: Turn System Integration
+- [ ] **Structured AI Responses**: Demonstrate 4-phase turn framework in real-time
+- [ ] **Progress Streaming**: Show dynamic loading states during content generation
+- [ ] **Agent Context Display**: Present AI-suggested lessons with pre-loaded reasoning
+- [ ] **Section-Specific Refinement**: Click "Refine with AI" to trigger targeted turn cycles
+- [ ] **Reasoning Transparency**: Show full AI decision-making process to build teacher trust
+- [ ] **State Preservation**: How turn context flows between interface modes
 
 ### AI-Specific Design Patterns
 - [ ] **Multi-Modal Content Intelligence**: AI generates materials in formats that match individual student learning preferences
-- [ ] **Learning Style Adaptation**: System learns and adapts to how each student best consumes content
+- [ ] **Learning Preference Adaptation**: System learns and adapts to how each student best consumes content
 - [ ] **Uncertainty Handling**: Confidence indicators and reasoning display for content format recommendations
 - [ ] **Loading States**: Progressive disclosure during AI processing with modality selection indicators
 - [ ] **Error Recovery**: Graceful degradation and user control over content format choices
@@ -102,6 +108,13 @@ Every feature, component, and system decision is evaluated through the lens of s
 - [ ] **Conversational Interface**: Advanced chat patterns with reasoning
 - [ ] **Lesson Builder**: Complex form design with AI assistance
 - [ ] **Dashboard Cards**: Information hierarchy and visual polish
+
+### Visual Design Philosophy
+- [ ] **Content-First Approach**: Following leading AI company patterns with text-heavy, functional interfaces
+- [ ] **Minimal Branding Strategy**: Reduced visual noise to maintain focus on educational content
+- [ ] **Tonal Color System**: Slate palette chosen for professional appearance and accessibility
+- [ ] **Information Density**: Maximized useful content per screen while maintaining readability
+- [ ] **Rapid Value Delivery**: Interface optimized for immediate utility over decorative elements
 
 ---
 

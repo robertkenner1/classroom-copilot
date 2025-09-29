@@ -165,7 +165,7 @@ Pages: Specific teacher workflow implementations
 
 1. **Conversational Start**: *"Create a lesson on slope for struggling students"*
 2. **AI Multi-Modal Generation**: Content in multiple formats with reasoning
-3. **Learning Style Optimization**: AI suggests optimal content mix
+3. **Learning Preference Optimization**: AI suggests optimal content mix
 4. **Traditional Refinement**: Precise editing with modality toggles
 5. **Conversational Enhancement**: *"Add visual examples for Emma"*
 6. **Traditional Finalization**: Scheduling with per-student variations
@@ -274,7 +274,7 @@ Pages: Specific teacher workflow implementations
 ## **Slide 18: Key Differentiators**
 ### **What Makes This Unique**
 
-1. **Adaptive Multi-Modal Content** → Matches individual learning styles
+1. **Adaptive Multi-Modal Content** → Matches individual learning preferences
 2. **Human-AI Collaboration** → Amplifies rather than replaces expertise
 3. **Standards-Driven Foundation** → Built on educational best practices
 4. **Contextual Intelligence** → Right interface for the right task
@@ -286,7 +286,7 @@ Pages: Specific teacher workflow implementations
 ### **How We'll Measure Impact**
 
 **Student-Centered Outcomes**
-- Increased engagement across learning styles
+- Increased engagement across learning preferences
 - Improved learning outcomes through personalization
 - Stronger teacher-student connections
 

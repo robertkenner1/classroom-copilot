@@ -86,7 +86,7 @@ The information architecture scales by preserving the human elements of teaching
 
 #### Current AI Capabilities
 - [ ] **Multi-Modal Content Generation**: Text, visual, audio, and interactive content creation
-- [ ] **Learning Style Adaptation**: Content automatically formatted to match student consumption preferences
+- [ ] **Learning Preference Adaptation**: Content automatically formatted to match student consumption preferences
 - [ ] **Conversational Interface**: Natural language interaction with content style awareness
 - [ ] **Context Awareness**: Section-specific assistance with modality recommendations
 - [ ] **Feedback Processing**: User rating integration with learning preference tracking
@@ -95,7 +95,7 @@ The information architecture scales by preserving the human elements of teaching
 - [ ] **Intelligent Multi-Modal Generation**: Content automatically created in optimal format for each student (visual learners get diagrams, auditory learners get explanations, kinesthetic learners get interactive elements)
 - [ ] **Content Consumption Analytics**: Track how students engage with different content types to refine generation
 - [ ] **Real-Time Adaptation**: Live lesson adjustment suggestions based on student engagement with different modalities
-- [ ] **Personalization Engine**: Individual student learning style profiling and content preference learning
+- [ ] **Personalization Engine**: Individual student learning preference profiling and content preference learning
 - [ ] **Advanced Reasoning**: Transparent decision-making about why specific content formats were chosen
 
 #### Phase 2 Capabilities (6-12 months)

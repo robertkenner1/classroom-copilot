@@ -16,7 +16,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { 
-  PaperClipIcon, 
   SparklesIcon, 
   ClockIcon, 
   LightBulbIcon,
@@ -32,7 +31,6 @@ import {
   AcademicCapIcon,
   BookOpenIcon,
   PencilSquareIcon,
-  PhotoIcon,
   HomeIcon,
   UserGroupIcon as UsersIcon,
   ClipboardDocumentListIcon as StandardsIcon,
@@ -40,7 +38,7 @@ import {
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon
 } from '@heroicons/react/24/outline';
-import { PhotoIcon as PhotoIconSolid, AcademicCapIcon as AcademicCapIconSolid } from '@heroicons/react/24/solid';
+import { AcademicCapIcon as AcademicCapIconSolid } from '@heroicons/react/24/solid';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 // Helper function to generate section-specific placeholder text
@@ -245,11 +243,199 @@ const CLASS_8A = {
 };
 
 // AI-prebaked lesson stubs (standards-aligned)
+// Enrichment Library Lessons (Pre-existing)
+const ENRICHMENT_LESSONS: Lesson[] = [
+  {
+    id: "enrichment-001",
+    title: "Introduction to Quadratic Functions",
+    subject: "Mathematics",
+    standards: ["A.REI.B.4"],
+    updatedAt: "2025-09-25",
+    efficacy: 0,
+    isLive: true,
+    assignedStudents: [],
+    chatHistory: [
+      {
+        id: "teacher-enrichment-001-1",
+        type: "user",
+        content: "Create an enrichment lesson on introduction to quadratic functions for advanced students who want to explore beyond 8th grade standards",
+        timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-001-1",
+        type: "ai",
+        content: "I've created a comprehensive introduction to quadratic functions lesson that introduces advanced concepts in an accessible way for 8th graders.",
+        timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want an enrichment lesson that challenges advanced students with quadratic functions beyond standard 8th grade curriculum while remaining accessible.\n\nI planned an introduction with parabolic motion in sports and architecture, visual representations using graphing tools and real-world examples, hands-on activities with quadratic modeling, connections to future Algebra 2 concepts, and optional extension activities for different interest levels.\n\nI created a lesson structure with engaging introduction, conceptual development, interactive activities, and extension opportunities, then generated a comprehensive enrichment lesson with multiple entry points and differentiated challenge levels.",
+        summary: "Created Introduction to Quadratic Functions enrichment lesson featuring:\n\n• **Engaging Introduction**: Parabolic motion in sports and architectural applications\n• **Conceptual Development**: Visual and hands-on approach to quadratic relationships\n• **Interactive Activities**: Graphing explorations and real-world modeling\n• **Future Connections**: Links to Algebra 2 and calculus concepts\n• **Differentiated Extensions**: Multiple challenge levels for different interests\n\nThe lesson is designed to inspire and challenge while remaining accessible to 8th grade students.",
+        reasoningCollapsed: true,
+        feedback: "positive"
+      },
+      {
+        id: "teacher-enrichment-001-2",
+        type: "user",
+        content: "Make the introduction more hands-on and add some interactive elements that students can explore independently",
+        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-001-2",
+        type: "ai",
+        content: "I've enhanced the introduction with interactive elements and hands-on activities that students can explore at their own pace.",
+        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want more interactive, hands-on elements in the introduction that allow for independent exploration and discovery of quadratic relationships.\n\nI added physical manipulatives for parabolic motion experiments, created self-guided graphing exploration activities, included digital tools and interactive simulations, designed activities that accommodate different pacing, and provided clear instructions for independent work.\n\nI updated the introduction with interactive elements, hands-on activities, and self-paced exploration opportunities. The enhanced introduction now includes interactive demonstrations, manipulatives, and independent exploration activities.",
+        summary: "Enhanced the introduction section with:\n\n• **Interactive Demonstrations**: Hands-on parabolic motion experiments\n• **Self-Guided Explorations**: Graphing activities students can complete independently\n• **Digital Tools**: Interactive quadratic function simulators\n• **Flexible Pacing**: Materials that accommodate different learning speeds\n• **Clear Instructions**: Step-by-step guidance for independent discovery\n\nThe updated introduction now provides multiple ways for students to engage with and discover quadratic concepts on their own.",
+        reasoningCollapsed: true,
+        feedback: null
+      }
+    ]
+  },
+  {
+    id: "enrichment-002",
+    title: "Basic Trigonometry Ratios",
+    subject: "Mathematics",
+    standards: ["G.SRT.C.6"],
+    updatedAt: "2025-09-24",
+    efficacy: 0,
+    isLive: true,
+    assignedStudents: [],
+    chatHistory: [
+      {
+        id: "teacher-enrichment-002-1",
+        type: "user",
+        content: "Create an enrichment lesson on basic trigonometry ratios for students ready for high school geometry concepts",
+        timestamp: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-002-1",
+        type: "ai",
+        content: "I've created a comprehensive basic trigonometry ratios lesson that introduces sine, cosine, and tangent in an accessible way.",
+        timestamp: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want an enrichment lesson introducing trigonometry ratios that prepares students for high school geometry while being accessible to 8th graders.\n\nI planned an introduction using right triangles in architecture and navigation, visual representations with unit circle concepts, hands-on activities with measuring and calculating ratios, real-world applications in engineering and design, and progressive complexity from basic ratios to applications.\n\nI created a lesson structure with concrete triangle examples, ratio calculations, and practical applications, then generated a comprehensive trigonometry lesson with visual aids and hands-on exploration.",
+        summary: "Created Basic Trigonometry Ratios enrichment lesson featuring:\n\n• **Engaging Introduction**: Right triangles in architecture and navigation\n• **Conceptual Development**: Visual approach to sine, cosine, and tangent ratios\n• **Interactive Activities**: Measuring and calculating ratios with physical triangles\n• **Real-World Applications**: Engineering and design problem-solving\n• **Progressive Complexity**: From basic ratios to practical applications\n\nThe lesson builds foundational understanding for high school geometry success.",
+        reasoningCollapsed: true,
+        feedback: "positive"
+      }
+    ]
+  },
+  {
+    id: "enrichment-003",
+    title: "Introduction to Calculus Ideas",
+    subject: "Mathematics",
+    standards: ["HS.F-IF.B.4"],
+    updatedAt: "2025-09-23",
+    efficacy: 0,
+    isLive: true,
+    assignedStudents: [],
+    chatHistory: [
+      {
+        id: "teacher-enrichment-003-1",
+        type: "user",
+        content: "Create an enrichment lesson introducing calculus concepts like rate of change and limits through visual examples",
+        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-003-1",
+        type: "ai",
+        content: "I've created an introduction to calculus ideas lesson that makes abstract concepts concrete through visual examples and real-world scenarios.",
+        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want to introduce calculus concepts like rate of change and limits in a way that's accessible to 8th graders through visual and concrete examples.\n\nI planned an introduction with motion and speed concepts students already understand, visual representations of changing rates using graphs and animations, hands-on activities exploring instantaneous vs. average rates, real-world connections to physics and engineering, and a conceptual foundation without complex notation.\n\nI created a lesson that builds from familiar concepts to calculus ideas through visual exploration, then generated a calculus introduction with visual examples and intuitive explanations.",
+        summary: "Created Introduction to Calculus Ideas enrichment lesson featuring:\n\n• **Engaging Introduction**: Motion and speed concepts as foundation\n• **Visual Representations**: Graphs and animations showing rate of change\n• **Interactive Activities**: Exploring instantaneous vs. average rates\n• **Real-World Connections**: Physics and engineering applications\n• **Conceptual Foundation**: Intuitive understanding without complex notation\n\nThe lesson provides a gentle introduction to calculus thinking for advanced students.",
+        reasoningCollapsed: true,
+        feedback: null
+      }
+    ]
+  },
+  {
+    id: "enrichment-004",
+    title: "Cryptography and Prime Numbers",
+    subject: "Mathematics",
+    standards: ["N.RN.A.2"],
+    updatedAt: "2025-09-22",
+    efficacy: 0,
+    isLive: true,
+    assignedStudents: [],
+    chatHistory: [
+      {
+        id: "teacher-enrichment-004-1",
+        type: "user",
+        content: "Create an enrichment lesson on cryptography and prime numbers showing how mathematics protects digital information",
+        timestamp: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-004-1",
+        type: "ai",
+        content: "I've created a cryptography and prime numbers lesson that shows how mathematical concepts protect our digital world.",
+        timestamp: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want to show students how number theory, specifically prime numbers, is used in real-world cryptography and digital security.\n\nI planned an introduction with everyday digital security examples, exploration of prime number properties and patterns, simple encryption activities using modular arithmetic, connections to computer science and cybersecurity, and hands-on coding and decoding exercises.\n\nI created a lesson that connects abstract number theory to practical digital security applications, then generated a cryptography lesson with hands-on activities and real-world relevance.",
+        summary: "Created Cryptography and Prime Numbers enrichment lesson featuring:\n\n• **Engaging Introduction**: Digital security in everyday life\n• **Prime Number Exploration**: Properties and patterns investigation\n• **Hands-On Encryption**: Simple coding and decoding activities\n• **Real-World Applications**: Computer science and cybersecurity connections\n• **Interactive Exercises**: Mathematical problem-solving with practical purpose\n\nThe lesson demonstrates how abstract mathematics protects our digital information.",
+        reasoningCollapsed: true,
+        feedback: "positive"
+      }
+    ]
+  },
+  {
+    id: "enrichment-005",
+    title: "The Mathematics of Music",
+    subject: "Mathematics",
+    standards: ["A.CED.A.2"],
+    updatedAt: "2025-09-21",
+    efficacy: 0,
+    isLive: true,
+    assignedStudents: [],
+    chatHistory: [
+      {
+        id: "teacher-enrichment-005-1",
+        type: "user",
+        content: "Create an enrichment lesson exploring the mathematics of music, including frequency ratios and sound waves",
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-005-1",
+        type: "ai",
+        content: "I've created a mathematics of music lesson that explores how mathematical patterns create harmony and musical relationships.",
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want to show students the mathematical foundations of music, including frequency ratios, sound waves, and harmonic relationships.\n\nI planned an introduction with familiar musical concepts and instruments, exploration of frequency ratios and mathematical intervals, visual representations of sound waves and harmonic patterns, hands-on activities with musical instruments and digital tools, and connections to physics and acoustic engineering.\n\nI created a lesson that bridges mathematics and music through interactive exploration, then generated a music mathematics lesson with audio-visual demonstrations and hands-on activities.",
+        summary: "Created The Mathematics of Music enrichment lesson featuring:\n\n• **Engaging Introduction**: Musical concepts students recognize\n• **Frequency Exploration**: Mathematical ratios in musical intervals\n• **Visual Sound Waves**: Patterns and harmonic relationships\n• **Interactive Activities**: Instruments and digital music tools\n• **Cross-Disciplinary Connections**: Physics and acoustic engineering\n\nThe lesson reveals the mathematical beauty underlying musical harmony.",
+        reasoningCollapsed: true,
+        feedback: null
+      }
+    ]
+  },
+  {
+    id: "enrichment-006",
+    title: "Fractals and Infinite Patterns",
+    subject: "Mathematics",
+    standards: ["G.MG.A.3"],
+    updatedAt: "2025-09-20",
+    efficacy: 0,
+    isLive: true,
+    assignedStudents: [],
+    chatHistory: [
+      {
+        id: "teacher-enrichment-006-1",
+        type: "user",
+        content: "Create an enrichment lesson on fractals and infinite patterns, showing self-similar patterns in nature and art",
+        timestamp: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000)
+      },
+      {
+        id: "ai-enrichment-006-1",
+        type: "ai",
+        content: "I've created a fractals and infinite patterns lesson that explores self-similarity in nature, art, and mathematics.",
+        timestamp: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000 + 60000),
+        reasoning: "You want to introduce students to fractal geometry and self-similar patterns, connecting mathematical concepts to natural phenomena and artistic expression.\n\nI planned an introduction with fractal patterns in nature like trees, coastlines, and clouds, exploration of self-similarity and recursive patterns, hands-on activities creating fractals with simple rules, digital tools for fractal generation and exploration, and connections to computer graphics and natural sciences.\n\nI created a lesson that reveals the mathematical patterns underlying natural and artistic beauty, then generated a fractals lesson with visual examples and creative activities.",
+        summary: "Created Fractals and Infinite Patterns enrichment lesson featuring:\n\n• **Nature Connections**: Fractal patterns in trees, coastlines, and natural forms\n• **Self-Similarity Exploration**: Mathematical recursion and pattern generation\n• **Creative Activities**: Drawing and constructing fractal patterns\n• **Digital Tools**: Computer-generated fractals and interactive exploration\n• **Interdisciplinary Links**: Computer graphics, art, and natural sciences\n\nThe lesson reveals the infinite complexity hidden in simple mathematical rules.",
+        reasoningCollapsed: true,
+        feedback: "positive"
+      }
+    ]
+  }
+];
+
 const PREBAKED: Lesson[] = [
   {
     id: "lsn-001",
-    title: "Understanding Slope in y = mx + b",
-    standards: ["8.EE.B.6", "8.F.B.4"],
+    title: "Integer Exponents and Their Properties",
+    standards: ["8.EE.A.1"],
     updatedAt: "2025-09-22",
     efficacy: 0.82,
     subject: "math",
@@ -282,7 +468,7 @@ const PREBAKED: Lesson[] = [
         content: "I've created a comprehensive lesson on slope-intercept form that addresses both standards with engaging, multi-modal content.",
         timestamp: new Date("2025-09-19T14:31:00Z"),
         reasoning: "The user requested materials covering 8.EE.B.6 (linear equations) and 8.F.B.4 (functions). I've designed content that:\n\n• **Addresses Both Standards**: Slope-intercept form connects algebraic manipulation (8.EE.B.6) with function concepts (8.F.B.4)\n• **Multi-Modal Approach**: Created text, slides, video, and audio versions to accommodate different learning preferences\n• **Real-World Connections**: Used skateboard ramps and ride-sharing examples to make abstract concepts concrete\n• **Scaffolded Learning**: Progressed from basic slope concept to full y = mx + b mastery\n• **Assessment Integration**: Included formative and summative assessment opportunities",
-        summary: "Created a complete slope-intercept form lesson with:\n\n• **Engaging Introduction**: Real-world skateboard ramp scenario\n• **Visual Representations**: Interactive graphs and coordinate plane activities\n• **Formula Breakdown**: Step-by-step y = mx + b component analysis\n• **Practice Problems**: Graduated difficulty with real-world applications\n• **Multi-Modal Content**: Text, slides, video, and audio versions\n• **Aligned Assessments**: Questions targeting both 8.EE.B.6 and 8.F.B.4\n\nThe lesson is ready for all students and includes differentiated content for various learning styles.",
+        summary: "Created a complete slope-intercept form lesson with:\n\n• **Engaging Introduction**: Real-world skateboard ramp scenario\n• **Visual Representations**: Interactive graphs and coordinate plane activities\n• **Formula Breakdown**: Step-by-step y = mx + b component analysis\n• **Practice Problems**: Graduated difficulty with real-world applications\n• **Multi-Modal Content**: Text, slides, video, and audio versions\n• **Aligned Assessments**: Questions targeting both 8.EE.B.6 and 8.F.B.4\n\nThe lesson is ready for all students and includes differentiated content for various learning preferences.",
         reasoningCollapsed: true,
         feedback: "positive"
       },
@@ -306,13 +492,14 @@ const PREBAKED: Lesson[] = [
   },
   {
     id: "lsn-002",
-    title: "Reading & Building Functions",
-    standards: ["8.F.A.1"],
+    title: "Graphing Proportional Relationships",
+    standards: ["8.EE.B.5"],
     updatedAt: "2025-09-19",
     efficacy: 0.76,
     subject: "math",
     isLive: false,
     completedCount: 0,
+    assignedStudents: ["stu-01", "stu-02", "stu-03", "stu-04", "stu-05", "stu-06", "stu-07", "stu-08", "stu-09", "stu-10"],
     chatHistory: [
       {
         id: "user-1695023456789",
@@ -350,13 +537,14 @@ const PREBAKED: Lesson[] = [
   },
   {
     id: "lsn-003",
-    title: "Integer Exponents – Laws & Patterns",
-    standards: ["8.EE.A.1"],
+    title: "Understanding Slope in Linear Equations",
+    standards: ["8.EE.B.6", "8.F.B.4"],
     updatedAt: "2025-09-12",
     efficacy: 0.71,
     subject: "math",
     isLive: false,
     completedCount: 0,
+    assignedStudents: ["stu-01", "stu-02", "stu-03", "stu-04", "stu-05", "stu-06", "stu-07", "stu-08", "stu-09", "stu-10"],
     chatHistory: [
       {
         id: "user-1694923456789",
@@ -403,7 +591,7 @@ const MODALITIES: { key: ModalityKey; name: string }[] = [
 
 type ModalityKey = "text" | "slides" | "video" | "audio";
 
-// Learning Style Utilities
+// Learning Preferences Utilities
 const LEARNING_STYLES = {
   visual: { 
     name: "Visual", 
@@ -476,7 +664,13 @@ interface Lesson {
   completedCount?: number;
   assignedStudents?: string[];
   studentProgress?: Record<string, StudentProgress>;
-  chatHistory?: Array<{id: string, type: 'user' | 'ai', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>;
+  chatHistory?: Array<{id: string, type: 'user' | 'ai' | 'agent', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>;
+  agentContext?: {
+    reasoning: string;
+    planning: string;
+    changes: string;
+    agentPrompt: string;
+  };
 }
 
 interface StudentProgress {
@@ -577,11 +771,38 @@ function LessonModal({
         .modal-scroll:hover::-webkit-scrollbar-thumb:hover {
           background: #94a3b8;
         }
+        
+        /* Lesson content scrollbar styling */
+        .lesson-content-scroll {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .lesson-content-scroll::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+        .lesson-content-scroll:hover {
+          scrollbar-width: thin;
+        }
+        .lesson-content-scroll:hover::-webkit-scrollbar {
+          width: 8px;
+        }
+        .lesson-content-scroll:hover::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 4px;
+        }
+        .lesson-content-scroll:hover::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 4px;
+        }
+        .lesson-content-scroll:hover::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
       `}</style>
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         {/* Backdrop with blur */}
         <div 
-          className="absolute inset-0 bg-white/40 backdrop-blur-md" 
+          className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" 
           onClick={handleClose}
         />
         
@@ -595,7 +816,7 @@ function LessonModal({
           className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-slate-100 transition-colors"
           title="Minimize lesson"
         >
-          <div className="h-5 w-5 flex items-center justify-center text-slate-600 font-bold text-lg">
+          <div className="h-5 w-5 flex items-center justify-center text-slate-600 font-semibold text-lg">
             −
           </div>
         </button>
@@ -628,6 +849,18 @@ export default function App() {
 
   function handleOpenLesson(id: string) {
     setOpenLessonId(id);
+    setIsLessonModalOpen(true);
+  }
+
+  function handleCreateLessonFromSuggestion(lesson: Lesson) {
+    setLessons((prev) => [lesson, ...prev]);
+    setOpenLessonId(lesson.id);
+    setIsLessonModalOpen(true);
+  }
+
+  function handleOpenEnrichmentLesson(lesson: Lesson) {
+    // Just open the lesson without adding it to the lessons array
+    setOpenLessonId(lesson.id);
     setIsLessonModalOpen(true);
   }
 
@@ -705,7 +938,7 @@ export default function App() {
   }
 
   if (currentView === 'builder' && openLessonId && !isLessonModalOpen) {
-    const lesson = pendingLesson || lessons.find((l) => l.id === openLessonId)!;
+    const lesson = pendingLesson || lessons.find((l) => l.id === openLessonId) || ENRICHMENT_LESSONS.find((l) => l.id === openLessonId)!;
   return (
       <TooltipProvider>
         <div className="min-h-screen bg-slate-50 text-foreground">
@@ -790,7 +1023,6 @@ export default function App() {
             
             const newLesson: Lesson & { 
               prompt?: string; 
-              uploadedFile?: File | null;
               selectedStudents?: string;
               specificStudents?: string[];
             } = {
@@ -804,7 +1036,6 @@ export default function App() {
               status: 'draft',
               // Pass context to lesson builder
               prompt: data.prompt,
-              uploadedFile: data.uploadedFile,
               selectedStudents: data.selectedStudents,
               specificStudents: data.specificStudents
             };
@@ -818,7 +1049,7 @@ export default function App() {
           <div className="mt-12 space-y-12">
             <div className="max-w-7xl mx-auto">
                       <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-slate-800">Guided Lessons</h2>
+                        <h2 className="text-2xl font-semibold text-slate-700">My Lessons</h2>
                       </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {lessons.map((lesson) => (
@@ -831,30 +1062,68 @@ export default function App() {
             {/* AI Suggestions */}
             <div className="max-w-7xl mx-auto">
                       <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-slate-800">Generated Lessons</h2>
+                        <div className="flex items-center gap-2">
+                          <h2 className="text-2xl font-semibold text-slate-700">AI Suggestions</h2>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button className="text-slate-400 hover:text-slate-600 transition-colors">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-xs">
+                              <p className="text-sm">
+                                AI generates lesson suggestions based on your curriculum progress and student needs. 
+                                You must review and set lessons live before students can access them.
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
                       </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <SuggestionCard 
-                  title="Graphing Linear Inequalities"
-                  reason="Next logical step"
-                  standard="8.EE.B.6"
+                  title="Negative Exponents Practice"
+                  reason="Band 2 students struggling"
+                  standard="8.EE.A.1"
                   urgency="high"
-                  timeEstimate="2 days"
+                  timeEstimate="1 day"
+                  agentContext={{
+                    reasoning: "Based on student performance data from 'Integer Exponents and Their Properties' lesson: 4 out of 6 Band 2 students scored below 70% on negative exponent problems. Common errors include treating negative exponents as negative numbers.",
+                    planning: "Created focused practice lesson that reinforces the pattern from positive to negative exponents, uses visual fraction models extensively, and includes error analysis of common mistakes.",
+                    changes: "Generated targeted practice lesson with pattern recognition warm-up, visual fraction model exercises, common error identification activities, and graduated difficulty progression.",
+                    agentPrompt: "Band 2 students are struggling with negative exponents in your recent lesson. Performance data shows 4 out of 6 students scored below 70%. I'm creating a targeted practice lesson with visual scaffolding to address these gaps immediately."
+                  }}
+                  onCreateLesson={handleCreateLessonFromSuggestion}
                 />
                 <SuggestionCard 
-                  title="Systems of Linear Equations"
-                  reason="Builds on functions"
-                  standard="8.EE.C.8"
+                  title="Introduction to Functions"
+                  reason="Next logical step"
+                  standard="8.F.A.1"
                   urgency="medium"
-                  timeEstimate="3 days"
+                  timeEstimate="2 days"
+                  agentContext={{
+                    reasoning: "Students have mastered linear equations and are ready for the next conceptual step. Functions build naturally on their understanding of input-output relationships from slope-intercept form.",
+                    planning: "Created introductory functions lesson that connects to previous learning, uses familiar contexts, and introduces function notation gradually with visual support.",
+                    changes: "Generated lesson with function machine concept, real-world examples (vending machines, temperature conversion), multiple representations (tables, graphs, equations), and practice identifying functions.",
+                    agentPrompt: "Your students have mastered linear equations and are ready for functions as the next logical step. Curriculum pacing indicates this is the optimal time to introduce function concepts. I'm generating an introductory functions lesson that builds on their current understanding."
+                  }}
+                  onCreateLesson={handleCreateLessonFromSuggestion}
                 />
                 <SuggestionCard 
-                  title="Proportional Relationships Review"
+                  title="Unit Rate as Slope Review"
                   reason="Reteaching needed"
                   standard="8.EE.B.5"
                   urgency="high"
                   timeEstimate="1 day"
+                  agentContext={{
+                    reasoning: "Assessment data shows students are confusing unit rate and slope concepts. They need targeted review to solidify the connection between these related but distinct concepts.",
+                    planning: "Created review lesson that explicitly connects unit rate to slope, uses visual comparisons, and provides practice distinguishing between the concepts in different contexts.",
+                    changes: "Generated lesson with side-by-side comparisons, real-world scenarios (speed, cost per item), visual representations, and targeted practice problems addressing common misconceptions.",
+                    agentPrompt: "Assessment data reveals confusion between unit rate and slope concepts among your students. This misconception requires immediate intervention. I'm creating a focused review lesson with visual comparisons to clarify these related but distinct concepts."
+                  }}
+                  onCreateLesson={handleCreateLessonFromSuggestion}
                 />
                       </div>
                     </div>
@@ -862,89 +1131,69 @@ export default function App() {
                     {/* Extra Credit / Self-Learning Lessons */}
                     <div className="max-w-7xl mx-auto">
                       <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-slate-800">Self-Taught Lessons</h2>
+                        <h2 className="text-2xl font-semibold text-slate-700">Enrichment Library</h2>
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <ExtraCreditCard 
-                          title="Advanced Quadratic Functions"
-                          description="Explore complex quadratic relationships and their real-world applications in physics and engineering."
+                          title="Introduction to Quadratic Functions"
+                          description="Explore parabolas and their properties - a preview of Algebra 2 concepts with visual graphing."
                           difficulty="Advanced"
                           estimatedTime="45 min"
-                          standard="8.F.A.3"
+                          standard="A.REI.B.4"
                           availableFor="all"
+                          isLive={true}
+                          onOpenLesson={handleOpenEnrichmentLesson}
                         />
                         <ExtraCreditCard 
-                          title="Introduction to Trigonometry"
-                          description="Get a head start on high school math with basic trigonometric ratios and the unit circle."
+                          title="Basic Trigonometry Ratios"
+                          description="Get a head start on high school geometry with sine, cosine, and tangent ratios."
                           difficulty="Challenging"
                           estimatedTime="60 min"
                           standard="G.SRT.C.6"
                           availableFor="all"
+                          isLive={true}
+                          onOpenLesson={handleOpenEnrichmentLesson}
                         />
                         <ExtraCreditCard 
-                          title="Mathematical Modeling with Data"
-                          description="Learn to create mathematical models using real-world data sets and statistical analysis."
-                          difficulty="Intermediate"
-                          estimatedTime="30 min"
-                          standard="8.SP.A.2"
-                          availableFor="all"
-                        />
-                        <ExtraCreditCard 
-                          title="Geometric Transformations"
-                          description="Dive deeper into rotations, reflections, and translations in the coordinate plane."
-                          difficulty="Intermediate"
-                          estimatedTime="35 min"
-                          standard="8.G.A.3"
-                          availableFor="all"
-                        />
-                        <ExtraCreditCard 
-                          title="Introduction to Calculus Concepts"
-                          description="Get a preview of derivatives and limits with visual explanations and real-world applications."
+                          title="Introduction to Calculus Ideas"
+                          description="Explore the concept of rate of change and limits through visual examples and real-world scenarios."
                           difficulty="Advanced"
                           estimatedTime="50 min"
                           standard="HS.F-IF.B.4"
                           availableFor="all"
+                          isLive={true}
+                          onOpenLesson={handleOpenEnrichmentLesson}
                         />
                         <ExtraCreditCard 
-                          title="Cryptography and Number Theory"
-                          description="Explore how mathematics protects digital information through encryption and prime numbers."
+                          title="Cryptography and Prime Numbers"
+                          description="Discover how mathematics protects digital information through encryption and number theory."
                           difficulty="Challenging"
                           estimatedTime="40 min"
-                          standard="8.EE.A.2"
+                          standard="N.RN.A.2"
                           availableFor="all"
-                        />
-                        <ExtraCreditCard 
-                          title="Fractals and Infinite Patterns"
-                          description="Discover the beauty of mathematical patterns that repeat at every scale in nature and art."
-                          difficulty="Intermediate"
-                          estimatedTime="25 min"
-                          standard="8.G.B.7"
-                          availableFor="all"
-                        />
-                        <ExtraCreditCard 
-                          title="Game Theory and Strategy"
-                          description="Learn how mathematics helps make optimal decisions in competitive situations and games."
-                          difficulty="Advanced"
-                          estimatedTime="45 min"
-                          standard="8.SP.A.4"
-                          availableFor="all"
+                          isLive={true}
+                          onOpenLesson={handleOpenEnrichmentLesson}
                         />
                         <ExtraCreditCard 
                           title="The Mathematics of Music"
-                          description="Explore how frequency, ratios, and patterns create harmony and rhythm in musical compositions."
-                          difficulty="Intermediate"
-                          estimatedTime="30 min"
-                          standard="8.EE.B.5"
-                          availableFor="all"
-                        />
-                        <ExtraCreditCard 
-                          title="Probability in Sports and Games"
-                          description="Apply probability concepts to analyze sports statistics, card games, and betting strategies."
+                          description="Explore frequency ratios, sound waves, and how mathematical patterns create harmony."
                           difficulty="Intermediate"
                           estimatedTime="35 min"
-                          standard="8.SP.A.1"
+                          standard="A.CED.A.2"
                           availableFor="all"
+                          isLive={true}
+                          onOpenLesson={handleOpenEnrichmentLesson}
+                        />
+                        <ExtraCreditCard 
+                          title="Fractals and Infinite Patterns"
+                          description="Discover self-similar patterns in nature and art through mathematical iteration and recursion."
+                          difficulty="Intermediate"
+                          estimatedTime="30 min"
+                          standard="G.MG.A.3"
+                          availableFor="all"
+                          isLive={true}
+                          onOpenLesson={handleOpenEnrichmentLesson}
                         />
                       </div>
                     </div>
@@ -956,7 +1205,7 @@ export default function App() {
             {/* Lesson Modal */}
             {isLessonModalOpen && openLessonId && (
               <LessonModal
-                lesson={pendingLesson || lessons.find((l) => l.id === openLessonId)!}
+                lesson={pendingLesson || lessons.find((l) => l.id === openLessonId) || ENRICHMENT_LESSONS.find((l) => l.id === openLessonId)!}
                 isOpen={isLessonModalOpen}
                 onClose={handleCloseLessonModal}
                 onSave={(patched) => {
@@ -971,13 +1220,13 @@ export default function App() {
           </TooltipProvider>
         );
       }
+}
 
 // -------------------- Lesson Creator Component --------------------
 function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Lesson) => void }) {
   const [prompt, setPrompt] = useState("");
   const [selectedStudents, setSelectedStudents] = useState<string>('all');
   const [specificStudents, setSpecificStudents] = useState<string[]>([]);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [selectedStandard, setSelectedStandard] = useState<string>("all");
   
@@ -995,11 +1244,11 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
   
   // Example prompts for cycling animation
   const examplePrompts = [
-    "I want to teach slope-intercept form using real-world examples. Target Band 4 students with advanced applications while providing scaffolded support for Band 1-2 students. Use 8.F.A.3 standards...",
-    "Create a lesson on solving systems of linear equations for Band 3 students. Include interactive examples and practice problems aligned to 8.EE.C.8 standards.",
-    "Design activities for the Pythagorean theorem connecting to architecture. Focus on Band 2 students with visual aids and hands-on practice using 8.G.B.7 standards.",
-    "Teach scientific notation through astronomy examples. Challenge Band 4 students with complex calculations while Band 1 students focus on basic notation using 8.EE.A.3.",
-    "Build a lesson on proportional relationships using cooking recipes. Differentiate for all bands with Band 1 getting concrete examples, Band 4 getting abstract applications."
+    "Create a lesson using 8.F.B.4 for Emma, Marcus, and Zoe focusing on slope-intercept form with skateboard ramp examples...",
+    "Design activities using 8.EE.C.8 for Band 3 students on solving systems of equations with real-world applications...",
+    "Build practice problems using 8.G.B.7 for Alex and Sarah covering Pythagorean theorem through architecture connections...",
+    "Generate materials using 8.EE.A.3 for Band 2 students teaching scientific notation with astronomy examples...",
+    "Create differentiated content using 8.EE.B.5 for all students on proportional relationships through cooking scenarios..."
   ];
   
   // Typing animation effect
@@ -1047,7 +1296,6 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
     
     const newLesson: Lesson & { 
       prompt?: string; 
-      uploadedFile?: File | null;
       selectedStudents?: string;
       specificStudents?: string[];
     } = {
@@ -1061,7 +1309,6 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
       status: 'draft',
       // Pass context to lesson builder
       prompt,
-      uploadedFile,
       selectedStudents,
       specificStudents
     };
@@ -1194,7 +1441,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
   return (
     <div className="mb-12">
       <div className="text-left mb-8">
-        <h1 className="text-4xl font-bold mb-4 text-slate-800">Good evening, Mr. Morales.</h1>
+        <h1 className="text-4xl font-semibold mb-4 text-slate-700">Good evening, Mr. Morales.</h1>
       </div>
 
       <div className="max-w-7xl mx-auto relative">
@@ -1206,7 +1453,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
             value={prompt}
             onChange={handlePromptChange}
             onKeyDown={handleKeyDown}
-            className="h-64 resize-none border-0 rounded-t-2xl focus-visible:ring-0 focus-visible:ring-offset-0 p-6 shadow-none bg-transparent !text-lg placeholder:text-lg text-slate-800 placeholder:text-slate-400"
+            className="h-64 resize-none border-0 rounded-t-2xl focus-visible:ring-0 focus-visible:ring-offset-0 p-6 shadow-none bg-transparent !text-lg placeholder:text-lg text-slate-700 placeholder:text-slate-400"
             placeholder={currentPlaceholder}
           />
           
@@ -1248,7 +1495,7 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
                     </div>
                     
                     {/* Name Column */}
-                    <div className="font-medium text-slate-800 text-sm truncate">
+                    <div className="font-medium text-slate-700 text-sm truncate">
                       {mention.name}
                     </div>
                     
@@ -1284,15 +1531,18 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
                   value={selectedStudents} 
                   onValueChange={(value) => setSelectedStudents(value)}
                 >
-                  <SelectTrigger className="w-48 h-8 text-xs bg-slate-200 border-0 shadow-none">
-                    <SelectValue />
+                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[120px] justify-start gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <UserGroupIcon className="h-4 w-4 text-slate-600" />
+                      <SelectValue />
+                    </div>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All students ({CLASS_8A.students.length})</SelectItem>
-                    <SelectItem value="band1">Band 1 students ({CLASS_8A.students.filter(s => s.masteryBand === 1).length})</SelectItem>
-                    <SelectItem value="band2">Band 2 students ({CLASS_8A.students.filter(s => s.masteryBand === 2).length})</SelectItem>
-                    <SelectItem value="band3">Band 3 students ({CLASS_8A.students.filter(s => s.masteryBand === 3).length})</SelectItem>
-                    <SelectItem value="band4">Band 4 students ({CLASS_8A.students.filter(s => s.masteryBand === 4).length})</SelectItem>
+                    <SelectItem value="all">All students</SelectItem>
+                    <SelectItem value="band1">Band 1 students</SelectItem>
+                    <SelectItem value="band2">Band 2 students</SelectItem>
+                    <SelectItem value="band3">Band 3 students</SelectItem>
+                    <SelectItem value="band4">Band 4 students</SelectItem>
                     <SelectItem value="selected">
                       {specificStudents.length > 0 ? `${specificStudents.length} selected` : 'Select individual students'}
                     </SelectItem>
@@ -1301,8 +1551,11 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
 
                 {/* Standards Selection */}
                 <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                  <SelectTrigger className="w-48 h-8 text-xs bg-slate-200 border-0 shadow-none">
-                    <SelectValue placeholder="Select standard (optional)" />
+                  <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[140px] justify-start gap-1">
+                    <div className="flex items-center gap-1.5">
+                      <AcademicCapIcon className="h-4 w-4 text-slate-600" />
+                      <SelectValue placeholder="All standards" />
+                    </div>
                   </SelectTrigger>
                   <SelectContent className="max-h-64">
                     <SelectItem value="all">All CCSSM standards</SelectItem>
@@ -1315,28 +1568,6 @@ function LessonCreator({ onLessonGenerated }: { onLessonGenerated: (lesson: Less
                   </SelectContent>
                 </Select>
 
-                {/* Source Material Upload */}
-                <div className="flex items-center">
-                  <input
-                    type="file"
-                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                    onChange={(e) => setUploadedFile(e.target.files?.[0] || null)}
-                    className="hidden"
-                    id="file-upload"
-                  />
-                  <label htmlFor="file-upload">
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0" asChild>
-                      <span className="cursor-pointer flex items-center justify-center">
-                        <PhotoIconSolid className="h-4 w-4 text-gray-400" />
-                      </span>
-                    </Button>
-                  </label>
-                  {uploadedFile && (
-                    <span className="text-xs text-slate-500 ml-2 truncate max-w-24">
-                      {uploadedFile.name}
-                    </span>
-                  )}
-                </div>
               </div>
 
                     {/* Right side - Generate Button */}
@@ -1415,7 +1646,7 @@ function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
               {item.label}
             </button>
           ) : (
-            <span className={index === items.length - 1 ? "text-slate-800 font-medium" : ""}>
+            <span className={index === items.length - 1 ? "text-slate-700 font-medium" : ""}>
               {item.label}
             </span>
           )}
@@ -1446,8 +1677,8 @@ function LeftSidebar({ currentView, onNavigate }: {
             onClick={() => onNavigate('dashboard')}
             className={`w-full flex items-center justify-center p-3 rounded-lg transition-colors ${
               currentView === 'dashboard'
-                ? 'bg-slate-200 text-slate-800' 
-                : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200'
+                ? 'bg-slate-200 text-slate-700' 
+                : 'text-slate-600 hover:text-slate-700 hover:bg-slate-200'
             }`}
           >
             <HomeIcon className="h-5 w-5" />
@@ -1456,8 +1687,8 @@ function LeftSidebar({ currentView, onNavigate }: {
             onClick={() => onNavigate('students')}
             className={`w-full flex items-center justify-center p-3 rounded-lg transition-colors ${
               currentView === 'students' 
-                ? 'bg-slate-200 text-slate-800' 
-                : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200'
+                ? 'bg-slate-200 text-slate-700' 
+                : 'text-slate-600 hover:text-slate-700 hover:bg-slate-200'
             }`}
           >
             <UsersIcon className="h-5 w-5" />
@@ -1466,8 +1697,8 @@ function LeftSidebar({ currentView, onNavigate }: {
             onClick={() => onNavigate('standards')}
             className={`w-full flex items-center justify-center p-3 rounded-lg transition-colors ${
               currentView === 'standards' 
-                ? 'bg-slate-200 text-slate-800' 
-                : 'text-slate-600 hover:text-slate-800 hover:bg-slate-200'
+                ? 'bg-slate-200 text-slate-700' 
+                : 'text-slate-600 hover:text-slate-700 hover:bg-slate-200'
             }`}
           >
             <StandardsIcon className="h-5 w-5" />
@@ -1561,13 +1792,22 @@ function SuggestionCard({
   reason, 
   standard, 
   urgency, 
-  timeEstimate 
+  timeEstimate,
+  agentContext,
+  onCreateLesson
 }: { 
   title: string; 
   reason: string; 
   standard: string; 
   urgency: 'high' | 'medium' | 'low';
   timeEstimate: string;
+  agentContext?: {
+    reasoning: string;
+    planning: string;
+    changes: string;
+    agentPrompt: string;
+  };
+  onCreateLesson: (lesson: Lesson) => void;
 }) {
   const urgencyVariant = urgency === 'high' ? 'destructive' : urgency === 'medium' ? 'default' : 'secondary';
 
@@ -1587,12 +1827,12 @@ function SuggestionCard({
 
   // Generate a summary with standards incorporated
   const getSummary = (title: string, standard: string) => {
-    if (title.includes('Linear Inequalities')) {
-      return `Learn to graph linear inequalities and understand solution regions on coordinate planes. Aligned to ${standard}.`;
-    } else if (title.includes('Systems of Linear Equations')) {
-      return `Solve systems using substitution and elimination methods with real-world applications. Covers ${standard}.`;
-    } else if (title.includes('Proportional Relationships')) {
-      return `Review and reinforce understanding of proportional relationships and their graphical representations. Addresses ${standard}.`;
+    if (title.includes('Negative Exponents')) {
+      return `Targeted practice for students struggling with negative exponents and scientific notation. Addresses ${standard}.`;
+    } else if (title.includes('Introduction to Functions')) {
+      return `Build understanding of functions as input-output relationships with visual representations. Covers ${standard}.`;
+    } else if (title.includes('Unit Rate as Slope')) {
+      return `Review and reinforce the connection between unit rate and slope in proportional relationships. Addresses ${standard}.`;
     }
     return `AI-generated lesson content tailored to your class needs and curriculum standards. Targets ${standard}.`;
   };
@@ -1628,8 +1868,52 @@ function SuggestionCard({
     console.log(`Duplicate suggestion: ${title}`);
   };
 
+  const handleCardClick = () => {
+    const agentChatHistory = agentContext ? [
+      {
+        id: `agent-${Date.now()}`,
+        type: 'agent' as const,
+        content: agentContext.agentPrompt,
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+        reasoning: undefined,
+        summary: undefined,
+        reasoningCollapsed: false,
+        feedback: null
+      },
+      {
+        id: `ai-response-${Date.now()}`,
+        type: 'ai' as const,
+        content: `I've successfully created the "${title}" lesson as directed by the Teaching Agent. The lesson is now ready for your review and can be deployed to students immediately.`,
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 120000), // 2 minutes after agent
+        reasoning: `${agentContext.reasoning}\n\n${agentContext.planning}\n\n${agentContext.changes}\n\nGenerated comprehensive lesson content based on Teaching Agent's directive. Content is structured, pedagogically sound, and ready for immediate deployment.`,
+        summary: `Successfully executed Teaching Agent's directive to create "${title}" lesson. The lesson addresses identified student needs with appropriate scaffolding and is ready for teacher review and student deployment.`,
+        reasoningCollapsed: true,
+        feedback: null
+      }
+    ] : [];
+
+    const newLesson: Lesson = {
+      id: `ai-${Date.now()}`,
+      title,
+      subject: 'Mathematics',
+      standards: [standard],
+      updatedAt: new Date().toISOString(),
+      efficacy: 0,
+      isLive: false,
+      assignedStudents: [],
+      agentContext,
+      chatHistory: agentChatHistory
+    };
+    
+    // Create and open lesson
+    onCreateLesson(newLesson);
+  };
+
   return (
-    <Card className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col">
+    <Card 
+      className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col"
+      onClick={handleCardClick}
+    >
       <CardContent className="p-6 flex-1 flex flex-col">
         {/* Eyebrow - AI Suggestion */}
         <div className="flex items-center gap-1.5 mb-2">
@@ -1639,7 +1923,7 @@ function SuggestionCard({
         
         {/* Row 1 - Lesson Name */}
         <div className="mb-3">
-          <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
+          <CardTitle className="text-lg leading-snug text-slate-700">{title}</CardTitle>
         </div>
         
         {/* Row 2 - Lesson Description */}
@@ -1657,33 +1941,38 @@ function SuggestionCard({
             >
               <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-1" />
             </button>
-            <span className="text-xs font-medium text-slate-500">Draft</span>
+            <span className="text-xs font-medium text-slate-500">Draft • Generated by AI</span>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2">
-            {/* Duplicate Button */}
-            <button
-              onClick={handleDuplicate}
-              className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
-              title="Duplicate lesson"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </button>
-            
-            {/* Delete Button */}
-            <button
-              onClick={handleDelete}
-              className="p-1.5 text-slate-400 hover:text-red-500 rounded transition-colors"
-              title="Delete lesson"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-            </button>
-          </div>
+          {/* Action Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
+                title="More actions"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zM13 12a1 1 0 11-2 0 1 1 0 012 0zM20 12a1 1 0 11-2 0 1 1 0 012 0z" />
+                </svg>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={handleDuplicate}>
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Duplicate lesson
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleDelete} className="text-red-600 focus:text-red-600">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Delete lesson
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardContent>
     </Card>
@@ -1697,7 +1986,9 @@ function ExtraCreditCard({
   difficulty, 
   estimatedTime, 
   standard, 
-  availableFor 
+  availableFor,
+  isLive = false,
+  onOpenLesson
 }: { 
   title: string; 
   description: string; 
@@ -1705,6 +1996,8 @@ function ExtraCreditCard({
   estimatedTime: string; 
   standard: string; 
   availableFor: string; 
+  isLive?: boolean;
+  onOpenLesson: (lesson: Lesson) => void;
 }) {
   // Get illustration-style image based on lesson type
   const getPlaceholderImage = (title: string) => {
@@ -1753,12 +2046,33 @@ function ExtraCreditCard({
     console.log(`Duplicate extra credit: ${title}`);
   };
 
+  const handleCardClick = () => {
+    // Find the existing enrichment lesson by title
+    const existingLesson = ENRICHMENT_LESSONS.find(lesson => lesson.title === title);
+    
+    if (existingLesson) {
+      // Open the existing enrichment lesson
+      onOpenLesson(existingLesson);
+    } else {
+      console.warn(`No enrichment lesson found for: ${title}`);
+    }
+  };
+
   return (
-    <Card className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col">
+    <Card 
+      className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col"
+      onClick={handleCardClick}
+    >
       <CardContent className="p-6 flex-1 flex flex-col">
+        {/* Eyebrow - Combined Standards and Students */}
+        <div className="flex items-center gap-1 mb-3 text-xs text-slate-500">
+          <AcademicCapIcon className="h-4 w-4 text-slate-600" />
+          <span>Outside standards • All students</span>
+        </div>
+
         {/* Row 1 - Lesson Name */}
         <div className="mb-3">
-          <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
+          <CardTitle className="text-lg leading-snug text-slate-700">{title}</CardTitle>
         </div>
         
         {/* Row 2 - Lesson Description */}
@@ -1772,37 +2086,57 @@ function ExtraCreditCard({
           <div className="flex items-center gap-2">
             <button
               onClick={handleToggleLive}
-              className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 bg-gray-300"
+              className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 ${
+                isLive ? 'bg-slate-600' : 'bg-slate-300'
+              }`}
             >
-              <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-1" />
+              <span
+                className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                  isLive ? 'translate-x-5' : 'translate-x-1'
+                }`}
+              />
             </button>
-            <span className="text-xs font-medium text-slate-500">Draft</span>
+            <span className={`text-xs font-medium ${isLive ? 'text-slate-600' : 'text-slate-500'}`}>
+              {isLive 
+                ? `Live • ${title.includes('Advanced') ? '1' : 
+                           title.includes('Trigonometry') ? '0' : 
+                           title.includes('Modeling') ? '2' :
+                           title.includes('Geometric') ? '0' :
+                           title.includes('Calculus') ? '1' : '0'} of 10 viewing`
+                : 'Draft • Last edited Dec 15'
+              }
+            </span>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2">
-            {/* Duplicate Button */}
-            <button
-              onClick={handleDuplicate}
-              className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
-              title="Duplicate lesson"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </button>
-            
-            {/* Delete Button */}
-            <button
-              onClick={handleDelete}
-              className="p-1.5 text-slate-400 hover:text-red-500 rounded transition-colors"
-              title="Delete lesson"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-            </button>
-          </div>
+          {/* Action Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
+                title="More actions"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zM13 12a1 1 0 11-2 0 1 1 0 012 0zM20 12a1 1 0 11-2 0 1 1 0 012 0z" />
+                </svg>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={handleDuplicate}>
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Duplicate lesson
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleDelete} className="text-red-600 focus:text-red-600">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Delete lesson
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardContent>
     </Card>
@@ -1827,20 +2161,40 @@ function LessonCard({ lesson, onOpen, onToggleLive }: { lesson: Lesson; onOpen: 
   
   const currentlyAccessing = getCurrentlyAccessingStudents(title);
   
-  // Generate a summary with standards incorporated
-  const getSummary = (title: string, standards: string[]) => {
-    const standardsText = standards.length > 0 ? standards.join(', ') : 'No standards assigned';
-    
-    if (title.includes('Slope-Intercept Form')) {
-      return `Interactive lesson covering y = mx + b with real-world examples using skateboard ramps and stairs. Aligned to ${standardsText}.`;
-    } else if (title.includes('Linear Functions')) {
-      return `Comprehensive exploration of linear relationships through graphing and algebraic representation. Covers ${standardsText}.`;
+  // Generate a clean summary without standards
+  const getSummary = (title: string) => {
+    if (title.includes('Integer Exponents')) {
+      return `Master positive and negative exponents with pattern recognition, scientific notation, and real-world applications.`;
     } else if (title.includes('Proportional Relationships')) {
-      return `Deep dive into proportional thinking with hands-on activities and visual representations. Addresses ${standardsText}.`;
-    } else if (title.includes('Exponents')) {
-      return `Master integer exponents and their properties through engaging practice and applications. Targets ${standardsText}.`;
+      return `Graph proportional relationships and interpret unit rate as slope through visual and algebraic methods.`;
+    } else if (title.includes('Understanding Slope')) {
+      return `Explore slope concepts using similar triangles and derive linear equations y = mx + b from geometric principles.`;
     }
-    return `Multi-modal lesson with immersive content, slides, video, audio, and interactive assessments. Standards: ${standardsText}.`;
+    return `Multi-modal lesson with immersive content, slides, video, audio, and interactive assessments.`;
+  };
+
+  // Get student targeting for eyebrow
+  const getStudentTargeting = () => {
+    if (assignedStudents.length === CLASS_8A.students.length) {
+      return 'All students';
+    }
+    
+    // Check if it's a specific band by looking at the assigned students
+    const assignedStudentObjects = CLASS_8A.students.filter(s => assignedStudents.includes(s.id));
+    const bands = [...new Set(assignedStudentObjects.map(s => s.masteryBand))];
+    
+    if (bands.length === 1) {
+      const band = bands[0];
+      const bandNames = {
+        1: 'Band 1 students',
+        2: 'Band 2 students', 
+        3: 'Band 3 students',
+        4: 'Band 4 students'
+      };
+      return bandNames[band as keyof typeof bandNames] || `${assignedStudents.length} students`;
+    }
+    
+    return `${assignedStudents.length} students`;
   };
   
   // Get illustration-style image based on lesson type
@@ -1880,14 +2234,22 @@ function LessonCard({ lesson, onOpen, onToggleLive }: { lesson: Lesson; onOpen: 
   return (
     <Card className="cursor-pointer overflow-hidden border-2 border-slate-200 !bg-slate-100 shadow-none hover:border-slate-300 hover:bg-slate-200 transition-colors flex flex-col" onClick={onOpen}>
       <CardContent className="p-6 flex-1 flex flex-col">
+        {/* Eyebrow - Combined Standards and Students */}
+        <div className="flex items-center gap-1.5 mb-2">
+          <AcademicCapIcon className="h-4 w-4 text-slate-400" />
+          <span className="text-xs text-slate-500">
+            {standards.length > 0 ? standards.join(', ') : 'No standards'} • {getStudentTargeting()}
+          </span>
+        </div>
+
         {/* Row 1 - Lesson Name */}
         <div className="mb-3">
-          <CardTitle className="text-lg leading-snug text-slate-800">{title}</CardTitle>
+          <CardTitle className="text-lg leading-snug text-slate-700">{title}</CardTitle>
         </div>
         
         {/* Row 2 - Lesson Description */}
         <div className="flex-1">
-          <p className="text-sm text-slate-600 leading-relaxed">{getSummary(title, standards)}</p>
+          <p className="text-sm text-slate-600 leading-relaxed">{getSummary(title)}</p>
         </div>
 
         {/* Row 3 - Actions */}
@@ -1909,38 +2271,43 @@ function LessonCard({ lesson, onOpen, onToggleLive }: { lesson: Lesson; onOpen: 
             <span className={`text-xs font-medium ${isLive ? 'text-slate-600' : 'text-slate-500'}`}>
               {isLive 
                 ? (currentlyAccessing.length > 0 
-                    ? `${currentlyAccessing.length} viewing now`
-                    : `${Object.keys(studentProgress).filter(id => studentProgress[id]?.status === 'completed').length}/${assignedStudents.length} completed`
+                    ? `Live • ${currentlyAccessing.length} of ${assignedStudents.length} viewing`
+                    : `Live • ${Object.keys(studentProgress).filter(id => studentProgress[id]?.status === 'completed').length} of ${assignedStudents.length} completed`
                   )
-                : 'Draft'
+                : `Draft • Last edited ${updatedAt}`
               }
             </span>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2">
-            {/* Duplicate Button */}
-            <button
-              onClick={handleDuplicate}
-              className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
-              title="Duplicate lesson"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </button>
-            
-            {/* Delete Button */}
-            <button
-              onClick={handleDelete}
-              className="p-1.5 text-slate-400 hover:text-red-500 rounded transition-colors"
-              title="Delete lesson"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-            </button>
-          </div>
+          {/* Action Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="p-1.5 text-slate-400 hover:text-slate-600 rounded transition-colors"
+                title="More actions"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zM13 12a1 1 0 11-2 0 1 1 0 012 0zM20 12a1 1 0 11-2 0 1 1 0 012 0z" />
+                </svg>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={handleDuplicate}>
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Duplicate lesson
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleDelete} className="text-red-600 focus:text-red-600">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Delete lesson
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </CardContent>
     </Card>
@@ -1977,7 +2344,7 @@ function LessonReview({
               </button>
               <div className="h-6 border-l border-neutral-300"></div>
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-2xl bg-black text-white grid place-content-center font-bold">
+                <div className="h-9 w-9 rounded-2xl bg-black text-white grid place-content-center font-semibold">
                   G8
                 </div>
                 <div>
@@ -2011,12 +2378,12 @@ function LessonReview({
         <div className="bg-white rounded-2xl border shadow-lg p-8 mb-8">
           <div className="text-center mb-8">
             <div className="mb-4"><SparklesIcon className="h-16 w-16 mx-auto text-blue-500" /></div>
-            <h1 className="text-3xl font-bold mb-2">Your lesson is ready!</h1>
+            <h1 className="text-3xl font-semibold mb-2">Your lesson is ready!</h1>
             <p className="text-xl text-neutral-600">Review the generated materials and publish when you're satisfied</p>
           </div>
 
           <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-2xl p-6 mb-8">
-            <h2 className="text-2xl font-bold mb-3">{lesson.title}</h2>
+            <h2 className="text-2xl font-semibold mb-3">{lesson.title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
               <div>
                 <div className="font-medium text-neutral-700 mb-2">Standards Aligned</div>
@@ -2145,7 +2512,6 @@ function UnifiedPromptComponent({
   const [prompt, setPrompt] = useState(initialPrompt);
   const [selectedStudents, setSelectedStudents] = useState<string>(initialContext.selectedStudents || 'all');
   const [specificStudents, setSpecificStudents] = useState<string[]>(initialContext.specificStudents || []);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(initialContext.uploadedFile || null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [selectedStandard, setSelectedStandard] = useState<string>(initialContext.selectedStandard || "all");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -2204,10 +2570,10 @@ function UnifiedPromptComponent({
   
   // Example prompts for cycling animation
   const examplePrompts = [
-    "Create a lesson on linear equations for struggling students...",
-    "Design activities for slope-intercept form with real-world examples...",
-    "Build practice problems for systems of equations at different levels...",
-    "Generate visual aids for graphing linear functions..."
+    "Create materials using 8.EE.B.6 for Band 2 students on linear equations with cell phone plan examples...",
+    "Design activities using 8.F.A.3 for Emma and Marcus covering slope-intercept form with skateboard ramps...",
+    "Build practice problems using 8.EE.C.8 for all students on systems of equations with real-world scenarios...",
+    "Generate visual content using 8.F.B.5 for Band 3 students on graphing linear functions with interactive examples..."
   ];
 
   // Quick suggestions for refinement mode
@@ -2257,7 +2623,7 @@ function UnifiedPromptComponent({
       
       const reasoningSections = [
         "I'll create comprehensive lesson materials on slope-intercept form for your selected students. Let me first understand your specific requirements and then process them through our Classroom Co-Pilot system.",
-        `Understanding your intent:\n\nI'm analyzing your request for ${initialContext.selectedStudents === 'band2' ? 'Band 2 (developing) students' : initialContext.selectedStudents === 'band1' ? 'Band 1 (emerging) students' : initialContext.selectedStudents === 'band3' ? 'Band 3 (proficient) students' : initialContext.selectedStudents === 'band4' ? 'Band 4 (advanced) students' : 'all students'}, focusing on ${initialContext.selectedStandard !== 'all' ? initialContext.selectedStandard : 'auto-selected CCSS standards'}, and creating lesson materials with multiple modalities${initialContext.uploadedFile ? ` based on your uploaded file: ${initialContext.uploadedFile.name}` : ''}.`,
+        `Understanding your intent:\n\nI'm analyzing your request for ${initialContext.selectedStudents === 'band2' ? 'Band 2 (developing) students' : initialContext.selectedStudents === 'band1' ? 'Band 1 (emerging) students' : initialContext.selectedStudents === 'band3' ? 'Band 3 (proficient) students' : initialContext.selectedStudents === 'band4' ? 'Band 4 (advanced) students' : 'all students'}, focusing on ${initialContext.selectedStandard !== 'all' ? initialContext.selectedStandard : 'auto-selected CCSS standards'}, and creating lesson materials with multiple modalities.`,
         "Processing with Classroom Co-Pilot:\n\nI've analyzed curriculum standards (CCSS 8.F.A.3, 8.F.B.4), applied Grade 8 readability guidelines, and incorporated differentiation strategies. The system has generated visual representations, created real-world applications, and structured everything for a 30-minute lesson format."
       ];
       
@@ -2424,7 +2790,6 @@ function UnifiedPromptComponent({
       prompt,
       selectedStudents,
       specificStudents,
-      uploadedFile,
       selectedStandard
     };
     
@@ -2457,7 +2822,7 @@ function UnifiedPromptComponent({
     return (
       <div className={`mb-12 ${className}`}>
         <div className="max-w-7xl mx-auto text-left mb-8">
-          <h1 className="text-4xl font-bold mb-4 text-slate-800">Good evening, Mr. Morales.</h1>
+          <h1 className="text-4xl font-semibold mb-4 text-slate-700">Good evening, Mr. Morales.</h1>
         </div>
 
         <div className="max-w-7xl mx-auto relative">
@@ -2467,7 +2832,7 @@ function UnifiedPromptComponent({
               value={prompt}
               onChange={handlePromptChange}
               onKeyDown={handleKeyDown}
-              className="h-64 resize-none border-0 rounded-t-2xl focus-visible:ring-0 focus-visible:ring-offset-0 p-6 shadow-none bg-transparent !text-lg placeholder:text-lg text-slate-800 placeholder:text-slate-400"
+              className="h-64 resize-none border-0 rounded-t-2xl focus-visible:ring-0 focus-visible:ring-offset-0 p-6 shadow-none bg-transparent !text-lg placeholder:text-lg text-slate-700 placeholder:text-slate-400"
               placeholder={currentPlaceholder}
             />
             
@@ -2507,7 +2872,7 @@ function UnifiedPromptComponent({
                         )}
                       </div>
                       
-                      <div className="font-medium text-slate-800 text-sm truncate">
+                      <div className="font-medium text-slate-700 text-sm truncate">
                         {mention.name}
                       </div>
                       
@@ -2534,15 +2899,18 @@ function UnifiedPromptComponent({
                 <div className="flex items-center gap-2">
                   {/* Students Selection */}
                   <Select value={selectedStudents} onValueChange={setSelectedStudents}>
-                    <SelectTrigger className="w-48 h-8 text-xs bg-slate-200 border-0 shadow-none">
-                      <SelectValue />
+                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[120px] justify-start gap-1">
+                      <div className="flex items-center gap-1.5">
+                        <UserGroupIcon className="h-4 w-4 text-slate-600" />
+                        <SelectValue />
+                      </div>
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All students ({CLASS_8A.students.length})</SelectItem>
-                      <SelectItem value="band1">Band 1 students ({CLASS_8A.students.filter(s => s.masteryBand === 1).length})</SelectItem>
-                      <SelectItem value="band2">Band 2 students ({CLASS_8A.students.filter(s => s.masteryBand === 2).length})</SelectItem>
-                      <SelectItem value="band3">Band 3 students ({CLASS_8A.students.filter(s => s.masteryBand === 3).length})</SelectItem>
-                      <SelectItem value="band4">Band 4 students ({CLASS_8A.students.filter(s => s.masteryBand === 4).length})</SelectItem>
+                      <SelectItem value="all">All students</SelectItem>
+                      <SelectItem value="band1">Band 1 students</SelectItem>
+                      <SelectItem value="band2">Band 2 students</SelectItem>
+                      <SelectItem value="band3">Band 3 students</SelectItem>
+                      <SelectItem value="band4">Band 4 students</SelectItem>
                       <SelectItem value="selected">
                         {specificStudents.length > 0 ? `${specificStudents.length} selected` : 'Select individual students'}
                       </SelectItem>
@@ -2551,8 +2919,11 @@ function UnifiedPromptComponent({
 
                   {/* Standards Selection */}
                   <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                    <SelectTrigger className="w-48 h-8 text-xs bg-slate-200 border-0 shadow-none">
-                      <SelectValue placeholder="Select standard (optional)" />
+                    <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[140px] justify-start gap-1">
+                      <div className="flex items-center gap-1.5">
+                        <AcademicCapIcon className="h-4 w-4 text-slate-600" />
+                        <SelectValue placeholder="All standards" />
+                      </div>
                     </SelectTrigger>
                     <SelectContent className="max-h-64">
                       <SelectItem value="all">All CCSSM standards</SelectItem>
@@ -2565,28 +2936,6 @@ function UnifiedPromptComponent({
                     </SelectContent>
                   </Select>
 
-                  {/* Source Material Upload */}
-                  <div className="flex items-center">
-                    <input
-                      type="file"
-                      accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                      onChange={(e) => setUploadedFile(e.target.files?.[0] || null)}
-                      className="hidden"
-                      id="file-upload"
-                    />
-                    <label htmlFor="file-upload">
-                      <Button variant="ghost" size="sm" className="h-8 w-8 p-0" asChild>
-                        <span className="cursor-pointer flex items-center justify-center">
-                          <PhotoIconSolid className="h-4 w-4 text-gray-400" />
-                        </span>
-                      </Button>
-                    </label>
-                    {uploadedFile && (
-                      <span className="text-xs text-slate-500 ml-2 truncate max-w-24">
-                        {uploadedFile.name}
-                      </span>
-                    )}
-                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -2646,7 +2995,7 @@ function UnifiedPromptComponent({
     <div className={`h-full bg-slate-100 border-l border-slate-200 flex flex-col ${className}`}>
       {/* Header */}
       <div className="p-4 border-b border-slate-200">
-        <h3 className="font-semibold text-slate-800">AI Assistant</h3>
+        <h3 className="font-semibold text-slate-700">AI Assistant</h3>
       </div>
 
       {/* Chat Transcript */}
@@ -2655,7 +3004,7 @@ function UnifiedPromptComponent({
               {/* Original Prompt as First Message */}
               {initialPrompt && (
                 <div className="flex justify-end items-end gap-2">
-                  <div className="max-w-[80%] p-3 rounded-lg text-sm bg-slate-200 text-slate-800">
+                  <div className="max-w-[80%] p-3 rounded-lg text-sm bg-slate-200 text-slate-700">
                     {initialPrompt}
                   </div>
                   <Avatar className="h-8 w-8 flex-shrink-0">
@@ -2671,7 +3020,7 @@ function UnifiedPromptComponent({
           {initialPrompt && reasoningState !== 'none' && (
             <>
               <div className="flex justify-start">
-                <div className="w-full text-sm text-gray-900">
+                <div className="w-full text-sm text-gray-700">
                   <button 
                     onClick={() => setIsReasoningCollapsed(!isReasoningCollapsed)}
                     className={`flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors ${isReasoningCollapsed ? '' : 'mb-3'}`}
@@ -2698,7 +3047,7 @@ function UnifiedPromptComponent({
           {/* AI Executive Summary Response */}
           {initialPrompt && reasoningState === 'complete' && (summaryText || isSummaryTyping) && (
             <div className="flex justify-start">
-              <div className="w-full text-sm text-gray-900">
+              <div className="w-full text-sm text-gray-700">
                 <div className="whitespace-pre-wrap">
                   {summaryText}
                   {isSummaryTyping && (
@@ -2745,10 +3094,10 @@ function UnifiedPromptComponent({
           ) : (
             <>
               {chatHistory.map((message) => (
-                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : 'justify-start'}`}>
+                <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-end gap-2' : 'justify-start'}`}>
                   {message.type === 'user' ? (
                     <>
-                      <div className="max-w-[80%] p-3 rounded-lg text-sm bg-slate-200 text-slate-800">
+                      <div className="max-w-[80%] p-3 rounded-lg text-sm bg-slate-200 text-slate-700">
                         {message.content}
                       </div>
                       <Avatar className="h-8 w-8 flex-shrink-0">
@@ -2757,6 +3106,20 @@ function UnifiedPromptComponent({
                           <UserIcon className="h-4 w-4" />
                         </AvatarFallback>
                       </Avatar>
+                    </>
+                  ) : message.type === 'agent' ? (
+                    <>
+                      <Avatar className="h-8 w-8 flex-shrink-0">
+                        <AvatarFallback className="bg-blue-500 text-white">
+                          <CpuChipIcon className="h-4 w-4" />
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="max-w-[80%] p-3 rounded-lg text-sm bg-blue-50 text-blue-800 border border-blue-200">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
+                        </div>
+                        {message.content}
+                      </div>
                     </>
                   ) : (
                     <div className="w-full space-y-3">
@@ -2785,16 +3148,26 @@ function UnifiedPromptComponent({
                       )}
                       
                       {/* AI Summary/Response */}
-                      <div className="w-full text-sm text-gray-900">
+                      <div className="w-full text-sm text-gray-700">
                         {message.content}
                         {message.isStreaming && message.content && (
                           <span className="animate-pulse">|</span>
                         )}
                       </div>
                       
-                      {/* Feedback buttons for each AI response */}
+                      {/* Action buttons for each AI response */}
                       {!message.isStreaming && (
                         <div className="flex items-center gap-1 mt-3">
+                        {/* Undo button - only show if this message applied changes */}
+                        {message.id.startsWith('apply-') && undoStack.length > 0 && (
+                          <button
+                            onClick={() => onUndo()}
+                            className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                            title="Undo changes"
+                          >
+                            <ArrowUturnLeftIcon className="w-5 h-5" />
+                          </button>
+                        )}
                         <button
                           onClick={() => onUpdateMessage?.(message.id, { feedback: message.feedback === 'positive' ? null : 'positive' })}
                           className={`p-1 transition-colors ${
@@ -2833,7 +3206,7 @@ function UnifiedPromptComponent({
         {/* Active Section Chip */}
         {activeSection && (
           <div className="mb-3">
-            <span className="px-2 py-1 bg-slate-200 text-slate-800 text-xs font-medium rounded border border-slate-200 flex items-center gap-2 w-fit">
+            <span className="px-2 py-1 bg-slate-200 text-slate-700 text-xs font-medium rounded border border-slate-200 flex items-center gap-2 w-fit">
               Section: {activeSection}
               {onClearSection && (
                 <button 
@@ -2856,7 +3229,7 @@ function UnifiedPromptComponent({
             onChange={handlePromptChange}
             onKeyDown={handleKeyDown}
             placeholder={activeSection ? getSectionPlaceholder(activeSection) : "Ask AI to help with lesson..."}
-            className="h-24 resize-none border-0 rounded-t-2xl focus-visible:ring-0 focus-visible:ring-offset-0 p-3 shadow-none bg-transparent text-sm placeholder:text-sm text-slate-800 placeholder:text-slate-400"
+            className="h-24 resize-none border-0 rounded-t-2xl focus-visible:ring-0 focus-visible:ring-offset-0 p-3 shadow-none bg-transparent text-sm placeholder:text-sm text-slate-700 placeholder:text-slate-400"
             disabled={isProcessing}
           />
           
@@ -2894,7 +3267,7 @@ function UnifiedPromptComponent({
                       )}
                     </div>
                     
-                    <div className="font-medium text-slate-800 text-sm truncate">
+                    <div className="font-medium text-slate-700 text-sm truncate">
                       {mention.name}
                     </div>
                     
@@ -2920,23 +3293,29 @@ function UnifiedPromptComponent({
             <div className="flex items-center gap-2">
               {/* Students Selection */}
               <Select value={selectedStudents} onValueChange={setSelectedStudents}>
-                <SelectTrigger className="h-8 text-xs bg-slate-200 border-0 shadow-none">
-                  <SelectValue />
+                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[120px] justify-start gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <UserGroupIcon className="h-4 w-4 text-slate-600" />
+                    <SelectValue />
+                  </div>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All students (10)</SelectItem>
-                  <SelectItem value="band1">Band 1 students (2)</SelectItem>
-                  <SelectItem value="band2">Band 2 students (3)</SelectItem>
-                  <SelectItem value="band3">Band 3 students (3)</SelectItem>
-                  <SelectItem value="band4">Band 4 students (2)</SelectItem>
+                  <SelectItem value="all">All students</SelectItem>
+                  <SelectItem value="band1">Band 1 students</SelectItem>
+                  <SelectItem value="band2">Band 2 students</SelectItem>
+                  <SelectItem value="band3">Band 3 students</SelectItem>
+                  <SelectItem value="band4">Band 4 students</SelectItem>
                   <SelectItem value="specific">Select individual students</SelectItem>
                 </SelectContent>
               </Select>
 
               {/* Standards Selection */}
               <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                <SelectTrigger className="h-8 text-xs bg-slate-200 border-0 shadow-none">
-                  <SelectValue placeholder="Select standard (optional)" />
+                <SelectTrigger className="h-8 text-xs border border-slate-300 bg-transparent shadow-none rounded-full pl-2 pr-3 w-fit min-w-[140px] justify-start gap-1">
+                  <div className="flex items-center gap-1.5">
+                    <AcademicCapIcon className="h-4 w-4 text-slate-600" />
+                    <SelectValue placeholder="All standards" />
+                  </div>
                 </SelectTrigger>
                 <SelectContent className="max-h-64">
                   <SelectItem value="all">All CCSSM standards</SelectItem>
@@ -2964,29 +3343,6 @@ function UnifiedPromptComponent({
                 </SelectContent>
               </Select>
 
-              {/* Source Material Upload */}
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                onChange={(e) => setUploadedFile(e.target.files?.[0] || null)}
-                className="hidden"
-                id="ai-chat-file-upload"
-              />
-              <label htmlFor="ai-chat-file-upload">
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0" asChild>
-                  <span className="cursor-pointer flex items-center justify-center">
-                    <svg className="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0119.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-4.75 4.75a.75.75 0 01-1.06 0L8.5 15.75a1.5 1.5 0 00-2.12 0L3 18.44zm18-11.5v-.5a.75.75 0 00-.75-.75H3.75a.75.75 0 00-.75.75v.5l4.5 3a.75.75 0 001.06 0l4.25-3.5a1.5 1.5 0 012.12 0L21 5.5zm-10.5 3a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                </Button>
-              </label>
-              
-              {uploadedFile && (
-                <span className="text-xs text-slate-500 ml-2 truncate max-w-24">
-                  {uploadedFile.name}
-                </span>
-              )}
             </div>
             
             <Button
@@ -3091,26 +3447,71 @@ function FloatingAIAssistant({
     <div className="h-full bg-white/95 backdrop-blur-sm border-l border-gray-200 shadow-2xl flex flex-col">
       {/* Header */}
       <div className="p-4 border-b bg-white/90 backdrop-blur-sm">
-        <h3 className="font-semibold text-gray-900">AI Assistant</h3>
+        <h3 className="font-semibold text-gray-700">AI Assistant</h3>
       </div>
 
       {/* Chat Transcript - Scrollable Middle Section */}
       <div className="flex-1 p-4 overflow-y-auto">
-        {chatHistory.length === 0 ? (
+        {chatHistory.length === 0 && !lesson.agentContext ? (
           <div className="text-center text-gray-500 text-sm">
             <p>Select "Improve with AI" on any section to start collaborating!</p>
           </div>
         ) : (
           <div className="space-y-3">
+            {/* Show agent context if available and no chat history */}
+            {lesson.agentContext && chatHistory.length === 0 && (
+              <div className="flex justify-start">
+                <div className="max-w-[80%] p-3 rounded-lg text-sm bg-blue-50 border border-blue-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
+                      <span className="text-white text-xs font-medium">AI</span>
+                    </div>
+                    <span className="text-xs text-blue-600 font-medium">Your Teaching Agent</span>
+                  </div>
+                  <p className="text-blue-800">{lesson.agentContext.agentPrompt}</p>
+                  <div className="mt-3 p-2 bg-white rounded border border-blue-100">
+                    <div className="text-xs text-blue-600 mb-1">Generated Analysis:</div>
+                    <div className="text-xs text-blue-700 space-y-1">
+                      <div><strong>Reasoning:</strong> {lesson.agentContext.reasoning}</div>
+                      <div><strong>Planning:</strong> {lesson.agentContext.planning}</div>
+                      <div><strong>Changes:</strong> {lesson.agentContext.changes}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {chatHistory.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-end gap-2' : 'justify-start'}`}>
+                {message.type === 'agent' && (
+                  <Avatar className="h-8 w-8 flex-shrink-0">
+                    <AvatarFallback className="bg-blue-500 text-white">
+                      <CpuChipIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
                 <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
                   message.type === 'user' 
-                    ? 'bg-slate-200 text-slate-800' 
-                    : 'bg-gray-100 text-gray-900'
+                    ? 'bg-slate-200 text-slate-700' 
+                    : message.type === 'agent'
+                    ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                    : 'bg-gray-100 text-gray-700'
                 }`}>
+                  {message.type === 'agent' && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
+                    </div>
+                  )}
                   {message.content}
                 </div>
+                {message.type === 'user' && (
+                  <Avatar className="h-8 w-8 flex-shrink-0">
+                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Teacher" />
+                    <AvatarFallback>
+                      <UserIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
               </div>
             ))}
           </div>
@@ -3147,7 +3548,7 @@ function FloatingAIAssistant({
           </span>
           {/* Active Section Chip */}
           {activeSection && (
-            <span className="px-2 py-1 bg-slate-200 text-slate-800 text-xs font-medium rounded border border-slate-200 flex items-center gap-1">
+            <span className="px-2 py-1 bg-slate-200 text-slate-700 text-xs font-medium rounded border border-slate-200 flex items-center gap-1">
               Section: {activeSection}
               <button 
                 onClick={onClearSection}
@@ -3269,7 +3670,7 @@ function RightRailChat({
     <div className="bg-white rounded-2xl border shadow-sm h-full flex flex-col">
       {/* Header */}
       <div className="p-4 border-b">
-        <h3 className="font-semibold text-gray-900 mb-3">AI Assistant</h3>
+        <h3 className="font-semibold text-gray-700 mb-3">AI Assistant</h3>
         
         {/* Context Chips */}
         <div className="flex flex-wrap gap-2 mb-3">
@@ -3287,7 +3688,7 @@ function RightRailChat({
         {/* Active Section Chip */}
         {activeSection && (
           <div className="flex items-center gap-2 mb-2">
-            <span className="px-2 py-1 bg-slate-200 text-slate-800 text-xs font-medium rounded border border-slate-200 flex items-center gap-1">
+            <span className="px-2 py-1 bg-slate-200 text-slate-700 text-xs font-medium rounded border border-slate-200 flex items-center gap-1">
               Section: {activeSection}
               <button 
                 onClick={onClearSection}
@@ -3309,14 +3710,36 @@ function RightRailChat({
         ) : (
           <div className="space-y-3">
             {chatHistory.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end items-end gap-2' : message.type === 'agent' ? 'justify-start items-end gap-2' : 'justify-start'}`}>
+                {message.type === 'agent' && (
+                  <Avatar className="h-8 w-8 flex-shrink-0">
+                    <AvatarFallback className="bg-blue-500 text-white">
+                      <CpuChipIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
                 <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
                   message.type === 'user' 
-                    ? 'bg-slate-200 text-slate-800' 
-                    : 'bg-gray-100 text-gray-900'
+                    ? 'bg-slate-200 text-slate-700' 
+                    : message.type === 'agent'
+                    ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                    : 'bg-gray-100 text-gray-700'
                 }`}>
+                  {message.type === 'agent' && (
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-medium text-blue-600">Teaching Agent</span>
+                    </div>
+                  )}
                   {message.content}
                 </div>
+                {message.type === 'user' && (
+                  <Avatar className="h-8 w-8 flex-shrink-0">
+                    <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Teacher" />
+                    <AvatarFallback>
+                      <UserIcon className="h-4 w-4" />
+                    </AvatarFallback>
+                  </Avatar>
+                )}
               </div>
             ))}
           </div>
@@ -3467,7 +3890,7 @@ slope-intercept form gives you a powerful tool for modeling and solving practica
         type: 'ai' as const,
         content: "I've created comprehensive lesson materials on slope-intercept form (y = mx + b) tailored for your students. The content includes an introduction with conceptual foundation and clear explanations, visual representation with interactive coordinate plane and examples, formula components with breakdown of variables and constants, and real-world application using cell phone plan modeling example.\n\nReady to refine? Select \"Refine with AI\" on any section to start iterating, or ask me specific questions about the lesson content.",
         timestamp: new Date(),
-        reasoning: "I need to create comprehensive lesson materials for slope-intercept form that cater to different learning styles and provide multiple modalities for engagement.\n\n**Content Strategy:**\n• **Introduction**: Build conceptual foundation with clear explanations\n• **Visual Elements**: Interactive coordinate plane with multiple examples\n• **Formula Breakdown**: Detailed explanation of variables and constants\n• **Real-World Applications**: Relatable examples like cell phone plans\n• **Multiple Modalities**: Text, visual, interactive, and practical components\n\n**Differentiation Approach:**\n• Clear step-by-step explanations for foundational understanding\n• Visual representations for visual learners\n• Interactive elements for kinesthetic learners\n• Real-world connections for practical application\n\nThis comprehensive approach ensures all students can access and understand the slope-intercept form concept through their preferred learning modality.",
+        reasoning: "You want comprehensive lesson materials for slope-intercept form that cater to different learning preferences and provide multiple modalities for engagement.\n\nI planned an introduction to build conceptual foundation with clear explanations, visual elements with interactive coordinate plane and multiple examples, formula breakdown with detailed explanation of variables and constants, real-world applications like cell phone plans, and multiple modalities including text, visual, interactive, and practical components.\n\nI created lesson structure with differentiated content for visual, kinesthetic, and analytical learners, building from concrete examples to abstract understanding, then generated comprehensive lesson with introduction, visual representations, formula breakdown, and real-world applications. Content is now streaming to the lesson interface.",
         reasoningCollapsed: false, // Start with reasoning expanded
         feedback: null,
         isStreaming: true // Start as streaming
@@ -3771,7 +4194,7 @@ ${selectedStandard?.label || 'Core Mathematical Concept'}
 - Use Grade 8 appropriate colors
 - Include mathematical symbols
 - Maintain clear hierarchy
-- Support multiple learning styles`
+- Support multiple learning preferences`
       };
 
       newGenerated[modality] = baseContent[modality];
@@ -3833,20 +4256,60 @@ ${selectedStandard?.label || 'Core Mathematical Concept'}
     // Just set the section as context for targeting, don't add chat message
   }
 
+  /*
+  TURN SYSTEM EXAMPLES:
+  
+  === SCENARIO 1: Creating New Lesson ===
+  Teacher Input: "Create a lesson on negative exponents for my Band 2 students who are struggling"
+  
+  AI Response Structure:
+  {
+    reasoning: "Teacher wants remedial lesson for Band 2 students struggling with negative exponents. Need scaffolding, visual aids, and connection to positive exponents.",
+    planning: "I planned pattern recognition from positive to negative, visual fraction models, scientific notation applications, graduated practice problems, and multi-modal content",
+    changes: "I built lesson structure with introduction using pattern discovery, visual fraction bars, scientific notation examples, guided practice, independent practice with real-world contexts",
+    streaming: "Creating introduction section... Adding visual examples... Generating practice problems... Building assessment components..."
+  }
+  
+  === SCENARIO 2: Revising Existing Section ===
+  Teacher Input: [Selects "Introduction" section] "Make this more engaging with a stronger hook"
+  
+  AI Response Structure:
+  {
+    reasoning: "Teacher wants improved introduction with stronger hook and real-world connections for 8th graders. Current intro lacks engagement and relevance.",
+    planning: "I planned to open with familiar scenario like phone storage and social media, create immediate relevance, use conversational language, and build curiosity about negative exponents",
+    changes: "I updated introduction with phone storage/data examples, conversational tone, real-world tech connections, and smooth transition to math concepts",
+    streaming: "Revising introduction... Adding engaging hook... Connecting to student experiences... Updating examples..."
+  }
+  
+  === SCENARIO 3: AI Suggestions (Implied History) ===
+  Agent Context: "I noticed Band 2 students struggling with negative exponents. Based on performance data, they need targeted practice with visual scaffolding."
+  
+  Pre-generated Analysis:
+  {
+    reasoning: "Based on student performance data: 4/6 Band 2 students scored <70% on negative exponents. Common errors: treating negative exponents as negative numbers.",
+    planning: "Created focused practice lesson with pattern reinforcement, visual fraction models, error analysis, immediate feedback, scientific notation connections.",
+    changes: "Generated lesson with pattern recognition warm-up, visual exercises, error identification activities, graduated difficulty, real-world examples",
+    status: "[ALREADY GENERATED] This lesson was created based on student performance patterns and is ready for customization."
+  }
+  */
+
   async function handleApplyEdit(sectionId: string, newContent: string) {
     // Store current content for undo
     const currentContent = getSectionContent(sectionId);
     setUndoStack(prev => [...prev, { sectionId, previousContent: currentContent }]);
     
-    // Apply the edit (simulate)
-    const aiRevision = newContent + " (AI revision)";
+    // Apply the actual content changes based on section
+    if (sectionId === 'introduction') {
+      // Generate improved introduction content based on the AI suggestion
+      const improvedIntro = generateImprovedContent(sectionId, newContent, currentContent);
+      setIntroContent(improvedIntro);
+    }
+    // Add more sections as needed (visual-representation, formula-components, etc.)
     
     // Add AI response to chat with reasoning and summary
-    const reasoningContent = `Understanding the improvement: I've analyzed the "${sectionId}" section and identified areas for enhancement based on Grade 8 readability standards.
+    const reasoningContent = `You requested improvements to the "${sectionId}" section. I've analyzed the current content and your specific feedback to enhance readability and engagement.\n\nI planned improved vocabulary for Grade 8 comprehension level, enhanced sentence structure and flow, more engaging examples and connections, and maintained educational objectives and standards alignment.\n\nI updated the "${sectionId}" section with improved content that better serves your students' learning needs. The "${sectionId}" section has been updated and is now live in your lesson. Changes are immediately visible to students.`;
 
-Processing with Classroom Co-Pilot: I've applied pedagogical best practices, adjusted vocabulary complexity, and improved sentence structure to better align with Grade 8 comprehension levels.`;
-
-    const summaryContent = `I've improved the "${sectionId}" section for better Grade 8 readability. The content has been refined to match appropriate reading levels while maintaining educational effectiveness.
+    const summaryContent = `I've successfully updated the "${sectionId}" section based on your feedback. The content has been enhanced for better student engagement and comprehension while maintaining alignment with learning objectives.
 
 The changes are now live in your lesson. You can continue refining other sections or ask for additional improvements.`;
 
@@ -3862,24 +4325,62 @@ The changes are now live in your lesson. You can continue refining other section
     }]);
     
     // Show toast notification
-    setToast({message: "Edit applied! Undo available.", type: 'success'});
+    setToast({message: `"${sectionId}" section updated! Undo available.`, type: 'success'});
     setTimeout(() => setToast(null), 3000);
+  }
+
+  function generateImprovedContent(sectionId: string, aiSuggestion: string, currentContent: string) {
+    // Generate improved content based on AI suggestion
+    if (sectionId === 'introduction') {
+      // Create more engaging introduction based on the AI suggestion
+      if (aiSuggestion.toLowerCase().includes('engaging') || aiSuggestion.toLowerCase().includes('hook')) {
+        return {
+          paragraph1: `Have you ever wondered how Uber calculates your ride cost? It starts with a base fee, then adds more money for each mile you travel. That's actually a perfect example of something called slope-intercept form: y = mx + b. This mathematical relationship appears everywhere in your daily life, from ride-sharing apps to phone plans to streaming subscriptions.`,
+          paragraph2: `Today, we're going to unlock this powerful mathematical tool that will help you understand and predict patterns in the world around you. By the end of this lesson, you'll be able to spot slope-intercept relationships everywhere and use them to solve real problems that matter to you.`
+        };
+      } else if (aiSuggestion.toLowerCase().includes('simpler') || aiSuggestion.toLowerCase().includes('easier')) {
+        return {
+          paragraph1: `Linear functions are like recipes that always follow the same pattern. When you graph them, they make straight lines. The slope-intercept form (y = mx + b) is a special way to write these functions that immediately tells you two important things: how steep the line is and where it crosses the y-axis.`,
+          paragraph2: `This form shows up in many real-life situations, like calculating costs or tracking growth. Learning slope-intercept form gives you a useful tool for understanding and solving everyday math problems.`
+        };
+      }
+    }
+    
+    // Return current content if no specific improvement pattern is detected
+    return typeof currentContent === 'object' ? currentContent : { paragraph1: currentContent, paragraph2: '' };
   }
 
   function handleUndo() {
     const lastEdit = undoStack[undoStack.length - 1];
     if (lastEdit) {
-      // Restore previous content (simulate)
-      console.log(`Undoing edit to ${lastEdit.sectionId}`);
+      // Restore previous content based on section
+      if (lastEdit.sectionId === 'introduction') {
+        const previousContent = typeof lastEdit.previousContent === 'object' 
+          ? lastEdit.previousContent 
+          : {
+              paragraph1: `Linear functions are mathematical relationships that create straight lines when graphed. The slope-intercept form, 
+              written as y = mx + b, is one of the most useful ways to express these relationships because it immediately shows 
+              us two key pieces of information: how steep the line is (slope) and where it crosses the y-axis (y-intercept).`,
+              paragraph2: `This form appears everywhere in real life, from calculating costs to predicting growth patterns. Understanding 
+              slope-intercept form gives you a powerful tool for modeling and solving practical problems.`
+            };
+        setIntroContent(previousContent);
+      }
+      // Add more sections as needed
+      
       setUndoStack(prev => prev.slice(0, -1));
-      setToast({message: `Undid changes to ${lastEdit.sectionId}`, type: 'info'});
+      setToast({message: `Undid changes to "${lastEdit.sectionId}" section`, type: 'info'});
       setTimeout(() => setToast(null), 3000);
     }
   }
 
-  function getSectionContent(sectionId: string): string {
-    // This would get the actual section content in a real implementation
-    return "Current section content...";
+  function getSectionContent(sectionId: string): any {
+    // Get the actual current content for the section
+    if (sectionId === 'introduction') {
+      return introContent;
+    }
+    // Add more sections as needed
+    return `Current ${sectionId} content...`;
   }
 
   const handleToggleLive = () => {
@@ -3952,7 +4453,7 @@ The changes are now live in your lesson. You can continue refining other section
             <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-3">
-                  <h1 className="text-xl font-semibold text-slate-800">{title}</h1>
+                  <h1 className="text-xl font-semibold text-slate-700">{title}</h1>
                 </div>
                 <div className="flex items-center gap-4 flex-shrink-0">
                   {/* Student Facepile - 3 viewers */}
@@ -3974,7 +4475,7 @@ The changes are now live in your lesson. You can continue refining other section
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full bg-slate-300 flex items-center justify-center text-xs font-medium text-slate-600">
+                              <div className="w-full h-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-600">
                                 {student.name.split(' ').map(n => n[0]).join('').toUpperCase()}
                               </div>
                             )}
@@ -4007,7 +4508,7 @@ The changes are now live in your lesson. You can continue refining other section
           </div>
           
           {/* Content Area */}
-          <div className={`flex-1 ${isModal ? 'px-6 py-6 overflow-y-auto' : 'px-20 py-6 pr-[580px]'}`}>
+          <div className={`flex-1 ${isModal ? 'px-6 py-6 overflow-y-auto lesson-content-scroll' : 'px-20 py-6 pr-[580px]'}`}>
             <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
           {/* Tabbed Interface */}
           <div className="mb-8">
@@ -4041,7 +4542,7 @@ The changes are now live in your lesson. You can continue refining other section
                     onClick={() => setActiveTab(modality.key)}
                     className={`flex flex-col items-center gap-2 px-6 py-3 rounded-lg transition-colors ${
                       isActive
-                        ? 'bg-slate-200 text-slate-800'
+                        ? 'bg-slate-200 text-slate-700'
                         : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'
                     }`}
                   >
@@ -4081,7 +4582,6 @@ The changes are now live in your lesson. You can continue refining other section
           initialContext={{
             selectedStudents: lesson.selectedStudents || 'all',
             specificStudents: lesson.specificStudents || [],
-            uploadedFile: lesson.uploadedFile || null,
             selectedStandard: lesson.standards?.[0] || 'all'
           }}
           chatHistory={chatHistory}
@@ -4242,7 +4742,7 @@ function StudentsPage() {
     <div className="max-w-7xl mx-auto px-6 pt-20 pb-6">
       <div className="mb-12">
         <div className="text-left mb-8">
-          <h1 className="text-4xl font-bold mb-4 text-slate-800">Students</h1>
+          <h1 className="text-4xl font-semibold mb-4 text-slate-700">Students</h1>
         </div>
 
         {/* Student Cards */}
@@ -4251,8 +4751,8 @@ function StudentsPage() {
             const learningStyleInfo = LEARNING_STYLES[student.learningStyle as keyof typeof LEARNING_STYLES];
             
             return (
-              <div key={student.id} className="overflow-hidden border-2 border-slate-200 !bg-slate-50 shadow-none rounded-2xl">
-                <div className="p-6 pb-4 bg-slate-50">
+              <div key={student.id} className="overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-none rounded-xl">
+                <div className="p-6 pb-4 bg-slate-100">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                       {student.avatar ? (
@@ -4270,7 +4770,7 @@ function StudentsPage() {
                       )}
                     </div>
                     <div>
-                      <div className="text-lg font-semibold text-slate-800">{student.name}</div>
+                      <div className="text-lg font-semibold text-slate-700">{student.name}</div>
                       <div className="text-sm text-slate-500">Band {student.masteryBand} • {learningStyleInfo.name} Learner</div>
                     </div>
                   </div>
@@ -4286,331 +4786,139 @@ function StudentsPage() {
 
 // -------------------- Standards Page --------------------
 function StandardsPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [selectedStandard, setSelectedStandard] = useState<any>(null);
-
-  // Complete standards data with full official descriptions
-  const COMPLETE_STANDARDS = G8_MATH_STANDARDS.map(std => ({
-    ...std,
-    domain: std.id.includes('EE') ? 'Expressions & Equations' : 
-            std.id.includes('F') ? 'Functions' : 
-            std.id.includes('G') ? 'Geometry' : 'Statistics & Probability',
-    cluster: std.id === "8.EE.A.1" ? "Work with radicals and integer exponents" :
-             std.id.includes("8.EE.B") ? "Understand the connections between proportional relationships, lines, and linear equations" :
-             std.id.includes("8.F.A") ? "Define, evaluate, and compare functions" :
-             std.id.includes("8.F.B") ? "Use functions to model relationships between quantities" :
-             "Mathematical standard cluster",
-    grade: "8",
-    fullDescription: std.id === "8.EE.A.1" ? 
-      "Know and apply the properties of integer exponents to generate equivalent numerical expressions. For example, 3² × 3⁻⁵ = 3⁻³ = 1/3³ = 1/27." :
-      std.id === "8.EE.B.5" ? 
-      "Graph proportional relationships, interpreting the unit rate as the slope of the graph. Compare two different proportional relationships represented in different ways. For example, compare a distance-time graph to a distance-time equation to determine which of two moving objects has greater speed." :
-      std.id === "8.EE.B.6" ? 
-      "Use similar triangles to explain why the slope m is the same between any two distinct points on a non-vertical line in the coordinate plane; derive the equation y = mx for a line through the origin and the equation y = mx + b for a line intercepting the vertical axis at b." :
-      std.id === "8.F.A.1" ? 
-      "Understand that a function is a rule that assigns to each input exactly one output. The graph of a function is the set of ordered pairs consisting of an input and the corresponding output." :
-      std.id === "8.F.B.4" ? 
-      "Construct a function to model a linear relationship between two quantities. Determine the rate of change and initial value of the function from a description of a relationship or from two (x, y) values, including reading these from a table or from a graph. Interpret the rate of change and initial value of a linear function in terms of the situation it models, and in terms of its graph or a table of values." :
-      std.label,
-    mathematicalPractices: [
-      "MP1: Make sense of problems and persevere in solving them",
-      "MP2: Reason abstractly and quantitatively", 
-      "MP3: Construct viable arguments and critique the reasoning of others",
-      "MP4: Model with mathematics",
-      "MP5: Use appropriate tools strategically",
-      "MP6: Attend to precision",
-      "MP7: Look for and make use of structure",
-      "MP8: Look for and express regularity in repeated reasoning"
-    ].slice(0, Math.floor(Math.random() * 3) + 2), // Random subset for demo
-    connections: std.id === "8.EE.B.6" ? ["7.RP.A.2", "8.EE.B.5", "8.F.B.4"] : 
-                 std.id === "8.F.B.4" ? ["8.EE.B.5", "8.EE.B.6"] : 
-                 std.id === "8.EE.B.5" ? ["7.RP.A.2", "8.EE.B.6"] : [],
-    examples: std.id === "8.EE.B.6" ? [
-      "Use similar triangles to show that the slope between any two points on a line is constant",
-      "Derive y = mx + b from geometric principles",
-      "Explain why all linear functions have constant rate of change"
-    ] : std.id === "8.F.B.4" ? [
-      "Model the cost of a cell phone plan: C = 30 + 0.05m where m is minutes",
-      "Determine rate of change from a table of values",
-      "Interpret y-intercept in context of real-world situations"
-    ] : [],
-    assessmentBoundary: std.id === "8.F.A.1" ? 
-      "Functions are limited to linear functions. Students are not expected to use function notation." :
-      std.id === "8.EE.A.1" ? 
-      "Integer exponents with numerical bases only." : null
-  }));
-
-  const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
-    
-    setIsSearching(true);
-    // Simulate search processing
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    const query = searchQuery.toLowerCase();
-    const results = COMPLETE_STANDARDS.filter(std => 
-      std.id.toLowerCase().includes(query) ||
-      std.label.toLowerCase().includes(query) ||
-      std.fullDescription.toLowerCase().includes(query) ||
-      std.cluster.toLowerCase().includes(query) ||
-      std.domain.toLowerCase().includes(query) ||
-      std.examples.some(example => example.toLowerCase().includes(query)) ||
-      std.connections.some(conn => conn.toLowerCase().includes(query))
-    );
-    
-    setSearchResults(results);
-    setIsSearching(false);
-  };
-
-  const handleStandardSelect = (standard: any) => {
-    setSelectedStandard(standard);
-  };
-
   return (
-    <div className="max-w-7xl mx-auto px-6 pt-20 pb-6">
-      <div className="mb-12">
-        <div className="text-left mb-8">
-          <h1 className="text-4xl font-bold mb-4 text-slate-800">Standards</h1>
-        </div>
-
-        {/* Standards Search */}
-        <div className="bg-slate-100 rounded-2xl border border-slate-200 shadow-sm p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">🔍 Search Standards</h2>
-          <p className="text-sm text-neutral-600 mb-4">
-            Search by standard ID, description, or concept. Examples: "slope", "8.F.B.4", "linear relationships", "exponents"
-          </p>
+    <div className="max-w-7xl mx-auto px-6 pt-20 pb-12">
+      <h1 className="text-4xl font-semibold mb-8 text-slate-700">Grade 8 Mathematics Standards</h1>
+      
+      <div className="space-y-12">
+        {/* Expressions & Equations Domain */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-6 text-slate-700">Expressions & Equations</h2>
           
-          <div className="flex gap-3 mb-4">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search standards... (e.g., 'slope', '8.F.B.4', 'linear relationships')"
-              className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-            />
-            <button
-              onClick={handleSearch}
-              disabled={isSearching || !searchQuery.trim()}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition"
-            >
-              {isSearching ? "Searching..." : "Search"}
-            </button>
-          </div>
-
-          {/* Search Results */}
-          {searchResults.length > 0 && (
-            <div className="border-t pt-4">
-              <h3 className="font-medium mb-3">Search Results ({searchResults.length})</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {searchResults.map(standard => (
-                  <button
-                    key={standard.id}
-                    onClick={() => handleStandardSelect(standard)}
-                    className="text-left p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition"
-                  >
-                    <div className="font-medium text-blue-600">{standard.id}</div>
-                    <div className="text-sm text-neutral-900 mt-1">{standard.label}</div>
-                    <div className="text-xs text-neutral-500 mt-2">{standard.domain}</div>
-                  </button>
-                ))}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-medium mb-3 text-slate-600">Work with radicals and integer exponents</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-medium mb-2 text-slate-700">8.EE.A.1</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Know and apply the properties of integer exponents to generate equivalent numerical expressions. 
+                    For example, 3² × 3⁻⁵ = 3⁻³ = 1/3³ = 1/27.
+                  </p>
+                </div>
               </div>
             </div>
-          )}
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Standards Browser */}
-          <div className="bg-slate-100 rounded-2xl border border-slate-200 shadow-sm">
-            <div className="p-6 border-b border-slate-200">
-              <h2 className="text-xl font-semibold">Browse by Domain</h2>
-            </div>
-            
-            <div className="p-6">
-              {/* Group standards by domain */}
-              {['Expressions & Equations', 'Functions', 'Geometry', 'Statistics & Probability'].map(domain => {
-                const domainStandards = COMPLETE_STANDARDS.filter(std => std.domain === domain);
-                if (domainStandards.length === 0) return null;
+            <div>
+              <h3 className="text-xl font-medium mb-3 text-slate-600">Understand the connections between proportional relationships, lines, and linear equations</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-medium mb-2 text-slate-700">8.EE.B.5</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Graph proportional relationships, interpreting the unit rate as the slope of the graph. 
+                    Compare two different proportional relationships represented in different ways. For example, 
+                    compare a distance-time graph to a distance-time equation to determine which of two moving 
+                    objects has greater speed.
+                  </p>
+                </div>
                 
-                return (
-                  <div key={domain} className="mb-6">
-                    <h3 className="font-semibold text-neutral-900 mb-3">{domain}</h3>
-                    <div className="space-y-2">
-                      {domainStandards.map(standard => (
-                        <button
-                          key={standard.id}
-                          onClick={() => handleStandardSelect(standard)}
-                          className={`w-full text-left p-3 rounded-lg border transition ${
-                            selectedStandard?.id === standard.id 
-                              ? 'border-blue-500 bg-blue-50' 
-                              : 'border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50'
-                          }`}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <div className="font-medium text-sm">{standard.id}</div>
-                              <div className="text-sm text-neutral-600 mt-1">{standard.label}</div>
-                            </div>
-                            <div className="text-xs text-neutral-400">Grade {standard.grade}</div>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Standard Details Panel */}
-          <div className="bg-slate-100 rounded-2xl border border-slate-200 shadow-sm">
-            <div className="p-6 border-b border-slate-200">
-              <h2 className="text-xl font-semibold">Standard Details</h2>
-            </div>
-            
-            <div className="p-6">
-              {!selectedStandard && (
-                <div className="text-center py-12">
-                  <div className="mb-4 opacity-30"><DocumentTextIcon className="h-16 w-16 mx-auto" /></div>
-                  <h3 className="font-medium text-neutral-900 mb-2">Select a standard</h3>
-                  <p className="text-neutral-600">Choose any standard to view complete details and official description</p>
+                <div>
+                  <h4 className="text-lg font-medium mb-2 text-slate-700">8.EE.B.6</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Use similar triangles to explain why the slope m is the same between any two distinct points 
+                    on a non-vertical line in the coordinate plane; derive the equation y = mx for a line through 
+                    the origin and the equation y = mx + b for a line intercepting the vertical axis at b.
+                  </p>
                 </div>
-              )}
-
-              {selectedStandard && (
-                <div className="space-y-6">
-                  {/* Header */}
-                  <div className="border-b border-neutral-100 pb-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-blue-600">{selectedStandard.id}</h3>
-                      <span className="text-xs px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
-                        Grade {selectedStandard.grade} • {selectedStandard.domain}
-                      </span>
-                    </div>
-                    <h4 className="text-lg font-semibold text-neutral-900 mb-2">{selectedStandard.label}</h4>
-                    <p className="text-sm text-neutral-600 italic">Cluster: {selectedStandard.cluster}</p>
-                  </div>
-
-                  {/* Full Description */}
-                  <div>
-                    <h5 className="font-semibold text-neutral-900 mb-3">📖 Standard Description</h5>
-                    <div className="bg-neutral-50 rounded-lg p-4">
-                      <p className="text-sm text-neutral-800 leading-relaxed">{selectedStandard.fullDescription}</p>
-                    </div>
-                  </div>
-
-                  {/* Mathematical Practices */}
-                  <div>
-                    <h5 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2"><UserGroupIcon className="h-4 w-4" />Mathematical Practices</h5>
-                    <div className="grid grid-cols-1 gap-2">
-                      {selectedStandard.mathematicalPractices.map((practice: string, idx: number) => (
-                        <div key={idx} className="text-xs p-2 bg-green-50 rounded border border-green-200 text-green-800">
-                          {practice}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Examples */}
-                  {selectedStandard.examples.length > 0 && (
-                    <div>
-                      <h5 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2"><LightBulbIcon className="h-4 w-4" />Examples</h5>
-                      <div className="space-y-2">
-                        {selectedStandard.examples.map((example: string, idx: number) => (
-                          <div key={idx} className="text-sm p-3 bg-blue-50 rounded border border-blue-200 text-blue-800">
-                            • {example}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Connections */}
-                  {selectedStandard.connections.length > 0 && (
-                    <div>
-                      <h5 className="font-semibold text-neutral-900 mb-3">🔗 Connected Standards</h5>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedStandard.connections.map((conn: string) => (
-                          <button
-                            key={conn}
-                            onClick={() => {
-                              const connectedStd = COMPLETE_STANDARDS.find(s => s.id === conn);
-                              if (connectedStd) handleStandardSelect(connectedStd);
-                            }}
-                            className="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 hover:bg-purple-100 transition"
-                          >
-                            {conn}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Assessment Boundary */}
-                  {selectedStandard.assessmentBoundary && (
-                    <div>
-                      <h5 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2"><ClipboardDocumentListIcon className="h-4 w-4" />Assessment Boundary</h5>
-                      <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                        <p className="text-sm text-orange-800">{selectedStandard.assessmentBoundary}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Actions */}
-                  <div className="pt-4 border-t border-neutral-100">
-                    <div className="flex flex-wrap gap-3">
-                      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        <ClipboardDocumentListIcon className="h-4 w-4 mr-2" />Copy standard text
-                      </button>
-                      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        <DocumentTextIcon className="h-4 w-4 mr-2" />View related lessons
-                      </button>
-                      <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                        <PresentationChartBarIcon className="h-4 w-4 mr-2" />Assessment resources
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Teacher Resources */}
-        <div className="mt-8 bg-slate-100 rounded-2xl border border-slate-200 shadow-sm p-6">
-          <h2 className="text-xl font-semibold mb-4">Teacher Resources</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button className="p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition text-left">
-              <div className="font-medium mb-1 flex items-center gap-2"><PresentationChartBarIcon className="h-4 w-4" />Standards Alignment Report</div>
-              <div className="text-sm text-neutral-600">See how your lessons align to each standard</div>
-            </button>
-            <button className="p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition text-left">
-              <div className="font-medium mb-1">📈 Scope & Sequence</div>
-              <div className="text-sm text-neutral-600">View recommended pacing and progression</div>
-            </button>
-            <button className="p-4 border border-slate-200 rounded-lg hover:border-slate-300 hover:bg-slate-200 hover:bg-slate-200 transition text-left">
-              <div className="font-medium mb-1 flex items-center gap-2"><DocumentTextIcon className="h-4 w-4" />Standard Progressions</div>
-              <div className="text-sm text-neutral-600">See how standards build across grades</div>
-            </button>
-          </div>
+        {/* Functions Domain */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-6 text-slate-700">Functions</h2>
           
-          <div className="mt-6 pt-6 border-t border-neutral-200">
-            <h3 className="font-semibold mb-3">Common Searches</h3>
-            <div className="flex flex-wrap gap-2">
-              {['slope', 'linear functions', 'proportional relationships', 'exponents', 'similar triangles'].map(term => (
-                <button
-                  key={term}
-                  onClick={() => {
-                    setSearchQuery(term);
-                    handleSearch();
-                  }}
-                  className="text-xs px-3 py-1 rounded-full bg-neutral-100 text-neutral-700 hover:bg-neutral-200 transition"
-                >
-                  {term}
-                </button>
-              ))}
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-medium mb-3 text-slate-600">Define, evaluate, and compare functions</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-medium mb-2 text-slate-700">8.F.A.1</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Understand that a function is a rule that assigns to each input exactly one output. 
+                    The graph of a function is the set of ordered pairs consisting of an input and the 
+                    corresponding output.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-medium mb-3 text-slate-600">Use functions to model relationships between quantities</h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-medium mb-2 text-slate-700">8.F.B.4</h4>
+                  <p className="text-slate-600 leading-relaxed">
+                    Construct a function to model a linear relationship between two quantities. Determine the 
+                    rate of change and initial value of the function from a description of a relationship or 
+                    from two (x, y) values, including reading these from a table or from a graph. Interpret 
+                    the rate of change and initial value of a linear function in terms of the situation it 
+                    models, and in terms of its graph or a table of values.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mathematical Practices */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-6 text-slate-700">Standards for Mathematical Practice</h2>
+          
+          <div className="space-y-3">
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP1: Make sense of problems and persevere in solving them</h4>
+              <p className="text-slate-600">Mathematically proficient students start by explaining to themselves the meaning of a problem and looking for entry points to its solution.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP2: Reason abstractly and quantitatively</h4>
+              <p className="text-slate-600">Mathematically proficient students make sense of quantities and their relationships in problem situations.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP3: Construct viable arguments and critique the reasoning of others</h4>
+              <p className="text-slate-600">Mathematically proficient students understand and use stated assumptions, definitions, and previously established results.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP4: Model with mathematics</h4>
+              <p className="text-slate-600">Mathematically proficient students can apply the mathematics they know to solve problems arising in everyday life.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP5: Use appropriate tools strategically</h4>
+              <p className="text-slate-600">Mathematically proficient students consider the available tools when solving a mathematical problem.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP6: Attend to precision</h4>
+              <p className="text-slate-600">Mathematically proficient students try to communicate precisely to others.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP7: Look for and make use of structure</h4>
+              <p className="text-slate-600">Mathematically proficient students look closely to discern a pattern or structure.</p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-medium text-slate-700">MP8: Look for and express regularity in repeated reasoning</h4>
+              <p className="text-slate-600">Mathematically proficient students notice if calculations are repeated, and look both for general methods and for shortcuts.</p>
             </div>
           </div>
         </div>
@@ -4731,7 +5039,7 @@ function LessonModule({ title, children, className = "" }: {
 }) {
   return (
     <div className={`bg-white rounded-2xl border shadow-sm p-6 mb-6 ${className}`}>
-      <h3 className="text-xl font-semibold mb-4 text-gray-900">{title}</h3>
+      <h3 className="text-xl font-semibold mb-4 text-gray-700">{title}</h3>
       {children}
     </div>
   );
@@ -4837,10 +5145,25 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
   if (!contentVisible) {
     return (
       <div className="h-full flex items-center justify-center">
-        <div className="text-center">
+        <div className="text-center max-w-md">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-600 mx-auto mb-4"></div>
-          <p className="text-slate-600 text-lg font-medium">Generating lesson materials...</p>
-          <p className="text-slate-500 text-sm mt-2">Creating comprehensive content for your students</p>
+          <p className="text-slate-600 text-lg font-medium mb-2">AI is generating lesson content...</p>
+          <div className="bg-slate-100 rounded-lg p-4 text-left">
+            <div className="text-xs text-slate-500 mb-2">Current Phase:</div>
+            <div className="text-sm text-slate-700 font-medium mb-3">Making Changes</div>
+            <div className="text-xs text-slate-500 leading-relaxed mb-3">
+              Building lesson structure with introduction using pattern discovery • Adding visual fraction bar models • 
+              Creating graduated practice problems with appropriate scaffolding
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                <div className="w-2 h-2 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+              </div>
+              <span className="text-xs text-slate-500">Streaming content to lesson interface...</span>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -4851,7 +5174,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
         
         {/* Document Header */}
         <div className="border-b border-slate-200 pb-4">
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
+          <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
           <p className="text-slate-600">Linear Functions in Algebra</p>
           <div className="text-sm text-slate-500 mt-2">
             Generated for Grade 8 Mathematics
@@ -4865,15 +5188,15 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-semibold text-slate-800">Introduction</h2>
+            <h2 className="text-xl font-semibold text-slate-700">Introduction</h2>
             <div className="flex items-start gap-2">
               {onEditWithAI && (
                 <button
                   onClick={() => onEditWithAI('introduction', 'Introduction')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'introduction'
-                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
+                      ? 'bg-slate-300 text-slate-700 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-700 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'introduction' ? 'Targeted' : 'Refine with AI'}
@@ -4899,15 +5222,15 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-semibold text-slate-800">Visual Representation</h2>
+            <h2 className="text-xl font-semibold text-slate-700">Visual Representation</h2>
             <div className="flex items-start gap-2">
               {onEditWithAI && (
                 <button
                   onClick={() => onEditWithAI('visual-representation', 'Visual Representation')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'visual-representation'
-                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
+                      ? 'bg-slate-300 text-slate-700 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-700 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'visual-representation' ? 'Targeted' : 'Refine with AI'}
@@ -4954,15 +5277,15 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-semibold text-slate-800">Formula Components</h2>
+            <h2 className="text-xl font-semibold text-slate-700">Formula Components</h2>
             <div className="flex items-start gap-2">
               {onEditWithAI && (
                 <button
                   onClick={() => onEditWithAI('formula-components', 'Formula Components')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'formula-components'
-                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
+                      ? 'bg-slate-300 text-slate-700 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-700 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'formula-components' ? 'Targeted' : 'Refine with AI'}
@@ -4972,21 +5295,21 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
           </div>
           <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
             <div className="text-center mb-6">
-              <span className="font-mono text-3xl text-slate-800">y = mx + b</span>
+              <span className="font-mono text-3xl text-slate-700">y = mx + b</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h4 className="font-semibold text-slate-800 mb-2">Variables</h4>
+                <h4 className="font-semibold text-slate-700 mb-2">Variables</h4>
                 <ul className="space-y-1 text-slate-600">
-                  <li><span className="font-mono font-bold">x</span> = input value (independent variable)</li>
-                  <li><span className="font-mono font-bold">y</span> = output value (dependent variable)</li>
+                  <li><span className="font-mono font-semibold">x</span> = input value (independent variable)</li>
+                  <li><span className="font-mono font-semibold">y</span> = output value (dependent variable)</li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-slate-800 mb-2">Constants</h4>
+                <h4 className="font-semibold text-slate-700 mb-2">Constants</h4>
                 <ul className="space-y-1 text-slate-600">
-                  <li><span className="font-mono font-bold">m</span> = slope (rate of change)</li>
-                  <li><span className="font-mono font-bold">b</span> = y-intercept (starting value)</li>
+                  <li><span className="font-mono font-semibold">m</span> = slope (rate of change)</li>
+                  <li><span className="font-mono font-semibold">b</span> = y-intercept (starting value)</li>
                 </ul>
               </div>
             </div>
@@ -5000,15 +5323,15 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-semibold text-slate-800">Real-World Application</h2>
+            <h2 className="text-xl font-semibold text-slate-700">Real-World Application</h2>
             <div className="flex items-start gap-2">
               {onEditWithAI && (
                 <button
                   onClick={() => onEditWithAI('real-world-application', 'Real-World Application')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'real-world-application'
-                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
+                      ? 'bg-slate-300 text-slate-700 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-700 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'real-world-application' ? 'Targeted' : 'Refine with AI'}
@@ -5017,7 +5340,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             </div>
           </div>
           <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
-            <h3 className="font-semibold text-slate-800 mb-3">
+            <h3 className="font-semibold text-slate-700 mb-3">
               Example: Cell Phone Plan
             </h3>
             <p className="text-slate-600 mb-4">
@@ -5027,7 +5350,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             <div className="space-y-2 text-slate-600">
               <p><strong>Monthly fee:</strong> $25 (this is our y-intercept, b = 25)</p>
               <p><strong>Cost per text:</strong> $0.10 (this is our slope, m = 0.10)</p>
-              <p><strong>Equation:</strong> <span className="font-mono font-bold">y = 0.10x + 25</span></p>
+              <p><strong>Equation:</strong> <span className="font-mono font-semibold">y = 0.10x + 25</span></p>
             </div>
           </div>
         </section>
@@ -5039,15 +5362,15 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             : ''
         }`}>
           <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-semibold text-slate-800">Personalized Assessment</h2>
+            <h2 className="text-xl font-semibold text-slate-700">Personalized Assessment</h2>
             <div className="flex items-start gap-2">
               {onEditWithAI && (
                 <button
                   onClick={() => onEditWithAI('assessment', 'Personalized Assessment')}
                   className={`transition-all duration-200 px-3 py-1.5 text-xs rounded-md font-medium flex-shrink-0 flex items-center gap-1 ${
                     activeSection === 'assessment'
-                      ? 'bg-slate-300 text-slate-900 border border-slate-300'
-                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-800 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
+                      ? 'bg-slate-300 text-slate-700 border border-slate-300'
+                      : 'opacity-60 group-hover:opacity-100 bg-slate-200 text-slate-700 hover:bg-slate-300 border border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   {activeSection === 'assessment' ? 'Targeted' : 'Refine with AI'}
@@ -5063,7 +5386,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             <div className="space-y-6">
               {/* Question 1 */}
               <div className="bg-white border border-slate-200 rounded-xl p-4">
-                <p className="font-medium text-slate-800 mb-3">1. What is the slope in the equation y = -3x + 7?</p>
+                <p className="font-medium text-slate-700 mb-3">1. What is the slope in the equation y = -3x + 7?</p>
                 <div className="space-y-2">
                   <label className="flex items-center space-x-2 cursor-pointer">
                     <input type="radio" name="q1" className="text-slate-600" />
@@ -5082,7 +5405,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
 
               {/* Question 2 */}
               <div className="bg-white border border-slate-200 rounded-xl p-4">
-                <p className="font-medium text-slate-800 mb-3">2. A gym membership costs $40 to join plus $15 per month. Write the equation for total cost (y) after x months:</p>
+                <p className="font-medium text-slate-700 mb-3">2. A gym membership costs $40 to join plus $15 per month. Write the equation for total cost (y) after x months:</p>
                 <input 
                   type="text" 
                   placeholder="y = "
@@ -5092,7 +5415,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
 
               {/* Question 3 */}
               <div className="bg-white border border-slate-200 rounded-xl p-4">
-                <p className="font-medium text-slate-800 mb-3">3. In the equation y = 4x + 12, what does the number 12 represent in a real-world context?</p>
+                <p className="font-medium text-slate-700 mb-3">3. In the equation y = 4x + 12, what does the number 12 represent in a real-world context?</p>
                 <textarea 
                   placeholder="Explain your reasoning..."
                   className="w-full p-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 h-20 resize-none"
@@ -5101,7 +5424,7 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             </div>
 
             <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-200">
-              <button className="text-slate-600 hover:text-slate-800 text-sm">
+              <button className="text-slate-600 hover:text-slate-700 text-sm">
                 Need help? View hints
               </button>
               <button className="bg-slate-700 text-white px-6 py-2 rounded-lg hover:bg-slate-600">
@@ -5124,7 +5447,7 @@ function SlidesContent() {
         
     {/* Slides Header */}
     <div className="border-b border-slate-200 pb-4">
-      <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
+      <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
       <p className="text-slate-600">Interactive Slide Presentation • 12 slides</p>
       <div className="flex gap-2 mt-2">
         <span className="inline-flex items-center px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded-md">8.F.A.3</span>
@@ -5140,7 +5463,7 @@ function SlidesContent() {
           </button>
           <div className="flex items-center gap-2">
             <span className="text-slate-600">Slide</span>
-            <select className="bg-white border border-slate-200 rounded px-2 py-1 text-slate-800">
+            <select className="bg-white border border-slate-200 rounded px-2 py-1 text-slate-700">
               <option>1 - Title Slide</option>
               <option>2 - Learning Objectives</option>
               <option>3 - What is Slope?</option>
@@ -5164,7 +5487,7 @@ function SlidesContent() {
         {/* Current Slide Display */}
         <div className="bg-white border-2 border-slate-200 rounded-2xl p-8 aspect-video">
           <div className="h-full flex flex-col justify-center">
-            <h2 className="text-4xl font-bold text-slate-800 mb-6 text-center">
+            <h2 className="text-4xl font-semibold text-slate-700 mb-6 text-center">
               Understanding Slope-Intercept Form
             </h2>
             <div className="text-center text-slate-600 space-y-4">
@@ -5179,7 +5502,7 @@ function SlidesContent() {
 
         {/* Slide Notes */}
         <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
-          <h3 className="font-semibold text-slate-800 mb-3">Speaker Notes</h3>
+          <h3 className="font-semibold text-slate-700 mb-3">Speaker Notes</h3>
           <p className="text-slate-600 text-sm leading-relaxed">
             Welcome students to today's lesson on slope-intercept form. This is a foundational concept that will help them 
             understand linear relationships in both mathematical and real-world contexts. Begin by asking students what they 
@@ -5200,7 +5523,7 @@ function VideoContent() {
         
         {/* Video Header */}
         <div className="border-b border-slate-200 pb-4">
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
+          <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
           <p className="text-slate-600">Educational Video • HD Quality</p>
         </div>
 
@@ -5253,10 +5576,10 @@ function VideoContent() {
 
         {/* Video Chapters */}
         <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
-          <h3 className="font-semibold text-slate-800 mb-4">Video Chapters</h3>
+          <h3 className="font-semibold text-slate-700 mb-4">Video Chapters</h3>
           <div className="space-y-2">
                         <div className="p-2 bg-white rounded-lg border border-slate-200">
-                          <span className="text-slate-800 font-medium">1. Introduction to Linear Functions</span>
+                          <span className="text-slate-700 font-medium">1. Introduction to Linear Functions</span>
                         </div>
                         <div className="p-2 hover:bg-white rounded-lg cursor-pointer">
                           <span className="text-slate-600">2. Understanding Slope</span>
@@ -5286,7 +5609,7 @@ function AudioContent() {
         
         {/* Audio Header */}
         <div className="border-b border-slate-200 pb-4">
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Understanding Slope-Intercept Form</h1>
+          <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
           <p className="text-slate-600">Audio Lesson • Podcast Style</p>
         </div>
 
@@ -5298,7 +5621,7 @@ function AudioContent() {
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-slate-800 mb-2">AI-Generated Audio Lesson</h3>
+            <h3 className="text-xl font-semibold text-slate-700 mb-2">AI-Generated Audio Lesson</h3>
             <p className="text-slate-600">Interactive dialogue between teacher and students</p>
           </div>
 
@@ -5335,7 +5658,7 @@ function AudioContent() {
 
         {/* Audio Transcript */}
         <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
-          <h3 className="font-semibold text-slate-800 mb-4">Live Transcript</h3>
+          <h3 className="font-semibold text-slate-700 mb-4">Live Transcript</h3>
           <div className="bg-white rounded-lg p-4 max-h-64 overflow-y-auto">
             <div className="space-y-3 text-sm">
               <div className="flex gap-3">
@@ -5365,7 +5688,7 @@ function AudioContent() {
         {/* Audio Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
-            <h4 className="font-semibold text-slate-800 mb-2">Playback Speed</h4>
+            <h4 className="font-semibold text-slate-700 mb-2">Playback Speed</h4>
             <select className="bg-white border border-slate-200 rounded px-3 py-1">
               <option>0.75x</option>
               <option selected>1x</option>
@@ -5374,13 +5697,13 @@ function AudioContent() {
             </select>
           </div>
           <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
-            <h4 className="font-semibold text-slate-800 mb-2">Captions</h4>
+            <h4 className="font-semibold text-slate-700 mb-2">Captions</h4>
             <button className="bg-slate-700 text-white px-4 py-1 rounded">
               On
             </button>
           </div>
           <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 text-center">
-            <h4 className="font-semibold text-slate-800 mb-2">Download</h4>
+            <h4 className="font-semibold text-slate-700 mb-2">Download</h4>
             <button className="bg-slate-700 text-white px-4 py-1 rounded">
               MP3
             </button>

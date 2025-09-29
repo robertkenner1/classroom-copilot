@@ -50,7 +50,7 @@ Ed emphasized that if standards are "up to date and clear enough, that would be 
 ### **3. Personalization Through Context**
 Two key data points emerged as essential for personalization:
 - **Mastery Band Levels**: Inclusive language (e.g., "Band 3") shared only with parents unless required by state
-- **Learning Style Preferences**: Teacher-entered data about how each student learns best
+- **Learning Preferences**: Teacher-entered data about how each student learns best
 
 ### **4. Teacher Agency Preserved**
 Critical insight: **AI creates content, but teachers control everything else.** The AI never makes lessons "live"—teachers must review and approve before students see anything.
@@ -75,7 +75,7 @@ Teachers maintain complete control over:
 ### **Student Context Integration**
 The system uses two key pieces of student data:
 - **Mastery Band Level**: Inferred academic readiness (inclusive, privacy-conscious language)
-- **Learning Style Preference**: How each student best processes information
+- **Learning Preference**: How each student best processes information
 
 ---
 
@@ -153,7 +153,7 @@ Teachers are already using AI tools. Success comes from enhancing these workflow
 AI should amplify teacher expertise, not replace teacher judgment. The human remains in control of all student-facing decisions.
 
 ### **4. Personalization Through Context**
-Simple data points (mastery level, learning style) can drive powerful personalization without overwhelming complexity.
+Simple data points (mastery level, learning preferences) can drive powerful personalization without overwhelming complexity.
 
 ### **5. Standards as Foundation**
 Curriculum standards provide the structural foundation that makes AI-generated content educationally sound and administratively compliant.

@@ -32,7 +32,7 @@ Every interface decision prioritizes the teacher-student relationship, ensuring 
 
 #### Conversational Interface Triggers
 - [ ] **Content Creation**: "Create a lesson about..." with automatic modality selection
-- [ ] **Learning Style Adaptation**: "Make this work for visual learners" or "Create an audio version"
+- [ ] **Learning Preference Adaptation**: "Make this work for visual learners" or "Create an audio version"
 - [ ] **Content Refinement**: "Make this more engaging for kinesthetic learners..."
 - [ ] **Problem Solving**: "How do I explain this concept to students who learn best through..."
 - [ ] **Multi-Modal Exploration**: "Show me different ways to present this concept"
@@ -91,13 +91,132 @@ Every interface decision prioritizes the teacher-student relationship, ensuring 
 
 ### Workflow Integration Examples
 
-#### Lesson Creation Workflow
+#### Lesson Creation Workflow (Enhanced with Turn System)
 1. **Conversational Start**: "Create a lesson on quadratic equations for struggling students"
-2. **AI Multi-Modal Generation**: Content created in multiple formats (visual diagrams, step-by-step text, interactive examples) with reasoning about format choices
-3. **Learning Style Optimization**: AI suggests optimal content mix based on student profiles
+2. **AI Turn Response**: 
+   - **Understanding Intent (🧠)**: Analyzes student needs, curriculum alignment, remedial approach requirements
+   - **Planning Changes (📋)**: Outlines multi-modal content strategy, scaffolding approach, assessment integration
+   - **Making Changes (🔧)**: Streams content creation progress with real-time updates
+   - **Applying Changes (✅)**: Delivers completed lesson with visual progress indicators
+3. **Learning Preference Optimization**: AI suggests optimal content mix based on student profiles with full reasoning transparency
 4. **Traditional Refinement**: Fine-tune using forms, dropdowns, and direct editing with modality toggles
-5. **Conversational Enhancement**: "Add more visual examples for Emma" or "Create an audio explanation for Marcus"
+5. **Conversational Enhancement**: "Add more visual examples for Emma" (triggers new turn cycle with section-specific reasoning)
 6. **Traditional Finalization**: Final formatting, scheduling, and distribution with per-student content variations
+
+#### Turn System Integration Patterns
+
+**Conversational Interface Enhancement**
+- **Structured AI Responses**: Every AI interaction follows the 4-phase turn structure
+- **Reasoning Transparency**: Teachers see full AI decision-making process
+- **Progress Streaming**: Real-time feedback during content generation
+- **Context Preservation**: Turn history maintained across interface switches
+
+**Traditional Interface Integration**
+- **AI-Assisted Actions**: Traditional buttons trigger conversational AI with structured responses
+- **Section-Specific Refinement**: Click "Refine with AI" on any content section to start targeted turn
+- **Visual Progress Integration**: Turn system progress indicators embedded in traditional UI
+- **Seamless Context Switching**: Move between chat and traditional editing without losing turn context
+
+**Hybrid Workflow Examples**
+- **Agent-Generated Lessons**: AI suggestions include pre-loaded turn context showing reasoning
+- **Section Revision**: Traditional content selection + conversational refinement with full turn cycle
+- **Streaming Content Updates**: Traditional lesson interface updates in real-time during AI turn phases
+- **Teacher Override**: Full control to interrupt, modify, or restart any turn at any phase
+
+#### Lesson-Isolated Chat Sessions (1-to-1 Design Decision)
+
+**Design Philosophy: Focused Guidance Over Multi-Tasking**
+
+Each lesson maintains its own isolated chat session, intentionally preventing cross-lesson memory sharing or global AI context. This design decision prioritizes teacher focus and cognitive clarity over system efficiency.
+
+**Rationale for Isolation:**
+- **Cognitive Load Management**: Teachers need focused guidance on one lesson at a time rather than juggling multiple concurrent AI conversations
+- **Clear Context Boundaries**: Each lesson's AI interactions remain contextually relevant to that specific content and student needs
+- **Intentional Workflow**: Prevents teachers from becoming overwhelmed by managing multiple AI threads simultaneously
+- **Educational Focus**: Maintains attention on individual lesson quality rather than system-wide optimization
+
+**Implementation Patterns:**
+- **Independent Chat Histories**: Each lesson stores its own complete conversation thread with AI
+- **Contextual AI Responses**: AI reasoning and suggestions are specific to the current lesson's content and assigned students
+- **Session Isolation**: No shared memory between lessons, requiring explicit context in each conversation
+- **Focused Interactions**: Teachers engage with AI on one lesson at a time, completing refinements before moving to next lesson
+
+**Lesson Type-Specific Chat Patterns:**
+
+**My Lessons (Teacher-Initiated):**
+- Full conversation history showing teacher-AI collaboration
+- Multiple turns with refinements and iterations
+- Complete reasoning transparency for all AI suggestions
+
+**AI Suggestions (Autonomous Agent-Generated):**
+- **Teaching Agent Directives**: Autonomous commands based on performance data analysis
+- **AI Compliance Responses**: Full 4-phase reasoning showing execution of agent directives
+- **Proactive Intervention**: Demonstrates autonomous educational intelligence
+- **Seamless Teacher Takeover**: Ready for immediate teacher customization
+
+**Enrichment Library (Teacher-Enhanced):**
+- Teacher-revised lessons with enhancement conversation history
+- Shows adaptation process for advanced learners
+- Demonstrates teacher agency in content development
+
+**Benefits for Teachers:**
+- **Reduced Cognitive Overhead**: No need to track multiple AI conversations or contexts
+- **Clear Mental Models**: Each lesson interaction is self-contained and easier to understand
+- **Focused Iteration**: Complete lesson refinement cycles without distraction from other content
+
+#### Autonomous Teaching Agent Integration
+
+**Proactive Educational Intelligence Within Conversational Framework**
+
+The Teaching Agent operates as an autonomous educational assistant that monitors student performance, analyzes curriculum needs, and proactively creates targeted interventions while maintaining the conversational interface paradigm.
+
+**Agent-Conversational Interface Integration:**
+
+**1. Autonomous Monitoring Layer**
+- Continuous performance data analysis across all student interactions
+- Curriculum pacing intelligence based on standards progression
+- Automatic identification of learning gaps and misconceptions
+- Proactive intervention triggers based on assessment patterns
+
+**2. Directive Communication Pattern**
+- Agent issues autonomous commands rather than seeking permission
+- Clear data-driven rationale provided for all autonomous actions
+- Immediate intervention capabilities without teacher approval requirements
+- Professional, confident directive language that demonstrates educational expertise
+
+**3. AI Compliance and Transparency Framework**
+- AI system executes agent directives with complete reasoning transparency
+- Full 4-phase turn system maintained for all agent-initiated content
+- Quality assurance and pedagogical validation built into execution
+- Seamless handoff to teacher control for customization and deployment
+
+**Example Agent-AI Integration Flow:**
+
+```
+Teaching Agent (Autonomous Directive):
+"Assessment data reveals confusion between unit rate and slope concepts among 
+your students. This misconception requires immediate intervention. I'm creating 
+a focused review lesson with visual comparisons to clarify these related but 
+distinct concepts."
+
+AI Assistant (Compliance Response):
+"I've successfully created the 'Unit Rate as Slope Review' lesson as directed 
+by the Teaching Agent. The lesson is now ready for your review and can be 
+deployed to students immediately."
+
+[Expandable 4-Phase Reasoning]:
+🧠 Understanding Intent: Assessment data shows students confusing concepts...
+📋 Planning Changes: Created review lesson with explicit connections...
+🔧 Making Changes: Generated side-by-side comparisons and scenarios...
+✅ Applying Changes: Comprehensive lesson ready for deployment...
+```
+
+**Strategic Benefits:**
+- **Proactive Support**: Issues identified and addressed before they become critical
+- **Autonomous Efficiency**: Intelligent interventions without constant teacher oversight
+- **Maintained Teacher Agency**: Full transparency and control over agent-generated content
+- **Seamless Integration**: Agent capabilities enhance rather than disrupt existing workflows
+- **Predictable Behavior**: AI responses are always relevant to the current lesson context
 
 #### Student Management Workflow
 1. **Traditional Overview**: Dashboard showing class performance data

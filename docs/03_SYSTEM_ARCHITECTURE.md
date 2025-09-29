@@ -76,16 +76,157 @@ src/components/
 ### Design System Strategy
 
 #### Design Tokens
-- [ ] **Color System**: Semantic color tokens for teacher-focused UI
-- [ ] **Typography Scale**: Readable hierarchy for content-heavy interfaces
-- [ ] **Spacing System**: Consistent spatial relationships
-- [ ] **Component Variants**: Contextual adaptations (conversational vs. traditional)
+- [x] **Color System**: Semantic color tokens for teacher-focused UI
+- [x] **Typography Scale**: Readable hierarchy for content-heavy interfaces
+- [x] **Spacing System**: Consistent spatial relationships
+- [x] **Component Variants**: Contextual adaptations (conversational vs. traditional)
+
+#### Content-First UI Philosophy
+
+**Text-Heavy Interface Strategy**
+
+Following the pattern established by leading AI companies, this interface prioritizes content density and functional clarity over heavy branding elements. The design philosophy centers on delivering value as quickly and coherently as possible.
+
+**Design Principles:**
+- **Content Hierarchy**: Information architecture that makes educational content the primary focus
+- **Minimal Branding**: Reduced visual noise to maintain focus on lesson materials and AI interactions
+- **Functional Clarity**: Interface elements serve content delivery rather than aesthetic purposes
+- **Rapid Value Delivery**: Design optimized for immediate utility and teacher productivity
+
+**Tonal Color System:**
+- **Primary Palette**: Slate color scale chosen for modern, professional appearance
+- **AI-Assisted Selection**: Leveraged AI recommendations for contemporary color choices
+- **Semantic Application**: Colors serve functional purposes (states, hierarchy, feedback) rather than branding
+- **Accessibility Focus**: High contrast ratios and readable text across all interface elements
+
+**Content-Centric Layout:**
+- **Information Density**: Maximizes useful content per screen real estate
+- **Scannable Hierarchy**: Clear visual organization that supports teacher workflow patterns
+- **Functional Typography**: Text sizing and weight variations that enhance readability and comprehension
+- **Purposeful Whitespace**: Strategic spacing that groups related content without unnecessary decoration
 
 #### AI-Specific Design Patterns
 - [ ] **Loading States**: Progressive disclosure during AI processing
 - [ ] **Uncertainty Indicators**: Confidence levels and reasoning display
 - [ ] **Feedback Mechanisms**: User rating and correction interfaces
 - [ ] **Context Switching**: Seamless transitions between interface modes
+- [x] **Turn-Based Interaction System**: Structured 4-phase AI response framework
+
+#### Turn System Architecture
+
+**4-Phase AI Interaction Framework**
+
+Each AI interaction follows a structured turn-based approach that provides transparency and builds teacher trust:
+
+**Phase 1: Understanding Intent (🧠)**
+- AI analyzes teacher input and contextual factors
+- Considers student data, curriculum alignment, and learning objectives
+- Identifies specific requirements and constraints
+- Documents reasoning for transparency
+
+**Phase 2: Planning Changes (📋)**
+- AI outlines specific steps and strategic approach
+- Breaks down complex tasks into actionable components
+- Shows pedagogical reasoning and content strategy
+- Provides preview of intended modifications
+
+**Phase 3: Making Changes (🔧)**
+- AI describes active content generation or modification
+- Shows real-time progress of content creation
+- Maintains transparency during processing
+- Streams updates to maintain engagement
+
+**Phase 4: Applying Changes (✅)**
+- AI delivers completed content to lesson interface
+- Provides visual progress indicators during streaming
+- Confirms completion and readiness for teacher review
+- Enables immediate teacher iteration and refinement
+
+**Implementation Components:**
+- **Structured Response Objects**: Standardized format for all AI interactions
+- **Streaming Progress Indicators**: Visual feedback during content generation
+- **Agent Context System**: Pre-loaded reasoning for AI-suggested lessons
+- **Phase-Specific UI States**: Dynamic loading states that reflect current AI processing phase
+- **Conversation Continuity**: Maintains context across lesson creation and revision cycles
+- **Lesson-Isolated Sessions**: Each lesson maintains independent chat history for focused interactions
+
+#### Lesson Isolation Architecture
+
+**1-to-1 Chat Session Design**
+
+Each lesson operates as an independent AI interaction context, preventing cross-lesson memory sharing and ensuring focused teacher guidance.
+
+**Technical Implementation:**
+- **Independent State Management**: Each lesson stores its own `chatHistory` array in the lesson data structure
+- **Contextual AI Prompting**: AI responses include only the current lesson's context and student assignments
+- **Session Boundaries**: No shared global AI memory or cross-lesson context bleeding
+- **Focused UI States**: Lesson builder interface shows only relevant chat history for the current lesson
+
+**Data Structure Pattern:**
+```typescript
+interface Lesson {
+  id: string;
+  title: string;
+  // ... other lesson properties
+  chatHistory?: Array<{
+    id: string;
+    type: 'user' | 'ai';
+    content: string;
+    timestamp: Date;
+    reasoning?: string;
+    summary?: string;
+    // ... turn system properties
+  }>;
+  agentContext?: {
+    reasoning: string;
+    planning: string;
+    changes: string;
+    agentPrompt: string;
+  };
+}
+```
+
+**Lesson Type-Specific Chat Patterns:**
+
+**My Lessons (Teacher-Created):**
+- Full conversation history showing teacher-AI collaboration
+- Multiple turns with refinements and iterations
+- Reasoning transparency for all AI suggestions and modifications
+
+**AI Suggestions (Agent-Generated):**
+- Autonomous Teaching Agent directives based on performance data
+- AI compliance responses with 4-phase reasoning structure
+- Demonstrates proactive intervention and autonomous decision-making
+- Ready for teacher takeover and customization
+
+**Enrichment Library (Teacher-Revised):**
+- Teacher-initiated conversation for advanced content
+- Shows revision history and enhancement requests
+- Demonstrates teacher agency in content development
+
+#### Autonomous Teaching Agent Architecture
+
+**Proactive Educational Intelligence**
+
+The Teaching Agent operates as an autonomous educational assistant that monitors student performance, analyzes curriculum pacing, and proactively creates targeted interventions without requiring teacher approval.
+
+**Agent Capabilities:**
+- **Performance Monitoring**: Automatically detects student struggles from assessment data
+- **Curriculum Intelligence**: Understands optimal timing and sequencing for concept introduction
+- **Immediate Intervention**: Takes action without waiting for teacher approval
+- **Data-Driven Decisions**: Uses specific metrics to justify autonomous actions
+- **Proactive Content Creation**: Generates lessons before problems become critical
+
+**Agent-AI Interaction Pattern:**
+1. **Agent Directive**: Teaching Agent issues autonomous commands based on data analysis
+2. **AI Compliance**: AI system executes directives with full 4-phase reasoning transparency
+3. **Quality Assurance**: AI ensures pedagogical soundness while following agent instructions
+4. **Teacher Handoff**: Completed lessons ready for teacher review and deployment
+
+**Example Agent Behaviors:**
+- "Band 2 students are struggling with negative exponents. Performance data shows 4 out of 6 students scored below 70%. I'm creating a targeted practice lesson immediately."
+- "Curriculum pacing indicates this is the optimal time to introduce function concepts. I'm generating an introductory functions lesson."
+- "Assessment data reveals confusion between unit rate and slope concepts. This requires immediate intervention. I'm creating a focused review lesson."
 
 ### Engineering Handoff Framework
 
@@ -104,7 +245,7 @@ src/components/
 ### Scalability Architecture
 
 #### Adaptive Multi-Modal Content Strategy
-- [ ] **Learning Style Intelligence**: AI determines optimal content format based on individual student consumption patterns
+- [ ] **Learning Preference Intelligence**: AI determines optimal content format based on individual student consumption patterns
 - [ ] **Content Type Abstraction**: Unified interface for text, slides, video, audio, interactive elements
 - [ ] **Adaptive Generation Pipeline**: Modular approach that creates content in multiple formats simultaneously
 - [ ] **Preference Learning System**: Tracks student engagement with different modalities to improve future content generation
