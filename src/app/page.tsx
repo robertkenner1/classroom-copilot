@@ -5133,12 +5133,50 @@ function Field({
   );
 }
 
-function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, contentVisible = true }: { 
+function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, contentVisible = true, lesson }: { 
   onEditWithAI?: (sectionId: string, sectionTitle: string) => void;
   activeSection?: string | null;
   introContent?: {paragraph1: string, paragraph2: string};
   contentVisible?: boolean;
+  lesson?: Lesson;
 }) {
+  
+  const getIntroContent = (title: string) => {
+    if (title.includes('Integer Exponents')) {
+      return {
+        paragraph1: "Welcome to our exploration of integer exponents and their properties! Today we'll discover how exponents work with both positive and negative integers, and learn the fundamental rules that govern these mathematical operations.",
+        paragraph2: "Think of exponents as a shorthand for repeated multiplication. When we write 2³, we mean 2 × 2 × 2. But what happens when the exponent is negative? We'll uncover this mystery and see how these concepts apply to scientific notation and real-world calculations."
+      };
+    }
+    if (title.includes('Graphing Proportional')) {
+      return {
+        paragraph1: "Welcome to our exploration of graphing proportional relationships! Today we'll learn how to identify, create, and interpret graphs that show proportional relationships between two quantities.",
+        paragraph2: "Imagine you're tracking the relationship between hours worked and money earned, or distance traveled and time. These proportional relationships create straight lines that pass through the origin, and we'll discover how to recognize and work with these important mathematical patterns."
+      };
+    }
+    if (title.includes('Functions')) {
+      return {
+        paragraph1: "Welcome to the fascinating world of functions! Today we'll explore what functions are, how they work, and why they're one of the most important concepts in mathematics.",
+        paragraph2: "Think of a function as a mathematical machine - you put in an input, it follows a specific rule, and gives you exactly one output. Like a vending machine that always gives you the same snack for the same button, functions create predictable relationships between numbers."
+      };
+    }
+    if (title.includes('Quadratic')) {
+      return {
+        paragraph1: "Welcome to our exploration of quadratic functions! Today we'll discover these fascinating U-shaped curves called parabolas and learn how they model many real-world situations from physics to economics.",
+        paragraph2: "Think about the path of a basketball shot or the shape of a satellite dish - these are all examples of parabolas in action. We'll learn how to understand, graph, and work with these important mathematical relationships."
+      };
+    }
+    if (title.includes('Trigonometry')) {
+      return {
+        paragraph1: "Welcome to our introduction to trigonometry ratios! Today we'll explore sine, cosine, and tangent - three fundamental relationships that help us solve problems involving right triangles.",
+        paragraph2: "From architecture to navigation, trigonometry helps us find missing measurements in triangles. We'll start with the basics and see how these ratios unlock the ability to solve real-world problems involving angles and distances."
+      };
+    }
+    return {
+      paragraph1: "Welcome to our exploration of slope-intercept form! Today we'll discover how the equation y = mx + b helps us understand and graph linear relationships. Think of it as a mathematical recipe that tells us exactly how to draw a straight line on a coordinate plane.",
+      paragraph2: "We'll start by connecting this concept to something familiar - imagine you're designing a skateboard ramp. The steepness of your ramp (that's the slope!) and where it starts (the y-intercept) completely determine the shape of your ramp. By the end of this lesson, you'll be able to create and interpret these mathematical 'ramp recipes' with confidence."
+    };
+  };
   
   // Show loading screen when content is not visible
   if (!contentVisible) {
@@ -5204,13 +5242,10 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
             </div>
           </div>
           <p className="text-slate-600 leading-relaxed">
-            {introContent?.paragraph1 || `Linear functions are mathematical relationships that create straight lines when graphed. The slope-intercept form, 
-            written as y = mx + b, is one of the most useful ways to express these relationships because it immediately shows 
-            us two key pieces of information: how steep the line is (slope) and where it crosses the y-axis (y-intercept).`}
+            {introContent?.paragraph1 || getIntroContent(lesson?.title || "Understanding Slope-Intercept Form").paragraph1}
           </p>
           <p className="text-slate-600 leading-relaxed">
-            {introContent?.paragraph2 || `This form appears everywhere in real life, from calculating costs to predicting growth patterns. Understanding 
-            slope-intercept form gives you a powerful tool for modeling and solving practical problems.`}
+            {introContent?.paragraph2 || getIntroContent(lesson?.title || "Understanding Slope-Intercept Form").paragraph2}
           </p>
         </section>
 
@@ -5439,19 +5474,33 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
 }
 
 // -------------------- Slides Content --------------------
-function SlidesContent() {
+function SlidesContent({ lesson }: { lesson?: Lesson }) {
+  const getSlideCount = (title: string) => {
+    if (title.includes('Integer Exponents')) return 15;
+    if (title.includes('Graphing Proportional')) return 10;
+    if (title.includes('Slope')) return 12;
+    if (title.includes('Functions')) return 14;
+    if (title.includes('Quadratic')) return 18;
+    if (title.includes('Trigonometry')) return 16;
+    return 12;
+  };
+
+  const lessonTitle = lesson?.title || "Understanding Slope-Intercept Form";
+  const lessonStandards = lesson?.standards || ["8.F.A.3", "8.F.B.4", "8.EE.B.6"];
+  const slideCount = getSlideCount(lessonTitle);
+
   return (
     <div className="h-full">
       <div className="space-y-6">
         
     {/* Slides Header */}
     <div className="border-b border-slate-200 pb-4">
-      <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
-      <p className="text-slate-600">Interactive Slide Presentation • 12 slides</p>
+      <h1 className="text-2xl font-semibold text-slate-700 mb-2">{lessonTitle}</h1>
+      <p className="text-slate-600">Interactive Slide Presentation • {slideCount} slides</p>
       <div className="flex gap-2 mt-2">
-        <span className="inline-flex items-center px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded-md">8.F.A.3</span>
-        <span className="inline-flex items-center px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded-md">8.F.B.4</span>
-        <span className="inline-flex items-center px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded-md">8.EE.B.6</span>
+        {lessonStandards.map(standard => (
+          <span key={standard} className="inline-flex items-center px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded-md">{standard}</span>
+        ))}
       </div>
     </div>
 
@@ -5515,15 +5564,92 @@ function SlidesContent() {
 }
 
 // -------------------- Video Content --------------------
-function VideoContent() {
+function VideoContent({ lesson }: { lesson?: Lesson }) {
+  const getVideoDuration = (title: string) => {
+    if (title.includes('Integer Exponents')) return "18:45";
+    if (title.includes('Graphing Proportional')) return "12:30";
+    if (title.includes('Slope')) return "15:20";
+    if (title.includes('Functions')) return "16:15";
+    if (title.includes('Quadratic')) return "22:10";
+    if (title.includes('Trigonometry')) return "19:35";
+    return "15:20";
+  };
+
+  const getVideoChapters = (title: string) => {
+    if (title.includes('Integer Exponents')) {
+      return [
+        "1. Introduction to Exponents",
+        "2. Positive vs Negative Exponents", 
+        "3. Properties of Integer Exponents",
+        "4. Scientific Notation Applications",
+        "5. Practice Problems"
+      ];
+    }
+    if (title.includes('Graphing Proportional')) {
+      return [
+        "1. Understanding Proportional Relationships",
+        "2. Identifying Proportional Graphs",
+        "3. Finding the Constant of Proportionality", 
+        "4. Real-World Examples"
+      ];
+    }
+    if (title.includes('Slope')) {
+      return [
+        "1. Introduction to Linear Functions",
+        "2. Understanding Slope",
+        "3. Y-Intercept Explained", 
+        "4. Real-World Applications",
+        "5. Practice Problems"
+      ];
+    }
+    if (title.includes('Functions')) {
+      return [
+        "1. What is a Function?",
+        "2. Function Machines and Input-Output",
+        "3. Multiple Representations of Functions",
+        "4. Identifying Functions from Tables and Graphs",
+        "5. Function Notation"
+      ];
+    }
+    if (title.includes('Quadratic')) {
+      return [
+        "1. Introduction to Quadratic Functions",
+        "2. Parabolas and Their Properties",
+        "3. Vertex Form vs Standard Form",
+        "4. Real-World Applications",
+        "5. Graphing Techniques",
+        "6. Advanced Concepts"
+      ];
+    }
+    if (title.includes('Trigonometry')) {
+      return [
+        "1. Right Triangles Review",
+        "2. Introduction to Sine, Cosine, Tangent",
+        "3. Using Trigonometric Ratios",
+        "4. Real-World Applications",
+        "5. Practice Problems"
+      ];
+    }
+    return [
+      "1. Introduction to Linear Functions",
+      "2. Understanding Slope",
+      "3. Y-Intercept Explained", 
+      "4. Real-World Applications",
+      "5. Practice Problems"
+    ];
+  };
+
+  const lessonTitle = lesson?.title || "Understanding Slope-Intercept Form";
+  const videoDuration = getVideoDuration(lessonTitle);
+
   return (
     <div className="h-full">
       <div className="space-y-6">
         
         {/* Video Header */}
         <div className="border-b border-slate-200 pb-4">
-          <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
-          <p className="text-slate-600">Educational Video • HD Quality</p>
+          <h1 className="text-2xl font-semibold text-slate-700 mb-2">{lessonTitle}</h1>
+          <p className="text-slate-600">Educational Video • HD Quality • {videoDuration}</p>
         </div>
 
         {/* Video Player */}
@@ -5577,21 +5703,11 @@ function VideoContent() {
         <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-6">
           <h3 className="font-semibold text-slate-700 mb-4">Video Chapters</h3>
           <div className="space-y-2">
-                        <div className="p-2 bg-white rounded-lg border border-slate-200">
-                          <span className="text-slate-700 font-medium">1. Introduction to Linear Functions</span>
-                        </div>
-                        <div className="p-2 hover:bg-white rounded-lg cursor-pointer">
-                          <span className="text-slate-600">2. Understanding Slope</span>
-                        </div>
-                        <div className="p-2 hover:bg-white rounded-lg cursor-pointer">
-                          <span className="text-slate-600">3. Y-Intercept Explained</span>
-                        </div>
-                        <div className="p-2 hover:bg-white rounded-lg cursor-pointer">
-                          <span className="text-slate-600">4. Real-World Applications</span>
-                        </div>
-                        <div className="p-2 hover:bg-white rounded-lg cursor-pointer">
-                          <span className="text-slate-600">5. Practice Problems</span>
-                        </div>
+            {getVideoChapters(lessonTitle).map((chapter, index) => (
+              <div key={index} className={`p-2 ${index === 0 ? 'bg-white border border-slate-200' : 'hover:bg-white'} rounded-lg cursor-pointer`}>
+                <span className={`${index === 0 ? 'text-slate-700 font-medium' : 'text-slate-600'}`}>{chapter}</span>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -5601,15 +5717,28 @@ function VideoContent() {
 }
 
 // -------------------- Audio Content --------------------
-function AudioContent() {
+function AudioContent({ lesson }: { lesson?: Lesson }) {
+  const getAudioDuration = (title: string) => {
+    if (title.includes('Integer Exponents')) return "24:15";
+    if (title.includes('Graphing Proportional')) return "18:45";
+    if (title.includes('Slope')) return "21:30";
+    if (title.includes('Functions')) return "23:20";
+    if (title.includes('Quadratic')) return "28:50";
+    if (title.includes('Trigonometry')) return "26:10";
+    return "21:30";
+  };
+
+  const lessonTitle = lesson?.title || "Understanding Slope-Intercept Form";
+  const audioDuration = getAudioDuration(lessonTitle);
+
   return (
     <div className="h-full">
       <div className="space-y-6">
         
         {/* Audio Header */}
         <div className="border-b border-slate-200 pb-4">
-          <h1 className="text-2xl font-semibold text-slate-700 mb-2">Understanding Slope-Intercept Form</h1>
-          <p className="text-slate-600">Audio Lesson • Podcast Style</p>
+          <h1 className="text-2xl font-semibold text-slate-700 mb-2">{lessonTitle}</h1>
+          <p className="text-slate-600">Audio Lesson • Podcast Style • {audioDuration}</p>
         </div>
 
         {/* Audio Player */}
@@ -5746,20 +5875,20 @@ function TabContent({
 
   // Show immersive content for text modality
   if (modality === "text" && content && content !== "— Not generated yet —") {
-    return <ImmersiveTextContent onEditWithAI={onEditWithAI} activeSection={activeSection} introContent={introContent} contentVisible={contentVisible} />;
+    return <ImmersiveTextContent onEditWithAI={onEditWithAI} activeSection={activeSection} introContent={introContent} contentVisible={contentVisible} lesson={lesson} />;
   }
 
   // Show mock artifacts for other modalities
   if (modality === "slides" && hasContent) {
-    return <SlidesContent />;
+    return <SlidesContent lesson={lesson} />;
   }
   
   if (modality === "video" && hasContent) {
-    return <VideoContent />;
+    return <VideoContent lesson={lesson} />;
   }
   
   if (modality === "audio" && hasContent) {
-    return <AudioContent />;
+    return <AudioContent lesson={lesson} />;
   }
   
   // Show loading screen when content is being generated
