@@ -4566,6 +4566,7 @@ The changes are now live in your lesson. You can continue refining other section
               activeSection={activeSection}
               introContent={introContent}
               contentVisible={contentVisible}
+              lesson={currentLesson}
             />
             </div>
           </div>
@@ -5854,6 +5855,7 @@ function TabContent({
   activeSection,
   introContent,
   contentVisible = true,
+  lesson,
 }: {
   modality: ModalityKey;
   title: string;
@@ -5865,6 +5867,7 @@ function TabContent({
   activeSection?: string | null;
   introContent?: {paragraph1: string, paragraph2: string};
   contentVisible?: boolean;
+  lesson?: Lesson;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(content || "");
