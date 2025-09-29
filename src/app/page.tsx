@@ -1200,6 +1200,7 @@ export default function App() {
               prompt?: string; 
               selectedStudents?: string;
               specificStudents?: string[];
+              isGenerating?: boolean;
             } = {
               id: `lsn-${Math.floor(Math.random() * 9999)}`,
               title: extractTitleFromPrompt(data.prompt),
@@ -1212,7 +1213,9 @@ export default function App() {
               // Pass context to lesson builder
               prompt: data.prompt,
               selectedStudents: data.selectedStudents,
-              specificStudents: data.specificStudents
+              specificStudents: data.specificStudents,
+              // Mark as new lesson being generated
+              isGenerating: true
             };
             
             handleLessonGenerated(newLesson);
@@ -2020,7 +2023,7 @@ function SuggestionCard({
   const handleCardClick = () => {
     const agentChatHistory = agentContext ? [
       {
-        id: `agent-${Date.now()}`,
+        id: `agent-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         type: 'agent' as const,
         content: agentContext.agentPrompt,
         timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
@@ -2030,7 +2033,7 @@ function SuggestionCard({
         feedback: null
       },
       {
-        id: `ai-response-${Date.now()}`,
+        id: `ai-response-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
         type: 'ai' as const,
         content: `I've successfully created the "${title}" lesson as directed by the Teaching Agent. The lesson is now ready for your review and can be deployed to students immediately.`,
         timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 120000), // 2 minutes after agent
@@ -2042,7 +2045,7 @@ function SuggestionCard({
     ] : [];
 
     const newLesson: Lesson = {
-      id: `ai-${Date.now()}`,
+      id: `ai-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       title,
       subject: 'Mathematics',
       standards: [standard],
@@ -2643,7 +2646,8 @@ function UnifiedPromptComponent({
   onClearSection,
   onUndo,
   undoStack = [],
-  className = ''
+  className = '',
+  disableAutoGeneration = false
 }: {
   mode?: 'creation' | 'refinement';
   initialPrompt?: string;
@@ -2657,6 +2661,7 @@ function UnifiedPromptComponent({
   onUndo?: () => void;
   undoStack?: Array<{sectionId: string, previousContent: string}>;
   className?: string;
+  disableAutoGeneration?: boolean;
 }) {
   const [prompt, setPrompt] = useState(initialPrompt);
   const [selectedStudents, setSelectedStudents] = useState<string>(initialContext.selectedStudents || 'all');
@@ -2767,7 +2772,7 @@ function UnifiedPromptComponent({
 
   // Reasoning streaming effect (for refinement mode)
   useEffect(() => {
-    if (mode === 'refinement' && initialPrompt && reasoningState === 'none') {
+    if (mode === 'refinement' && initialPrompt && reasoningState === 'none' && !disableAutoGeneration) {
       setReasoningState('streaming');
       
       const reasoningSections = [
@@ -3236,7 +3241,10 @@ function UnifiedPromptComponent({
           )}
           
           {/* Regular Chat History */}
-          {chatHistory.length === 0 && !initialPrompt ? (
+          {disableAutoGeneration ? (
+            <div className="text-center text-gray-500 text-sm">
+            </div>
+          ) : chatHistory.length === 0 && !initialPrompt ? (
             <div className="text-center text-gray-500 text-sm">
               <p>Select "Improve with AI" on any section to start collaborating!</p>
             </div>
@@ -3980,7 +3988,8 @@ function LessonBuilder({
   const [chatHistory, setChatHistory] = useState<Array<{id: string, type: 'user' | 'ai', content: string, timestamp: Date, reasoning?: string, summary?: string, reasoningCollapsed?: boolean, feedback?: 'positive' | 'negative' | null, isStreaming?: boolean}>>(lesson.chatHistory || []);
   const [undoStack, setUndoStack] = useState<Array<{sectionId: string, previousContent: string}>>([]);
   const [toast, setToast] = useState<{message: string, type: 'success' | 'info'} | null>(null);
-  const [contentVisible, setContentVisible] = useState(!isPending); // Hide content for new lessons until AI summary is shown
+  const [contentVisible, setContentVisible] = useState(!(lesson as any).isGenerating); // Only hide content for NEW lesson generation
+  const [isInitialGenerating, setIsInitialGenerating] = useState((lesson as any).isGenerating); // Track initial generation phase
   const [introContent, setIntroContent] = useState({
     paragraph1: `Linear functions are mathematical relationships that create straight lines when graphed. The slope-intercept form, 
 written as y = mx + b, is one of the most useful ways to express these relationships because it immediately shows 
@@ -3996,18 +4005,21 @@ slope-intercept form gives you a powerful tool for modeling and solving practica
       handleGenerate();
     }
     
-    // For new lessons (isPending), simulate the initial generation chat turn
-    if (isPending && chatHistory.length === 0) {
+    // For new lessons (isGenerating), simulate the initial generation chat turn
+    if ((lesson as any).isGenerating && chatHistory.length === 0) {
       simulateInitialGeneration();
     }
-  }, [chatHistory.length, isPending]);
+  }, [chatHistory.length, (lesson as any).isGenerating]);
 
   const simulateInitialGeneration = async () => {
+    // Guard against multiple calls
+    if (chatHistory.length > 0) return;
+    
     // Add the initial user prompt
     const userPrompt = lesson.prompt || "Create lesson materials for all students focusing on 8.NS.A.1 with multiple modalities";
     
     const initialUserMessage = {
-      id: `msg-${Date.now()}`,
+      id: `initial-user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       type: 'user' as const,
       content: userPrompt,
       timestamp: new Date()
@@ -4015,44 +4027,59 @@ slope-intercept form gives you a powerful tool for modeling and solving practica
     
     setChatHistory([initialUserMessage]);
     
-    // Simulate AI processing with reasoning
+    // Immediately add AI message and start reasoning
+    const aiMessageId = `initial-ai-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    
+    setChatHistory(prev => [...prev, {
+      id: aiMessageId,
+      type: 'ai' as const,
+      content: '',
+      timestamp: new Date(),
+      reasoning: '',
+      reasoningCollapsed: false,
+      feedback: null,
+      isStreaming: true
+    }]);
+    
+    // Fast reasoning stream (2 seconds total)
+    const fullReasoning = "Understanding your request: I'm analyzing your lesson requirements to create comprehensive materials for slope-intercept form.\n\nProcessing with Classroom Co-Pilot: I've reviewed curriculum standards and applied Grade 8 guidelines with differentiation strategies.\n\nGenerating content: Creating visual representations, real-world applications, and interactive elements.";
+    
+    // Stream reasoning quickly
+    for (let i = 0; i <= fullReasoning.length; i++) {
+      setChatHistory(prev => prev.map(msg => 
+        msg.id === aiMessageId ? { ...msg, reasoning: fullReasoning.slice(0, i) } : msg
+      ));
+      await new Promise(resolve => setTimeout(resolve, 8)); // Fast typing
+    }
+    
+    // Wait 1 second, then collapse reasoning and show lesson
     setTimeout(() => {
-      const aiMessage = {
-        id: `msg-${Date.now() + 1}`,
-        type: 'ai' as const,
-        content: "I've created comprehensive lesson materials on slope-intercept form (y = mx + b) tailored for your students. The content includes an introduction with conceptual foundation and clear explanations, visual representation with interactive coordinate plane and examples, formula components with breakdown of variables and constants, and real-world application using cell phone plan modeling example.\n\nReady to refine? Select \"Refine with AI\" on any section to start iterating, or ask me specific questions about the lesson content.",
-        timestamp: new Date(),
-        reasoning: "You want comprehensive lesson materials for slope-intercept form that cater to different learning preferences and provide multiple modalities for engagement.\n\nI planned an introduction to build conceptual foundation with clear explanations, visual elements with interactive coordinate plane and multiple examples, formula breakdown with detailed explanation of variables and constants, real-world applications like cell phone plans, and multiple modalities including text, visual, interactive, and practical components.\n\nI created lesson structure with differentiated content for visual, kinesthetic, and analytical learners, building from concrete examples to abstract understanding, then generated comprehensive lesson with introduction, visual representations, formula breakdown, and real-world applications. Content is now streaming to the lesson interface.",
-        reasoningCollapsed: false, // Start with reasoning expanded
-        feedback: null,
-        isStreaming: true // Start as streaming
-      };
+      setChatHistory(prev => prev.map(msg => 
+        msg.id === aiMessageId ? { ...msg, reasoningCollapsed: true } : msg
+      ));
       
-      setChatHistory(prev => [...prev, aiMessage]);
+      // Show lesson content
+      setContentVisible(true);
       
-      // Simulate reasoning streaming and then collapse
+      // 1 second later, add summary
       setTimeout(() => {
+        const summaryContent = "I've created comprehensive lesson materials on slope-intercept form (y = mx + b) tailored for your students. Ready to refine? Select \"Refine with AI\" on any section to start iterating.";
+        
         setChatHistory(prev => prev.map(msg => 
-          msg.id === aiMessage.id 
-            ? { ...msg, isStreaming: false }
-            : msg
+          msg.id === aiMessageId ? { 
+            ...msg, 
+            content: summaryContent,
+            isStreaming: false 
+          } : msg
         ));
         
-        // Collapse reasoning after streaming is done
-        setTimeout(() => {
-          setChatHistory(prev => prev.map(msg => 
-            msg.id === aiMessage.id 
-              ? { ...msg, reasoningCollapsed: true }
-              : msg
-          ));
-          
-          // Show content after reasoning collapses
-          setTimeout(() => {
-            setContentVisible(true);
-          }, 300);
-        }, 1000); // Wait 1 second before collapsing
-      }, 2000); // Stream for 2 seconds
-    }, 3000); // 3 second delay for AI processing
+        // Clear flags
+        setIsInitialGenerating(false);
+        if ((lesson as any).isGenerating) {
+          onSave({...lesson, isGenerating: undefined} as Lesson);
+        }
+      }, 1000);
+    }, 1000);
   };
 
   async function handleGenerate() {
@@ -4562,7 +4589,7 @@ The changes are now live in your lesson. You can continue refining other section
 
   return (
     <TooltipProvider>
-      <div className={`${isModal ? 'h-full bg-slate-50 text-foreground flex' : 'min-h-screen bg-slate-50 text-foreground flex'}`}>
+      <div className={`${isModal ? 'h-full bg-slate-50 text-foreground grid grid-cols-[1fr_420px]' : 'min-h-screen bg-slate-50 text-foreground flex'}`}>
         {!isModal && (
           <LeftSidebar currentView="builder" onNavigate={(view) => {
             if (view === 'dashboard') {
@@ -4574,7 +4601,7 @@ The changes are now live in your lesson. You can continue refining other section
         )}
         
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col">
+        <div className={`${isModal ? 'flex flex-col overflow-hidden' : 'flex-1 flex flex-col'}`}>
           {/* Breadcrumb - only show when not in modal */}
           {!isModal && (
             <div className="px-20 pt-4 pr-[580px]">
@@ -4649,7 +4676,7 @@ The changes are now live in your lesson. You can continue refining other section
           )}
           
           {/* Content Area */}
-          <div className={`flex-1 ${isModal ? 'px-12 py-12 overflow-y-auto lesson-content-scroll' : 'px-20 py-6 pr-[580px]'}`}>
+          <div className={`${isModal ? 'flex-1 px-12 py-12 overflow-y-auto lesson-content-scroll' : 'flex-1 px-20 py-6 pr-[580px]'}`}>
             <div className={`${isModal ? '' : 'max-w-4xl mx-auto'}`}>
           {/* Tabbed Interface */}
           <div className="mb-8">
@@ -4717,10 +4744,10 @@ The changes are now live in your lesson. You can continue refining other section
         </div>
         
         {/* Unified AI Assistant - Right Panel */}
-        <div className={`${isModal ? 'w-[420px] border-l border-slate-200 bg-slate-100 flex-shrink-0' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
+        <div className={`${isModal ? 'border-l border-slate-200 bg-slate-100 overflow-hidden' : 'fixed top-0 right-0 h-screen w-[500px] z-40'}`}>
         <UnifiedPromptComponent
           mode="refinement"
-          initialPrompt={lesson.prompt || ''}
+          initialPrompt={''}
           initialContext={{
             selectedStudents: lesson.selectedStudents || 'all',
             specificStudents: lesson.specificStudents || [],
@@ -4731,12 +4758,16 @@ The changes are now live in your lesson. You can continue refining other section
           onClearSection={() => setActiveSection(null)}
           onUndo={handleUndo}
           undoStack={undoStack}
+          disableAutoGeneration={isInitialGenerating}
           onUpdateMessage={(messageId, updates) => {
             setChatHistory(prev => prev.map(msg => 
               msg.id === messageId ? { ...msg, ...updates } : msg
             ));
           }}
           onSendMessage={async (message) => {
+            // Don't allow new messages during initial generation
+            if (isInitialGenerating) return;
+            
             const userMessage = {
               id: `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
               type: 'user' as const,
@@ -5321,33 +5352,91 @@ function ImmersiveTextContent({ onEditWithAI, activeSection, introContent, conte
     };
   };
   
-  // Show loading screen when content is not visible
+  // Show skeleton loading for NEW lesson generation only
   if (!contentVisible) {
     return (
-      <div className="h-full flex items-center justify-center">
-        <div className="text-center max-w-md">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-600 mx-auto mb-4"></div>
-          <p className="text-slate-600 text-lg font-medium mb-2">AI is generating lesson content...</p>
-          <div className="bg-slate-100 rounded-lg p-4 text-left">
-            <div className="text-xs text-slate-500 mb-2">Current Phase:</div>
-            <div className="text-sm text-slate-700 font-medium mb-3">Making Changes</div>
-            <div className="text-xs text-slate-500 leading-relaxed mb-3">
-              Building lesson structure with introduction using pattern discovery • Adding visual fraction bar models • 
-              Creating graduated practice problems with appropriate scaffolding
+      <div className="h-full">
+        <div className="space-y-12">
+          
+          {/* Document Header Skeleton */}
+          <section className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-slate-200 rounded-lg animate-pulse"></div>
+              <div className="h-6 bg-slate-200 rounded w-48 animate-pulse"></div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                <div className="w-2 h-2 bg-blue-300 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+            <div className="space-y-3">
+              <div className="h-4 bg-slate-200 rounded w-full animate-pulse"></div>
+              <div className="h-4 bg-slate-200 rounded w-5/6 animate-pulse"></div>
+              <div className="h-4 bg-slate-200 rounded w-4/5 animate-pulse"></div>
+            </div>
+          </section>
+
+          {/* Introduction Section Skeleton */}
+          <section className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-slate-200 rounded-lg animate-pulse"></div>
+              <div className="h-6 bg-slate-200 rounded w-32 animate-pulse"></div>
+            </div>
+            <div className="space-y-3">
+              <div className="h-4 bg-slate-200 rounded w-full animate-pulse"></div>
+              <div className="h-4 bg-slate-200 rounded w-11/12 animate-pulse"></div>
+              <div className="h-4 bg-slate-200 rounded w-5/6 animate-pulse"></div>
+              <div className="h-4 bg-slate-200 rounded w-3/4 animate-pulse"></div>
+            </div>
+          </section>
+
+          {/* Visual Representation Skeleton */}
+          <section className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-slate-200 rounded-lg animate-pulse"></div>
+              <div className="h-6 bg-slate-200 rounded w-44 animate-pulse"></div>
+            </div>
+            <div className="bg-slate-100 border-2 border-slate-200 rounded-2xl p-8">
+              <div className="bg-slate-200 rounded-xl h-64 animate-pulse"></div>
+            </div>
+          </section>
+
+          {/* Guided Practice Skeleton */}
+          <section className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-slate-200 rounded-lg animate-pulse"></div>
+              <div className="h-6 bg-slate-200 rounded w-36 animate-pulse"></div>
+            </div>
+            <div className="space-y-4">
+              <div className="bg-slate-100 rounded-xl p-6">
+                <div className="h-4 bg-slate-200 rounded w-3/4 mb-3 animate-pulse"></div>
+                <div className="h-4 bg-slate-200 rounded w-1/2 animate-pulse"></div>
               </div>
-              <span className="text-xs text-slate-500">Streaming content to lesson interface...</span>
+              <div className="bg-slate-100 rounded-xl p-6">
+                <div className="h-4 bg-slate-200 rounded w-5/6 mb-3 animate-pulse"></div>
+                <div className="h-4 bg-slate-200 rounded w-2/3 animate-pulse"></div>
+              </div>
             </div>
-          </div>
+          </section>
+
+          {/* Independent Practice Skeleton */}
+          <section className="space-y-4">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-slate-200 rounded-lg animate-pulse"></div>
+              <div className="h-6 bg-slate-200 rounded w-40 animate-pulse"></div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-slate-100 rounded-xl p-6">
+                <div className="h-4 bg-slate-200 rounded w-full mb-3 animate-pulse"></div>
+                <div className="h-4 bg-slate-200 rounded w-3/4 animate-pulse"></div>
+              </div>
+              <div className="bg-slate-100 rounded-xl p-6">
+                <div className="h-4 bg-slate-200 rounded w-5/6 mb-3 animate-pulse"></div>
+                <div className="h-4 bg-slate-200 rounded w-2/3 animate-pulse"></div>
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
     );
   }
+
   return (
     <div className="h-full">
       <div className="space-y-12">
@@ -6019,7 +6108,7 @@ function TabContent({
   const hasContent = content && content !== "— Not generated yet —" && contentVisible;
 
   // Show immersive content for text modality
-  if (modality === "text" && content && content !== "— Not generated yet —") {
+  if (modality === "text") {
     return <ImmersiveTextContent onEditWithAI={onEditWithAI} activeSection={activeSection} introContent={introContent} contentVisible={contentVisible} lesson={lesson} />;
   }
 
@@ -6036,18 +6125,7 @@ function TabContent({
     return <AudioContent lesson={lesson} />;
   }
   
-  // Show loading screen when content is being generated
-  if (!contentVisible && content && content !== "— Not generated yet —") {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-600 mx-auto mb-4"></div>
-          <p className="text-slate-600 text-lg font-medium">Generating lesson materials...</p>
-          <p className="text-slate-500 text-sm mt-2">Creating comprehensive content for your students</p>
-        </div>
-      </div>
-    );
-  }
+  // Content is always visible - removed loading screen
   
   const handleEdit = () => {
     setIsEditing(true);
@@ -6140,20 +6218,7 @@ function TabContent({
 
       {/* Content */}
       <div className="bg-neutral-50 rounded-xl p-4 min-h-[300px]">
-        {loading ? (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              {/* Skeleton loading */}
-              <div className="space-y-3 animate-pulse">
-                <div className="h-4 bg-neutral-300 rounded w-3/4 mx-auto"></div>
-                <div className="h-4 bg-neutral-300 rounded w-1/2 mx-auto"></div>
-                <div className="h-4 bg-neutral-300 rounded w-5/6 mx-auto"></div>
-                <div className="h-4 bg-neutral-300 rounded w-2/3 mx-auto"></div>
-              </div>
-              <p className="text-neutral-600 mt-4">Generating {title.toLowerCase()}...</p>
-            </div>
-          </div>
-        ) : hasContent ? (
+        {hasContent ? (
           isEditing ? (
             <div className="space-y-2">
               <textarea

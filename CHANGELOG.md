@@ -1,74 +1,102 @@
-# Changelog
+# Classroom Copilot - Change Log
 
-## [Latest] - 2025-09-29
+## [Latest Updates] - 2025-09-29
 
-### 🎨 UI/UX Improvements
+### 🚀 Major New Lesson Generation Flow
 
-#### Modal Header Enhancements
-- **Repositioned Draft/Live toggle switch** to appear next to lesson title instead of far right
-- **Made minimize button transparent** with hover effects for cleaner appearance
-- **Improved spacing** between modal header controls (increased from 8px to 24px)
-- **Fixed lesson title alignment** to match content padding (px-12)
-- **Implemented dynamic title width** using character-based calculation for natural fitting
-- **Removed modal border** for cleaner, more modern appearance
+#### ✨ Enhanced User Experience
+- **5-Second Lesson Generation**: Completely rebuilt lesson generation flow for optimal speed and engagement
+- **Streaming AI Reasoning**: Real-time AI thought process visible during content generation
+- **Skeleton Loading**: Professional stencil animations while content loads
+- **Seamless Transitions**: Smooth progression from reasoning to content reveal
 
-#### Toggle Switch Unification
-- **Unified toggle logic** between lesson cards and modal header
-- **Both locations now use same `handleToggleLessonLive` function**
-- **Consistent status labels** matching lesson card format:
-  - Live: "Live • X viewing" or "Live • Ready for students"
-  - Draft: "Draft • Last edited [date]"
+#### 🎯 New Lesson Generation Sequence
+1. **Instant Start**: User prompt appears immediately when lesson generation begins
+2. **AI Reasoning Stream**: Fast 2-second reasoning display while stencils show
+3. **Content Reveal**: Lesson content appears after reasoning completes
+4. **Confirmation Summary**: AI provides brief confirmation of lesson creation
+5. **Total Time**: Complete flow in exactly 5 seconds
 
-#### Layout & Spacing Improvements
-- **Increased lesson content padding** from px-6 to px-12 for better alignment
-- **Enhanced vertical spacing** with py-12 for more spacious feel
-- **Added more space under tabs** (mb-6 to mb-10)
-- **Increased spacing between lesson sections** (space-y-8 to space-y-12)
-- **Improved AI assistant panel width** (reduced by 100px for better balance)
+#### 🔧 Technical Improvements
+- **Single AI Turn Only**: Fixed duplicate AI messages during generation
+- **Proper State Management**: Clean `isInitialGenerating` flag prevents interference
+- **Unique Message IDs**: Eliminated React duplicate key warnings
+- **Modal-Level AI Chat**: Repositioned AI assistant for better layout stability
+- **Grid Layout**: Switched to CSS Grid for consistent column widths
 
-#### Scrollbar Enhancements
-- **Fixed scrollbar behavior** to appear on hover without layout shifts
-- **Implemented stable scrollbar gutter** to prevent content jumping
-- **Added subtle scrollbar styling** with hover effects
+### 🎨 UI/UX Enhancements
 
-### 🔧 Technical Improvements
+#### Modal Improvements
+- **Unified Header**: Moved lesson title, draft/live toggle, and minimize button to modal header
+- **Natural Title Width**: Dynamic title input sizing based on content length
+- **Transparent Minimize Button**: Clean, modern button styling with proper spacing
+- **Consistent Switch Logic**: Unified toggle behavior between lesson cards and modal
 
-#### Component Architecture
-- **Enhanced prop flow** for toggle functionality across components
-- **Added proper TypeScript interfaces** for new props
-- **Improved component reusability** with consistent prop patterns
+#### Layout & Spacing
+- **Increased Padding**: More spacious lesson content with 12px horizontal/vertical padding
+- **Section Spacing**: Enhanced spacing between lesson sections (12px gaps)
+- **Tab Spacing**: Added breathing room under lesson tabs
+- **Muted Borders**: Softened select component borders for cleaner appearance
 
-#### Bug Fixes
-- **Fixed React Select warning** by replacing `selected` attribute with `defaultValue`
-- **Resolved ReferenceError** for `handleToggleLessonLive` in modal context
-- **Fixed duplicate import** causing runtime errors
-- **Corrected undo button placement** to appear after second AI turn
+#### Interactive Elements
+- **Improved Scrollbars**: Stable scrollbar behavior without layout shifts
+- **Undo Button Positioning**: Proper placement after second AI turn
+- **Removed Borders**: Cleaner interface by removing unnecessary action row borders
 
-#### Border & Visual Cleanup
-- **Removed borders** from action rows in homepage and lesson builder prompts
-- **Muted select component borders** for subtler appearance
-- **Eliminated duplicate content** in lesson headers
+### 🐛 Bug Fixes
 
-### 🚀 AI Suggestion Flow
-- **Improved AI suggestion workflow**: Suggestions only move to "My Lessons" when modified
-- **Automatic new suggestion generation** when AI lesson is adopted and modified
-- **Prevented duplicate lessons** from unmodified AI suggestions
+#### AI Chat Flow
+- **Fixed Multiple AI Turns**: Prevented duplicate messages during lesson generation
+- **Eliminated Loading Overlap**: Removed conflicting loading states in modal
+- **React Key Conflicts**: Resolved duplicate key errors in chat history
+- **Auto-Generation Prevention**: Disabled UnifiedPromptComponent interference during initial generation
 
-### 📱 Responsive Design
-- **Enhanced flexbox layouts** for better responsive behavior
-- **Improved text overflow handling** with proper min-width constraints
-- **Better space utilization** across different screen sizes
+#### State Management
+- **AI Suggestion Flow**: Fixed duplicate lessons when opening AI suggestions without changes
+- **Lesson Modification Tracking**: Only move AI suggestions to "My Lessons" when actually modified
+- **Runtime Errors**: Fixed React component export and import conflicts
+
+#### Layout Stability
+- **Fixed Column Width**: Consistent lesson column width regardless of AI chat state
+- **Modal Border**: Removed unnecessary borders and shadows around modal
+- **Content Loading**: Proper skeleton-to-content transitions
+
+### 🎛️ Component Architecture
+
+#### New Components & Features
+- **Skeleton Loading System**: Professional stencil animations for all lesson sections
+- **Streaming AI Messages**: Real-time reasoning and summary display
+- **Modal-Level AI Assistant**: Repositioned for better layout control
+- **Unified Toggle Logic**: Shared state management between lesson cards and modal
+
+#### Code Quality
+- **Unique ID Generation**: All messages use timestamp + random string pattern
+- **Clean State Flags**: `isInitialGenerating` and `contentVisible` for precise control
+- **Simplified Generation Logic**: Removed complex async chains for better reliability
+- **Component Separation**: Clear separation between modal and component responsibilities
+
+### 📊 Performance Improvements
+- **Faster Generation**: 5-second total lesson creation time
+- **Reduced Re-renders**: Optimized state updates and component rendering
+- **Stable Layout**: Grid-based layout prevents content shifting
+- **Smooth Animations**: Professional transitions between states
 
 ---
 
-## Summary of Changes
+## Previous Updates
 
-This update focuses heavily on UI/UX improvements, particularly around the lesson modal interface. Key highlights include:
+### Initial Implementation
+- Core lesson builder functionality
+- AI-powered lesson generation
+- Multi-modal content support (Text, Slides, Video, Audio)
+- Student and standards selection
+- Draft/Live lesson management
+- Real-time AI assistance for lesson refinement
 
-1. **Unified toggle switch behavior** across the application
-2. **Cleaner modal design** with better spacing and alignment
-3. **Improved AI suggestion workflow** to prevent duplicates
-4. **Enhanced responsive design** and layout consistency
-5. **Multiple bug fixes** for better stability
-
-All changes maintain backward compatibility and improve the overall user experience.
+### Foundation Features
+- Next.js 15.5.4 with Turbopack
+- TypeScript implementation
+- Tailwind CSS styling
+- Component-based architecture
+- Modal-based lesson editing
+- Responsive design system
